@@ -389,16 +389,23 @@ function renderMessages() {
   });
 }
 
+function setThemeColor(color) {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', color);
+}
+
 function openChat() {
   document.getElementById('list-view').style.display = 'none';
   const cv = document.getElementById('chat-view');
   cv.style.display = 'flex';
+  setThemeColor('#627898');
   renderMessages();
 }
 
 function closeChat() {
   document.getElementById('chat-view').style.display = 'none';
   document.getElementById('list-view').style.display = 'flex';
+  setThemeColor('#ffffff');
 }
 
 function sendMsg() {
