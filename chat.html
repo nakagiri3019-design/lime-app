@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LIME</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#06C755">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LIME">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: #f0f0f0; display: flex; justify-content: center; min-height: 100vh; }
+#app { width: 100%; max-width: 390px; height: 100vh; background: #fff; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 40px rgba(0,0,0,0.15); position: relative; }
+
+/* LIST VIEW */
+#list-view { display: flex; flex-direction: column; height: 100%; }
+.header { padding: 14px 14px 0; background: #fff; }
+.header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.talk-pill { background: #111; border-radius: 22px; padding: 7px 16px; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+.talk-pill span { color: #fff; font-weight: 700; font-size: 16px; }
+.talk-pill svg { flex-shrink: 0; }
+.header-title { font-weight: 700; font-size: 20px; color: #111; flex: 1; }
+.header-icons { display: flex; gap: 16px; align-items: center; }
+.dot-badge { position: relative; }
+.dot-badge .dot { position: absolute; top: -1px; right: -2px; width: 9px; height: 9px; border-radius: 50%; background: #06C755; border: 2px solid #fff; }
+.plus-btn { width: 28px; height: 28px; border-radius: 50%; background: #06C755; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.search-bar { background: #f0f0f0; border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.search-bar span { color: #aaa; font-size: 15px; flex: 1; }
+.ai-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #7B68EE, #00C9FF); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.list-body { flex: 1; overflow-y: auto; }
+.safety-notice { padding: 10px 14px 8px; border-bottom: 1px solid #f0f0f0; position: relative; }
+.safety-notice .title { font-size: 15px; font-weight: 600; color: #111; margin-bottom: 2px; }
+.safety-notice .sub { font-size: 13px; color: #999; }
+.friend-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-bottom: 1px solid #f2f2f2; cursor: pointer; background: #fff; transition: background 0.1s; }
+.friend-row:active { background: #f7f7f7; }
+.friend-row.clickable:active { background: #f0f0f0; }
+.avatar { border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 25px; flex-shrink: 0; overflow: hidden; position: relative; width: 54px; height: 54px; }
+.avatar svg { position: absolute; }
+.official-badge { position: absolute; bottom: -2px; right: -2px; width: 17px; height: 17px; border-radius: 50%; background: #06C755; border: 1.5px solid #fff; display: flex; align-items: center; justify-content: center; }
+.friend-info { flex: 1; min-width: 0; }
+.friend-name-row { display: flex; justify-content: space-between; align-items: center; }
+.friend-name { font-weight: 700; font-size: 15px; color: #111; }
+.friend-time { font-size: 12px; color: #aaa; flex-shrink: 0; margin-left: 8px; }
+.friend-last { font-size: 13px; color: #999; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bottom-tabs { display: flex; background: #fff; border-top: 1px solid #ddd; padding: 8px 0 10px; }
+.tab-btn { flex: 1; background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 0; position: relative; }
+.tab-btn .tab-label { font-size: 10px; color: #aaa; font-weight: 400; }
+.tab-btn.active .tab-label { color: #111; font-weight: 700; }
+.tab-icon { position: relative; }
+.unread-badge { position: absolute; top: -5px; right: -8px; background: #FF3B30; color: #fff; border-radius: 12px; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; padding: 0 4px; border: 2px solid #fff; }
+
+/* CHAT VIEW */
+#chat-view { display: none; flex-direction: column; height: 100%; }
+.chat-header { background: #8FA7C8; border-bottom: none; padding: 12px 14px; display: flex; align-items: center; gap: 10px; }
+.back-btn { background: none; border: none; cursor: pointer; padding: 0 2px; }
+.chat-name { font-weight: 700; font-size: 17px; flex: 1; text-align: left; color: #111; }
+.chat-icons { display: flex; gap: 18px; align-items: center; }
+.messages-area { flex: 1; overflow-y: auto; background: #8FA7C8; padding: 12px 10px; position: relative; }
+.floating-date { position: sticky; top: 8px; text-align: center; z-index: 10; pointer-events: none; margin-bottom: 8px; }
+.floating-date span { background: rgba(100,100,100,0.45); color: #fff; font-size: 12px; padding: 4px 16px; border-radius: 20px; font-weight: 500; opacity: 0; transition: opacity 0.3s; }
+.date-divider { text-align: center; margin: 10px 0 14px; }
+.date-divider span { background: rgba(100,100,100,0.35); color: #fff; font-size: 12px; padding: 4px 16px; border-radius: 20px; font-weight: 500; }
+.msg-row { display: flex; align-items: flex-end; gap: 6px; margin-bottom: 5px; }
+.msg-row.me { flex-direction: row-reverse; }
+.msg-row.them { flex-direction: row; }
+.msg-avatar { width: 36px; flex-shrink: 0; }
+.msg-avatar .avatar { width: 36px; height: 36px; font-size: 17px; border-radius: 8px; }
+.msg-content { display: flex; align-items: flex-end; gap: 4px; max-width: 75%; }
+.msg-row.me .msg-content { flex-direction: row-reverse; }
+.bubble { padding: 10px 14px; font-size: 14.5px; line-height: 1.6; white-space: pre-wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.12); color: #111; word-break: break-all; }
+.bubble.me { background: #AAD97A; border-radius: 18px 4px 18px 18px; }
+.bubble.them { background: #fff; border-radius: 4px 18px 18px 18px; }
+.msg-meta { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; padding-bottom: 2px; }
+.msg-row.me .msg-meta { align-items: flex-end; }
+.msg-row.them .msg-meta { align-items: flex-start; }
+.read-label { font-size: 10px; color: #555; font-weight: 600; line-height: 1.2; }
+.msg-time { font-size: 10px; color: #555; white-space: nowrap; }
+.ai-bar { background: #ececec; border-top: 1px solid #ddd; padding: 7px 14px; display: flex; align-items: center; gap: 10px; }
+.ai-dot { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, #7B68EE, #00C9FF); flex-shrink: 0; }
+.ai-btn { background: none; border: none; font-size: 12.5px; color: #555; cursor: pointer; padding: 1px 2px; font-family: inherit; }
+.input-bar { background: #fff; border-top: 1px solid #e0e0e0; padding: 8px 10px 12px; display: flex; align-items: center; gap: 10px; }
+.icon-btn { background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+.input-wrap { flex: 1; position: relative; }
+.msg-input { width: 100%; border: 1px solid #ddd; border-radius: 22px; padding: 9px 38px 9px 14px; font-size: 15px; outline: none; background: #fafafa; font-family: inherit; }
+.emoji-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 19px; line-height: 1; }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- LIST VIEW -->
+<div id="list-view">
+  <div class="header">
+    <div class="header-top">
+      <div class="talk-pill">
+        <span>トーク</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <span class="header-title">友だち</span>
+      <div class="header-icons">
+        <div class="dot-badge">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+          <div class="dot"></div>
+        </div>
+        <div class="dot-badge">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <div class="dot"></div>
+        </div>
+        <div class="plus-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>検索</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01"/></svg>
+      <div class="ai-avatar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="list-body">
+    <div class="safety-notice">
+      <div class="title">（東京）墨田区江東橋３丁目で声かけ　６月５日</div>
+      <div class="sub">地域の安全情報</div>
+    </div>
+
+    <!-- Friend rows -->
+    <div class="friend-row">
+      <div class="avatar" style="background:#8B1A1A;font-size:24px;">🍳<div class="official-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">【公式】ろくキッチン (929) 🔇</span><span class="friend-time">午後5:32</span></div>
+        <div class="friend-last">プレゼント🎁動画 https://youtu.be/...</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#8B9BB4;font-size:24px;">🪖</div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">あきら</span><span class="friend-time">午後5:28</span></div>
+        <div class="friend-last">未だメール来てないみたい…</div>
+      </div>
+    </div>
+
+    <div class="friend-row clickable" onclick="openChat()">
+      <div class="avatar" style="background:#B0C4D8;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="rgba(255,255,255,0.85)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">金</span><span class="friend-time">午後5:06</span></div>
+        <div class="friend-last">こちらこそ、よろしくお願いいたします。</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#E8513A;font-size:24px;">📚<div class="official-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M20 6L9 17l-5-5"/></svg></div></div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">めちゃコミック 🔇 ✏️</span><span class="friend-time">午後5:05</span></div>
+        <div class="friend-last">☝️ 最大3,000ptが当たる💕 上のバナーからおみくじに挑戦してみてね🥰</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#F5C842;font-size:24px;">🐶</div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">Enohiro</span><span class="friend-time">午後4:37</span></div>
+        <div class="friend-last">Enohiroが写真を送信しました</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#F5A623;font-size:24px;">🐤</div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">釣り (3)</span><span class="friend-time">午後4:23</span></div>
+        <div class="friend-last">電車降りたらおかけします</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#ccc;font-size:24px;">🐕</div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">鮫島さん</span><span class="friend-time">昨日</span></div>
+        <div class="friend-last">ありがとうございます</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#e8e8e8;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="rgba(100,100,100,0.6)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <div class="official-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M20 6L9 17l-5-5"/></svg></div>
+      </div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">キタムラ・ケイツウ</span><span class="friend-time">昨日</span></div>
+        <div class="friend-last">《★☆開催中☆★》ノベルティキャンペーンのお知らせ</div>
+      </div>
+    </div>
+
+    <div class="friend-row">
+      <div class="avatar" style="background:#C0392B;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="rgba(255,255,255,0.85)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <div class="official-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M20 6L9 17l-5-5"/></svg></div>
+      </div>
+      <div class="friend-info">
+        <div class="friend-name-row"><span class="friend-name">BIZ CASH 🔇</span><span class="friend-time">昨日</span></div>
+        <div class="friend-last">※営業時間：平日9時〜18時 ※本件につきま</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-tabs">
+    <button class="tab-btn"><div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="tab-label">ホーム</span></button>
+    <button class="tab-btn active"><div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#111" stroke="#111" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div class="unread-badge">2</div></div><span class="tab-label">トーク</span></button>
+    <button class="tab-btn"><div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="tab-label">VOOM</span></button>
+    <button class="tab-btn"><div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.8"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a4 4 0 01-4-4V6"/><line x1="10" y1="7" x2="17" y2="7"/><line x1="10" y1="11" x2="17" y2="11"/></svg></div><span class="tab-label">ニュース</span></button>
+    <button class="tab-btn"><div class="tab-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12h6M12 9v6"/></svg></div><span class="tab-label">MINI</span></button>
+  </div>
+</div>
+
+<!-- CHAT VIEW -->
+<div id="chat-view">
+  <div class="chat-header">
+    <button class="back-btn" onclick="closeChat()">
+      <svg width="11" height="20" viewBox="0 0 11 20" fill="none"><path d="M10 1.5L2 10L10 18.5" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span class="chat-name">金</span>
+    <div class="chat-icons">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <div style="width:24px;height:24px;border:1.8px solid #333;border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;">
+        <div style="position:absolute;top:-4px;left:3px;width:2px;height:6px;background:#333;border-radius:1px;"></div>
+        <div style="position:absolute;top:-4px;right:3px;width:2px;height:6px;background:#333;border-radius:1px;"></div>
+        <span style="font-size:10px;font-weight:700;color:#333;margin-top:2px;">31</span>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#333"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+    </div>
+  </div>
+
+  <div class="messages-area" id="messages-area">
+    <div class="floating-date" id="floating-date"><span id="floating-date-text"></span></div>
+  </div>
+
+  <div class="input-bar">
+    <button class="icon-btn"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.7"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <button class="icon-btn"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.7"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></button>
+    <button class="icon-btn"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></button>
+    <div class="input-wrap">
+      <input class="msg-input" id="msg-input" placeholder="メッセージを入力" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="emoji-btn">🙂</button>
+    </div>
+    <button class="icon-btn"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.7"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button>
+  </div>
+
+  <div class="ai-bar">
+    <div class="ai-dot"></div>
+    <button class="ai-btn">返信を提案</button>
+    <button class="ai-btn">話題を提案</button>
+    <button class="ai-btn">ムードを分析</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+const DAYS = [
+  { date: "4月25日", messages: [
+    { from: "them", text: "いつもお世話になっております。\n以前お話ししていたジュエリー製作用パーツの件ですが、K18やPt900あたりで対応可能なものはありますか？", time: "午前10:15" },
+    { from: "me", text: "お世話になっております。\nK18、Pt900、SV925あたりでしたら対応可能です。\nネックレス用パーツ、チャーム類、リング用パーツなど内容によって金額が変わりますので、数量や仕様が分かりましたら概算で確認します。", time: "午前10:42" },
+    { from: "them", text: "ありがとうございます。\n今回はまず少量で見たいです。\nネックレス用のパーツとチャーム類を中心にお願いしたいです。", time: "午前11:05" },
+    { from: "me", text: "承知しました。\n種類・数量・希望納期を確認して、素材別に内容を整理します。", time: "午前11:20" },
+  ]},
+  { date: "4月28日", messages: [
+    { from: "them", text: "前回の件ですが、K18パーツとPt900製品を含めて確認できますか？\nSV925も一部入るかもしれません。", time: "午後1:08" },
+    { from: "me", text: "可能です。\nK18、Pt900、SV925で分けて確認します。\n素材によって単価や納期が変わりますので、数量が分かりましたらあわせて確認します。", time: "午後1:35" },
+    { from: "them", text: "今回は検品と仕上げまでお願いする形になると思います。", time: "午後2:10" },
+    { from: "me", text: "承知しました。\n検品・仕上げ・梱包まで含めた内容で進められます。", time: "午後2:28" },
+  ]},
+  { date: "5月1日", messages: [
+    { from: "them", text: "納期は5月中旬くらいで考えています。\nそのくらいで対応できそうですか？", time: "午前10:00" },
+    { from: "me", text: "内容と数量によりますが、5月中旬目安で調整可能です。\n数量が確定しましたら、準備に入ります。", time: "午前10:22" },
+    { from: "them", text: "ありがとうございます。\n数量は連休明けまでに固めます。", time: "午前10:45" },
+    { from: "me", text: "かしこまりました。\n連休明けに内容を確認して進めましょう。", time: "午前10:58" },
+  ]},
+  { date: "5月7日", messages: [
+    { from: "them", text: "数量がだいたい固まりました。\nK18パーツ、Pt900製品、SV925製品でお願いします。\n細かい内訳は今日中に送ります。", time: "午前9:30" },
+    { from: "me", text: "承知しました。\n内訳を確認次第、素材ごとに整理します。\n検品・仕上げ込みで進める形で大丈夫でしょうか？", time: "午前9:55" },
+    { from: "them", text: "はい、検品と仕上げも含めてお願いします。\n納品時に内容が分かりやすいようにしてもらえると助かります。", time: "午前10:20" },
+    { from: "me", text: "かしこまりました。\n品目ごとに分けて、確認しやすい形で準備します。", time: "午前10:38" },
+  ]},
+  { date: "5月10日", messages: [
+    { from: "them", text: "進捗はいかがでしょうか？", time: "午後2:00" },
+    { from: "me", text: "現在、仕上げ前の確認を進めています。\nK18パーツ、Pt900製品、SV925製品それぞれ確認中です。", time: "午後2:18" },
+    { from: "them", text: "ありがとうございます。\n納品は予定通り5月中旬くらいで見ていて大丈夫ですか？", time: "午後2:35" },
+    { from: "me", text: "はい、現時点では5月中旬頃で進められそうです。\n完了しましたら改めてご連絡します。", time: "午後2:50" },
+  ]},
+  { date: "5月13日", messages: [
+    { from: "me", text: "対象商品の検品と仕上げを進めています。\n一部、最終確認中ですが、大きな問題はありません。", time: "午前11:00" },
+    { from: "them", text: "ありがとうございます。\n急ぎではありませんが、完了しましたら連絡ください。", time: "午前11:20" },
+    { from: "me", text: "承知しました。\n完了次第、納品内容とあわせてご連絡いたします。", time: "午前11:32" },
+  ]},
+  { date: "5月15日", messages: [
+    { from: "me", text: "本日、対象商品の検品・仕上げが完了しました。\n納品内容は、K18パーツ、Pt900製品、SV925製品となります。\n梱包後、納品手配を進めます。", time: "午後3:10" },
+    { from: "them", text: "ありがとうございます。\n内容確認します。", time: "午後3:28" },
+    { from: "me", text: "よろしくお願いいたします。\n何かありましたらご連絡ください。", time: "午後3:35" },
+  ]},
+  { date: "5月18日", messages: [
+    { from: "me", text: "お世話になっております。\n請求書をメールでお送りしましたので、ご確認ください。", time: "午前10:05" },
+    { from: "them", text: "ありがとうございます。\n確認いたします。", time: "午前10:22" },
+    { from: "me", text: "よろしくお願いいたします。", time: "午前10:30" },
+  ]},
+  { date: "5月27日", messages: [
+    { from: "them", text: "お世話になっております。\n次回分の件で少し相談です。\n前回と同じように、K18パーツとSV925製品を中心にお願いできますか？", time: "午前10:00" },
+    { from: "me", text: "お世話になっております。\n対応可能です。\n数量や仕様が分かりましたら、前回分を参考にして確認します。", time: "午前10:25" },
+    { from: "them", text: "ありがとうございます。\n今回はPt900は少なめになるかもしれません。\nK18とSV925が中心になりそうです。", time: "午前10:50" },
+    { from: "me", text: "承知しました。\nK18、SV925中心で確認します。\nPt900が入る場合は、別で分けて整理します。", time: "午前11:10" },
+  ]},
+  { date: "5月29日", messages: [
+    { from: "me", text: "お世話になっております。\n先月分の入金を確認いたしました。\nこのたびはありがとうございました。", time: "午前10:00" },
+    { from: "them", text: "こちらこそありがとうございました。\n引き続きよろしくお願いいたします。", time: "午前10:20" },
+    { from: "me", text: "こちらこそ、よろしくお願いいたします。", time: "午前10:28" },
+    { from: "them", text: "新規分ですが、ネックレス用パーツとチャーム類を中心に考えています。\n前回より少し種類が増えるかもしれません。", time: "午前10:45" },
+    { from: "me", text: "承知しました。\n種類が増える場合は、品目ごとに分けて確認します。\n検品・仕上げも前回同様に含める形でよろしいでしょうか？", time: "午前11:05" },
+    { from: "them", text: "はい、今回も検品と仕上げまでお願いします。\n納品時に分かりやすいようにしてもらえると助かります。", time: "午前11:20" },
+    { from: "me", text: "かしこまりました。\n前回と同じように、内容が確認しやすい形で準備します。", time: "午前11:35" },
+  ]},
+  { date: "6月3日", messages: [
+    { from: "me", text: "お世話になっております。\n新規発注予定分について、現時点の数量や素材の内訳はどのような感じでしょうか。", time: "午前10:00" },
+    { from: "them", text: "お世話になっております。\nまだ最終確定ではありませんが、K18パーツが中心で、SV925製品も入る予定です。\nPt900は少量になると思います。", time: "午前10:30" },
+    { from: "me", text: "承知しました。\nK18中心、SV925あり、Pt900少量という形で一度整理します。\n数量が確定しましたら、準備に入ります。", time: "午前10:50" },
+    { from: "them", text: "ありがとうございます。\n今週中にはだいたい固めます。", time: "午前11:05" },
+  ]},
+  { date: "6月6日", messages: [
+    { from: "them", text: "新規分の数量がだいたい固まりました。\nK18パーツ、SV925製品、Pt900製品でお願いします。\n細かい内容は別途まとめて送ります。", time: "午後1:00" },
+    { from: "me", text: "承知しました。\n内容を確認次第、素材ごとに整理します。\n前回分と同じ流れで、検品・仕上げ・梱包まで対応します。", time: "午後1:20" },
+    { from: "them", text: "ありがとうございます。\n今回もよろしくお願いします。", time: "午後1:35" },
+    { from: "me", text: "こちらこそ、よろしくお願いいたします。", time: "午後1:42" },
+  ]},
+];
+
+function avatarHTML(size) {
+  return `<div class="avatar" style="background:#B0C4D8;width:${size}px;height:${size}px;font-size:${size*0.46}px;border-radius:${size*0.22}px;"><svg width="${size*0.55}" height="${size*0.55}" viewBox="0 0 24 24" fill="rgba(255,255,255,0.85)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>`;
+}
+
+function renderMessages() {
+  const area = document.getElementById('messages-area');
+  let html = '<div class="floating-date" id="floating-date"><span id="floating-date-text"></span></div>';
+  DAYS.forEach(day => {
+    html += `<div class="date-divider" data-date="${day.date}"><span>${day.date}</span></div>`;
+    day.messages.forEach((msg, i) => {
+      const isMe = msg.from === 'me';
+      const showAvatar = !isMe && (i === 0 || day.messages[i-1].from !== 'them');
+      const metaHTML = `<div class="msg-meta">${isMe ? '<span class="read-label">既読</span>' : ''}<span class="msg-time">${msg.time}</span></div>`;
+      const avatarEl = !isMe ? `<div class="msg-avatar">${showAvatar ? avatarHTML(36) : ''}</div>` : '';
+      const paddingLeft = !isMe && !showAvatar ? 'padding-left:42px;' : '';
+      html += `<div class="msg-row ${isMe?'me':'them'}" style="${paddingLeft}">
+        ${avatarEl}
+        <div class="msg-content">
+          <div class="bubble ${isMe?'me':'them'}">${msg.text.replace(/\n/g,'<br>')}</div>
+          ${metaHTML}
+        </div>
+      </div>`;
+    });
+  });
+  area.innerHTML = html;
+  area.scrollTop = area.scrollHeight;
+
+  // スクロール時に日付を表示
+  let scrollTimer = null;
+  area.addEventListener('scroll', () => {
+    const dateDividers = area.querySelectorAll('.date-divider[data-date]');
+    let currentDate = '';
+    dateDividers.forEach(el => {
+      if (el.offsetTop - area.scrollTop <= 20) currentDate = el.getAttribute('data-date');
+    });
+    const floatingText = document.getElementById('floating-date-text');
+    const floatingDate = document.getElementById('floating-date');
+    if (floatingText && floatingDate && currentDate) {
+      floatingText.textContent = currentDate;
+      floatingText.style.opacity = '1';
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => { floatingText.style.opacity = '0'; }, 1500);
+    }
+  });
+}
+
+function openChat() {
+  document.getElementById('list-view').style.display = 'none';
+  const cv = document.getElementById('chat-view');
+  cv.style.display = 'flex';
+  renderMessages();
+}
+
+function closeChat() {
+  document.getElementById('chat-view').style.display = 'none';
+  document.getElementById('list-view').style.display = 'flex';
+}
+
+function sendMsg() {
+  const input = document.getElementById('msg-input');
+  const text = input.value.trim();
+  if (!text) return;
+  const area = document.getElementById('messages-area');
+  const t = new Date().toLocaleTimeString('ja-JP', {hour:'2-digit',minute:'2-digit',hour12:true});
+  const div = document.createElement('div');
+  div.className = 'msg-row me';
+  div.innerHTML = `<div class="msg-content"><div class="bubble me">${text.replace(/\n/g,'<br>')}</div><div class="msg-meta"><span class="read-label">既読</span><span class="msg-time">${t}</span></div></div>`;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+  input.value = '';
+  const replies = ['なるほど！','そうなんですね','わかりました！','ありがとうございます','了解です。'];
+  setTimeout(() => {
+    const t2 = new Date().toLocaleTimeString('ja-JP', {hour:'2-digit',minute:'2-digit',hour12:true});
+    const d2 = document.createElement('div');
+    d2.className = 'msg-row them';
+    d2.innerHTML = `<div class="msg-avatar">${avatarHTML(36)}</div><div class="msg-content"><div class="bubble them">${replies[Math.floor(Math.random()*replies.length)]}</div><div class="msg-meta"><span class="msg-time">${t2}</span></div></div>`;
+    area.appendChild(d2);
+    area.scrollTop = area.scrollHeight;
+  }, 1200);
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').catch((err) => {
+      console.error('Service worker registration failed:', err);
+    });
+  });
+}
+</script>
+</body>
+</html>
