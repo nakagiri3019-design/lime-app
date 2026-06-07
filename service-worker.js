@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lime-cache-v1';
+const CACHE_NAME = 'lime-cache-v2';
 const PRECACHE_URLS = [
   './chat.html',
   './manifest.json',
@@ -23,18 +23,18 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Network-first: always try to fetch the latest version, falling back to the
+// cache only when offline. This keeps the app from getting stuck showing an
+// outdated cached page after a deploy.
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        if (response.ok && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => cached);
-    })
+    fetch(event.request).then((response) => {
+      if (response.ok && response.type === 'basic') {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+      }
+      return response;
+    }).catch(() => caches.match(event.request))
   );
 });

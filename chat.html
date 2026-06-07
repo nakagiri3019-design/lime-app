@@ -425,8 +425,29 @@ function sendMsg() {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js').catch((err) => {
+    navigator.serviceWorker.register('service-worker.js').then((reg) => {
+      // 既存のService Workerより新しいバージョンがあればすぐに確認・適用する
+      reg.update();
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (!newWorker) return;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'activated') {
+            // 新しいバージョンが有効になったら、最新のデザインを表示するため再読み込みする
+            window.location.reload();
+          }
+        });
+      });
+    }).catch((err) => {
       console.error('Service worker registration failed:', err);
+    });
+
+    // Service Workerが切り替わったタイミングでも確実に再読み込みする
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
     });
   });
 }
