@@ -3,9 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Lime</title>
-<meta name="theme-color" content="#ffffff">
-<link rel="manifest" href="./manifest.json">
+<title>Lime</title><link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -438,7 +436,8 @@ function sendMsg() {
 }
 
 function setThemeColor(color) {
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', color);
+  const el = document.querySelector('meta[name="theme-color"]');
+  if (el) el.setAttribute('content', color);
 }
 
 function openChat() {
