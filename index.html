@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Lime</title>
-<link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#607898">
+<link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -437,17 +437,26 @@ function sendMsg() {
   }, 1200);
 }
 
-// Navigation
-document.getElementById('kin-row').addEventListener('click', () => {
+function setThemeColor(color) {
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', color);
+}
+
+function openChat() {
   document.getElementById('list-view').style.display = 'none';
   document.getElementById('chat-view').style.display = 'flex';
+  setThemeColor('#607898');
   renderMessages();
-});
+}
 
-document.getElementById('back-btn').addEventListener('click', () => {
+function closeChat() {
   document.getElementById('chat-view').style.display = 'none';
   document.getElementById('list-view').style.display = 'flex';
-});
+  setThemeColor('#ffffff');
+}
+
+// Navigation
+document.getElementById('kin-row').addEventListener('click', openChat);
+document.getElementById('back-btn').addEventListener('click', closeChat);
 
 document.getElementById('send-btn').addEventListener('click', sendMsg);
 
