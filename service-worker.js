@@ -1,6 +1,6 @@
-const CACHE_NAME = 'lime-cache-v2';
+const CACHE_NAME = 'lime-cache-v3';
 const PRECACHE_URLS = [
-  './chat.html',
+  './index.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
