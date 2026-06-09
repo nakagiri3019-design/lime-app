@@ -444,6 +444,10 @@ function openChat() {
   document.getElementById('list-view').style.display = 'none';
   document.getElementById('chat-view').style.display = 'flex';
   setThemeColor('#607898');
+  const themeEl = document.createElement('meta');
+  themeEl.name = 'theme-color';
+  themeEl.content = '#607898';
+  document.head.appendChild(themeEl);
   renderMessages();
 }
 
@@ -451,6 +455,8 @@ function closeChat() {
   document.getElementById('chat-view').style.display = 'none';
   document.getElementById('list-view').style.display = 'flex';
   setThemeColor('#ffffff');
+  const themeEl = document.querySelector('meta[name="theme-color"]');
+  if (themeEl) themeEl.remove();
 }
 
 // Navigation
