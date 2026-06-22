@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
   ============================================================
   Lime チャット テンプレート（中桐さん版がベース）
@@ -277,6 +277,19 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">キタムラ・ケイツウ</span><span class="f-time">6/5</span></div>
         <div class="f-last">《★☆開催中☆★》ノベルティキャンペーン</div>
+      </div>
+    </div>
+
+    <!-- 伊藤優 -->
+    <div class="friend-row openable" id="ito-row">
+      <div class="f-avatar-wrap">
+        <div class="f-avatar">
+          <img src="./avatars/ito_yu.jpg" alt="伊藤優" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">伊藤優</span><span class="f-time">5/20</span></div>
+        <div class="f-last">よろしくお願いいたします。また、7月の群馬工場…</div>
       </div>
     </div>
 
@@ -1182,6 +1195,321 @@ Interakt様に説明する時は、
     <span class="ai-chip">ムードを分析</span>
   </div>
 </div>
+<!-- CHAT VIEW: 伊藤優 -->
+<div id="chat-view-ito" style="display:none;flex-direction:column;height:100%;">
+  <div class="chat-header">
+    <button class="back-btn" id="back-btn-ito">
+      <svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1L1 9l8 8"/></svg>
+    </button>
+    <span class="chat-name">伊藤優</span>
+    <div class="chat-icons">
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="messages-area" id="messages-area-ito">
+    <div class="float-date-wrap"><div class="floating-date" id="floating-date-ito"></div></div>
+
+    <!-- 5月7日 -->
+    <div class="date-divider"><span class="date-pill">5月7日(木)</span></div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="overflow:hidden;"><img src="./avatars/ito_yu.jpg" alt="伊藤" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">中桐さん、お疲れさまです。ユリールの件、5月からもう少し具体的に進めていきたいです。シートマスク、洗顔石鹸、クレンジングクリーム、美容液、保湿クリームの5商品で、エステサロン向けのシリーズとして見せたいと思っています。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:30</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">11:05</span>
+        </div>
+        <div class="bubble bbl-me">伊藤さん、お疲れさまです。はい、ユリールは5商品でシリーズ感を出した方が良いと思います。クレンジングクリーム、洗顔石鹸、美容液、シートマスク、保湿クリームで、サロンケア後のホームケアとして流れを作ると説明しやすいです。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐（続き） -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">そうですね。エステ専売品として、少し高級感のある大人向けラインにしたいです。ヒト幹細胞培養液やエクソソームを軸にしたいと思っています。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">11:20</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">11:45</span>
+        </div>
+        <div class="bubble bbl-me">方向性は良いと思います。ただ、外向きの販売資料では表現を少し調整した方が安全です。「肌再生」や「細胞ケア」という言葉は強く見えるので、サロン向け資料では、「年齢肌向けのプレミアムライン」「サロンケア後の肌を整えるホームケア」「ハリ・うるおい・ツヤを意識したシリーズ」のように整理すると使いやすいと思います。</div>
+      </div>
+    </div>
+
+    <!-- 5月9日 -->
+    <div class="date-divider"><span class="date-pill">5月9日(土)</span></div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="overflow:hidden;"><img src="./avatars/ito_yu.jpg" alt="伊藤" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">OEM先については、どこか相談できそうなところありますか？</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:15</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">11:00</span>
+        </div>
+        <div class="bubble bbl-me">はい。以前からお付き合いのある株式会社シースタイルの大内さんに、一度相談してみます。スキンケア系は千葉県の工場、洗顔石鹸は群馬県の工場で進められる可能性があります。まずは商品ごとの対応可否、納期、最低ロット、サンプル対応を確認してみます。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">ありがとうございます。シースタイルさんをご紹介いただけるのは助かります。見積もりや商品代の請求は、シースタイルさんからうちに直接もらう形で大丈夫です。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">11:30</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">13:00</span>
+        </div>
+        <div class="bubble bbl-me">承知しました。見積もりや商品の請求まわりは、大内さんからピースユーモアさんへ直接送ってもらう流れにします。私は、納期、成分、販売方法、サロン向け資料、管理表まわりの整理を中心に入ります。</div>
+      </div>
+    </div>
+
+    <!-- 5月12日 -->
+    <div class="date-divider"><span class="date-pill">5月12日(火)</span></div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">10:00</span>
+        </div>
+        <div class="bubble bbl-me">伊藤さん、お疲れさまです。大内さんにユリールの5商品について概要を共有しました。現時点では、洗顔石鹸だけ群馬県の工場、それ以外のクレンジングクリーム、美容液、シートマスク、保湿クリームは千葉県の工場で確認する流れになりそうです。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="overflow:hidden;"><img src="./avatars/ito_yu.jpg" alt="伊藤" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">ありがとうございます。納期はどのくらいになりそうですか？</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:30</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">10:55</span>
+        </div>
+        <div class="bubble bbl-me">目安としては、洗顔石鹸だけ約2か月、それ以外は約1か月くらいとのことです。洗顔石鹸は枠練りや乾燥工程があるので、他の商品より早めに仕様を固めた方がよさそうです。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">なるほど。9月頃の販売開始を考えると、石鹸は先に進めた方がいいですね。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">11:20</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">14:00</span>
+        </div>
+        <div class="bubble bbl-me">そうですね。7月に群馬と千葉の工場へ行けるように、大内さんと日程調整してセッティングします。サンプルが出来上がったら、大内さんと一緒にピースユーモアさんへ伺う流れも合わせて確認します。</div>
+      </div>
+    </div>
+
+    <!-- 5月15日 -->
+    <div class="date-divider"><span class="date-pill">5月15日(金)</span></div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="overflow:hidden;"><img src="./avatars/ito_yu.jpg" alt="伊藤" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">あと、正規の商品と一緒に配れるようなミニサイズも作れたらいいなと思っています。サロンでお客様に試してもらいやすいので。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:05</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">10:40</span>
+        </div>
+        <div class="bubble bbl-me">いいと思います。特に美容液、クリーム、クレンジングあたりは、ミニサイズやサンプルがあると導入しやすいです。ミニサイズ対応が可能か、最低ロットがどのくらいになるか、大内さんに確認します。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">お願いします。化粧箱やパッケージデザインは、こちらで進めます。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">11:00</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">14:30</span>
+        </div>
+        <div class="bubble bbl-me">承知しました。化粧箱やデザインはピースユーモアさん側で進める前提で、私は容器仕様、商品説明、販売方法、サロン向け資料の整理を進めます。商品ごとの訴求ポイントも、販売時に使いやすい形にまとめておきます。</div>
+      </div>
+    </div>
+
+    <!-- 5月18日 -->
+    <div class="date-divider"><span class="date-pill">5月18日(月)</span></div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">9:30</span>
+        </div>
+        <div class="bubble bbl-me">伊藤さん、お疲れさまです。ユリールのシリーズ構成ですが、販売資料では以下のように役割を分けると分かりやすいと思います。クレンジングクリーム：摩擦を抑えた美容液感覚のクレンジング／洗顔石鹸：くすみ・角質ケアを意識した濃密泡洗顔／美容液：シリーズの中心となるハリ・ツヤ訴求／シートマスク：週1〜2回の集中ケア／保湿クリーム：仕上げの保湿・バリアケア</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="overflow:hidden;"><img src="./avatars/ito_yu.jpg" alt="伊藤" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">分かりやすいですね。サロンのスタッフさんにも説明しやすそうです。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:00</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">10:25</span>
+        </div>
+        <div class="bubble bbl-me">はい。専門的な成分名は入れつつ、説明は難しくなりすぎないようにします。ヒト幹細胞培養液、エクソソーム、PDRN、ナイアシンアミド、セラミドなどは、商品ごとの特徴として整理しますが、広告表現は強くなりすぎないように調整します。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">お願いします。エステ後のホームケアとして、シリーズでおすすめできる形にしたいです。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">11:00</span></div>
+      </div>
+    </div>
+
+    <!-- 5月20日 -->
+    <div class="date-divider"><span class="date-pill">5月20日(水)</span></div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="overflow:hidden;"><img src="./avatars/ito_yu.jpg" alt="伊藤" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">中桐さん、5月分の進行状況を一度まとめていただけますか？社内でもユリールの販売準備として共有したいです。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:00</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">10:35</span>
+        </div>
+        <div class="bubble bbl-me">承知しました。5月分は、ユリールのシリーズ構成、OEM先の確認、工場の切り分け、納期目安、ミニサイズ対応、販売資料の方向性を中心にまとめます。請求書と月次作業報告書は、5月20日締め分としてメールでお送りします。</div>
+      </div>
+    </div>
+
+    <!-- 伊藤 → 中桐 -->
+    <div class="msg-row row-them">
+      <div class="avatar-slot"></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">ありがとうございます。確認します。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">10:55</span></div>
+      </div>
+    </div>
+
+    <!-- 中桐 → 伊藤 -->
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me">
+          <span class="read-lbl">既読</span>
+          <span class="time-lbl">11:10</span>
+        </div>
+        <div class="bubble bbl-me">よろしくお願いいたします。また、7月の群馬工場・千葉工場の訪問については、大内さんと調整して、候補日が出たら共有します。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="input-bar">
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <div class="input-wrap">
+      <input class="msg-input" type="text" placeholder="メッセージを入力">
+      <div class="input-right">
+        <button class="i-sm-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></button>
+        <button class="i-sm-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button>
+      </div>
+    </div>
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+  </div>
+  <div class="ai-bar">
+    <div class="ai-dot"></div>
+    <span class="ai-chip">返信を提案</span>
+    <span class="ai-chip">話題を提案</span>
+    <span class="ai-chip">ムードを分析</span>
+  </div>
+</div>
 
 </div>
 <script>
@@ -1217,30 +1545,44 @@ document.getElementById('back-btn').addEventListener('click', () => {
   setThemeColor('#FFFFFF');
 });
 
-// スクロール中に日付を上部に薄く表示（本物のLINE風・止まると消える）
-const floatingDate = document.getElementById('floating-date');
-const dateDividers = Array.from(document.querySelectorAll('.date-divider'));
-let dateScrollTimer;
-messagesArea.addEventListener('scroll', () => {
-  const st = messagesArea.scrollTop;
-  let label = '';
-  for (let i = 0; i < dateDividers.length; i++) {
-    if (dateDividers[i].offsetTop <= st + 16) {
-      const pill = dateDividers[i].querySelector('.date-pill');
-      label = pill ? pill.textContent : '';
-    } else {
-      break;
-    }
-  }
-  if (label) {
-    floatingDate.textContent = label;
-    floatingDate.classList.add('show');
-  }
-  clearTimeout(dateScrollTimer);
-  dateScrollTimer = setTimeout(() => {
-    floatingDate.classList.remove('show');
-  }, 1100);
+// 伊藤優 チャット
+const chatViewIto = document.getElementById('chat-view-ito');
+const messagesAreaIto = document.getElementById('messages-area-ito');
+
+document.getElementById('ito-row').addEventListener('click', () => {
+  listView.style.display = 'none';
+  chatViewIto.style.display = 'flex';
+  setThemeColor('#3D6B8C');
+  messagesAreaIto.scrollTop = messagesAreaIto.scrollHeight;
 });
+
+document.getElementById('back-btn-ito').addEventListener('click', () => {
+  chatViewIto.style.display = 'none';
+  listView.style.display = 'flex';
+  setThemeColor('#FFFFFF');
+});
+
+// スクロール中に日付を上部に薄く表示（本物のLINE風・止まると消える）
+function setupFloatingDate(area, floatingDateEl) {
+  const dividers = Array.from(area.querySelectorAll('.date-divider'));
+  let timer;
+  area.addEventListener('scroll', () => {
+    const st = area.scrollTop;
+    let label = '';
+    for (let i = 0; i < dividers.length; i++) {
+      if (dividers[i].offsetTop <= st + 16) {
+        const pill = dividers[i].querySelector('.date-pill');
+        label = pill ? pill.textContent : '';
+      } else { break; }
+    }
+    if (label) { floatingDateEl.textContent = label; floatingDateEl.classList.add('show'); }
+    clearTimeout(timer);
+    timer = setTimeout(() => { floatingDateEl.classList.remove('show'); }, 1100);
+  });
+}
+
+setupFloatingDate(messagesArea, document.getElementById('floating-date'));
+setupFloatingDate(messagesAreaIto, document.getElementById('floating-date-ito'));
 </script>
 </body>
 </html>
