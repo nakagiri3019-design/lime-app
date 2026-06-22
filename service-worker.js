@@ -1,10 +1,11 @@
-const CACHE_NAME = 'lime-cache-v5';
+const CACHE_NAME = 'lime-cache-v6';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
+  './avatars/ito_yu.png',
 ];
 
 self.addEventListener('install', (event) => {
