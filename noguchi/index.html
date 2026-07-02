@@ -134,12 +134,14 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       <div class="safety-sub">地域の安全情報</div>
     </div>
 
-    <!-- ろくキッチン -->
-    <div class="friend-row">
-      <div class="f-avatar official" style="background:#8B1A1A;font-size:26px;">🍳</div>
+    <!-- 内藤 -->
+    <div class="friend-row openable" id="naito-row">
+      <div class="f-avatar" style="background:#B0C4D8;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      </div>
       <div class="f-info">
-        <div class="f-name-row"><span class="f-name">【公式】ろくキッチン (929) 🔇</span><span class="f-time">午後5:32</span></div>
-        <div class="f-last">プレゼント🎁動画 https://youtu.be/...</div>
+        <div class="f-name-row"><span class="f-name">内藤</span><span class="f-time">午後4:33</span></div>
+        <div class="f-last">承知しました。請求書を送ってください。確認します。</div>
       </div>
     </div>
     <!-- あきら -->
@@ -247,7 +249,7 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     <button class="back-btn" id="back-btn">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
-    <span class="chat-name">金</span>
+    <span class="chat-name" id="chat-name-el">金</span>
     <div class="chat-icons">
       <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
       <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></button>
@@ -367,8 +369,34 @@ const DAYS = [
   ]},
 ];
 
+const DAYS_NAITO = [
+  { date: '6月2日', messages: [
+    { from: 'me', text: 'お世話になっております。セントラル・タンクターミナル様向け排水処理設備の件ですが、製缶・配管まわりの部材拾い出しを進めています。現時点で仕様変更や追加指示はありますでしょうか。', time: '午前9:47' },
+    { from: 'them', text: 'お世話になります。現時点で大きな変更はありません。現在の内容で進めてください。確認事項が出たら連絡します。', time: '午前11:23' },
+  ]},
+  { date: '6月4日', messages: [
+    { from: 'me', text: '排水処理設備まわりの配管ルートと電気関係の確認ですが、前回打合せ内容の通りで進めてよろしいでしょうか。', time: '午前10:18' },
+    { from: 'them', text: 'はい、前回打合せ内容で進めてください。細かいところは現場側にも確認しておきます。', time: '午後2:52' },
+  ]},
+  { date: '6月9日', messages: [
+    { from: 'me', text: '製缶部材と配管部材について、先行して手配を進めます。納期が分かり次第、工程に反映して共有します。', time: '午前9:36' },
+    { from: 'them', text: '承知しました。工程に影響が出そうなものがあれば早めに教えてください。', time: '午後1:41' },
+  ]},
+  { date: '6月12日', messages: [
+    { from: 'me', text: '排水処理設備の製作・部材手配・設計関係ですが、6月分として進捗を整理しています。出来高としては30％程度で見ておりますが、認識に相違ないでしょうか。', time: '午後3:27' },
+  ]},
+  { date: '6月16日', messages: [
+    { from: 'them', text: '確認しました。6月分の進捗として30％程度で問題ありません。その内容で進めてください。', time: '午前10:09' },
+  ]},
+  { date: '6月25日', messages: [
+    { from: 'me', text: '6月末締め分の請求書を作成予定です。内容は排水処理設備30％、製缶・配管・電気・部材費および設計業務分となります。作成後、メールでお送りします。', time: '午前11:14' },
+    { from: 'them', text: '承知しました。請求書を送ってください。確認します。', time: '午後4:33' },
+  ]},
+];
+
 const AUTO_REPLIES = ['なるほど！', 'そうなんですね', 'わかりました！', 'ありがとうございます', '了解です。'];
 
+let currentDays = DAYS;
 let extraMessages = [];
 
 function esc(t) {
@@ -402,7 +430,7 @@ function renderMessages() {
   const area = document.getElementById('messages-area');
   let html = '';
 
-  DAYS.forEach((day) => {
+  currentDays.forEach((day) => {
     html += `<div class="date-divider"><span class="date-pill">${esc(day.date)}</span></div>`;
     day.messages.forEach((msg, mi) => {
       const showAvatar = msg.from !== 'me' && (mi === 0 || day.messages[mi - 1].from !== 'them');
@@ -440,7 +468,10 @@ function setThemeColor(color) {
   if (el) el.setAttribute('content', color);
 }
 
-function openChat() {
+function openChat(days, name) {
+  currentDays = days || DAYS;
+  extraMessages = [];
+  document.getElementById('chat-name-el').textContent = name || '金';
   document.getElementById('list-view').style.display = 'none';
   document.getElementById('chat-view').style.display = 'flex';
   setThemeColor('#607898');
@@ -460,7 +491,8 @@ function closeChat() {
 }
 
 // Navigation
-document.getElementById('kin-row').addEventListener('click', openChat);
+document.getElementById('kin-row').addEventListener('click', () => openChat(DAYS, '金'));
+document.getElementById('naito-row').addEventListener('click', () => openChat(DAYS_NAITO, '内藤'));
 document.getElementById('back-btn').addEventListener('click', closeChat);
 
 document.getElementById('send-btn').addEventListener('click', sendMsg);
