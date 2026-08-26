@@ -119,10 +119,21 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 
 /* 写真：バブルを持たず角丸の画像をそのまま置く。
    メッセージ最大幅いっぱいまで伸ばし、height:auto で縦横比を保つ。 */
-.photo-msg{flex:1 1 auto;min-width:0;max-width:100%;display:block;line-height:0;
-  border-radius:18px;overflow:hidden;-webkit-tap-highlight-color:rgba(0,0,0,0.06);}
+/* 写真行は msg-content に写真だけを入れ、最大幅いっぱい（テキストバブルと同じ右端・
+   同じ幅）まで広げる。既読/時刻と共有ボタンは写真の外へ絶対配置して幅を食わせない。 */
+.photo-content{position:relative;}
+.photo-msg-wrap{position:relative;width:100%;min-width:0;line-height:0;}
+.photo-msg{display:block;line-height:0;border-radius:18px;overflow:hidden;
+  -webkit-tap-highlight-color:rgba(0,0,0,0.06);}
 .photo-msg:active{filter:brightness(0.96);}
 .photo-msg img{display:block;width:100%;height:auto;}
+/* 共有ボタン：写真の左外・縦中央（実測 直径30px / 写真から10px / rgba(0,0,0,0.15)） */
+.photo-share{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);
+  width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.15);
+  display:flex;align-items:center;justify-content:center;pointer-events:none;}
+/* 既読と時刻は写真の左外・下端揃え。共有ボタンとは縦方向で離れるので重ならない。 */
+.photo-msg-wrap .msg-meta{position:absolute;right:calc(100% + 6px);bottom:0;
+  white-space:nowrap;padding-bottom:0;}
 
 /* ファイル送信バブル（PDF） */
 .file-bubble{display:flex;align-items:center;gap:11px;padding:11px 13px;text-decoration:none;
@@ -574,9 +585,13 @@ function esc(t) {
 // 膨らませた非対称形にし、左脚は scale(-1,1) で鏡像にしている。
 const PDF_PETAL_TOP = 'M0 0C-2.6-5.4-2.4-10.6 0-15.6C2.4-10.6 2.6-5.4 0 0Z';
 const PDF_PETAL_LEG = 'M0 0C-1-4.6-1-9.4 0-13.6C3.7-9.4 3.6-4.6 0 0Z';
-const PDF_SVG =
-  '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">' +
-  '<rect x="0.5" y="0.5" width="43" height="43" rx="11" fill="#FFFFFF" stroke="#E6E6E6"/>' +
+// 枠は実機に合わせて「塗りなし＋わずかに濃い枠線」。実測では緑バブル #9DE693 に対し
+// 枠線 #8FD186（＝地色の約0.91倍）で、枠の内側はバブルと同色だった。
+// 自分側はバブル #AAD97A に同じ比率をかけた緑、相手側（白バブル）は薄いグレー。
+function pdfSvg(isMe) {
+  return '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">' +
+  '<rect x="0.5" y="0.5" width="43" height="43" rx="11" fill="none" stroke="' +
+  (isMe ? '#9BC56F' : '#E0E0E0') + '"/>' +
   '<g transform="translate(22,27)" fill="none" stroke="#EE1C1F" ' +
   'stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round">' +
   '<path d="' + PDF_PETAL_TOP + '"/>' +
@@ -584,6 +599,7 @@ const PDF_SVG =
   '<path d="' + PDF_PETAL_LEG + '" transform="scale(-1,1) rotate(115)"/>' +
   '<path d="M-5.6 2H5.6"/>' +
   '</g></svg>';
+}
 
 // 有効期間 = 送信日時 + 7日。「〜7月1日 午後2:20」の形式（12時間表記・分は2桁）。
 const THREAD_YEAR = 2026;
@@ -642,7 +658,7 @@ function fileBubble(msg, cls, dayDate) {
   if (!f) return `<div class="bubble ${cls}">${esc(msg.file)}</div>`;
   const exp = expiryLabel(dayDate, msg.time);
   return `<a class="bubble ${cls} file-bubble" href="${f.href}" target="_blank" rel="noopener">` +
-    `<span class="file-ico">${PDF_SVG}</span>` +
+    `<span class="file-ico">${pdfSvg(msg.from === 'me')}</span>` +
     `<span class="file-txt">` +
     `<span class="file-name">${esc(f.name)}</span>` +
     (exp ? `<span class="file-sub">有効期間：${esc(exp)}</span>` : '') +
@@ -672,17 +688,31 @@ function callBubble(msg, cls) {
 // 写真：バブルを持たず、角丸の画像をそのまま置く。
 // 幅はメッセージ最大幅いっぱいまで伸び、height:auto で縦横比を維持する。
 // タップすると別タブで原寸の画像が開く。
-function photoBubble(msg) {
+// 共有ボタン（見た目のみ・機能しない）。3つの点を2本の線でつないだ形。
+const SHARE_SVG =
+  '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">' +
+  '<circle cx="18" cy="5" r="2.6" fill="#fff"/>' +
+  '<circle cx="6" cy="12" r="2.6" fill="#fff"/>' +
+  '<circle cx="18" cy="19" r="2.6" fill="#fff"/>' +
+  '<path d="M8.4 10.7l7.2-4.1M8.4 13.3l7.2 4.1" fill="none" stroke="#fff" ' +
+  'stroke-width="1.9" stroke-linecap="round"/></svg>';
+
+// 写真はメッセージ最大幅いっぱいに出す。既読/時刻と共有ボタンは写真の外へ絶対配置し、
+// 幅を食わないようにする（テキストバブルと同じ右端・同じ最大幅に揃う）。
+function photoBubble(msg, meta) {
   const p = PHOTOS[msg.photo];
   if (!p) return `<div class="bubble bbl-me">${esc(msg.photo)}</div>`;
-  return `<a class="photo-msg" href="${p.src}" target="_blank" rel="noopener">` +
+  return '<div class="photo-msg-wrap">' +
+    `<a class="photo-msg" href="${p.src}" target="_blank" rel="noopener">` +
     `<img src="${p.src}" width="${p.w}" height="${p.h}" alt="${esc(msg.alt || '')}" loading="lazy">` +
-    `</a>`;
+    '</a>' +
+    `<span class="photo-share">${SHARE_SVG}</span>` +
+    (meta || '') +
+    '</div>';
 }
 
 function bubbleBody(msg, isMe, dayDate) {
   const cls = isMe ? 'bbl-me' : 'bbl-them';
-  if (msg.type === 'photo') return photoBubble(msg);
   if (msg.type === 'file') return fileBubble(msg, cls, dayDate);
   if (msg.type === 'call') return callBubble(msg, cls);
   return `<div class="bubble ${cls}">${esc(msg.text)}</div>`;
@@ -690,13 +720,27 @@ function bubbleBody(msg, isMe, dayDate) {
 
 function renderBubble(msg, showMeta, dayDate) {
   const isMe = msg.from === 'me';
-  const bubble = bubbleBody(msg, isMe, dayDate);
   const meta = showMeta === false
     ? ''
     : isMe
       ? `<div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">${esc(msg.time)}</span></div>`
       : `<div class="msg-meta meta-them"><span class="time-lbl">${esc(msg.time)}</span></div>`;
 
+  // 写真は meta を写真の外へ絶対配置するため、msg-content には写真だけを入れる
+  if (msg.type === 'photo') {
+    const body = photoBubble(msg, meta);
+    if (isMe) {
+      return `<div class="msg-row row-me">
+      <div class="msg-content content-me photo-content">${body}</div>
+    </div>`;
+    }
+    return `<div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>
+      <div class="msg-content content-them photo-content">${body}</div>
+    </div>`;
+  }
+
+  const bubble = bubbleBody(msg, isMe, dayDate);
   if (isMe) {
     return `<div class="msg-row row-me">
       <div class="msg-content content-me">${meta}${bubble}</div>
