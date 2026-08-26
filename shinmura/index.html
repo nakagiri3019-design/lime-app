@@ -635,11 +635,14 @@ function renderBubble(msg, showAvatar, showMeta) {
       <div class="msg-content content-me">${meta}${bubble}</div>
     </div>`;
   } else {
+    // 連続メッセージの2通目以降はアイコンを消すが、枠(.avatar-slot 36px + gap 6px)は残す。
+    // これだけで左端が1通目と完全に揃うので、.row-indent は付けない。
+    // （両方付けると 42px + 36px + 6px = 84px となり 1通目より 42px 右にずれ、
+    //   さらに max-width:75% が縮んで固定幅の通話カードが圧迫される）
     const avatarSlot = showAvatar
       ? `<div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>`
       : `<div class="avatar-slot"></div>`;
-    const indent = showAvatar ? '' : 'row-indent';
-    return `<div class="msg-row row-them ${indent}">
+    return `<div class="msg-row row-them">
       ${avatarSlot}
       <div class="msg-content content-them">${bubble}${meta}</div>
     </div>`;
