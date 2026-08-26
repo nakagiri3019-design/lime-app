@@ -117,6 +117,13 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .time-lbl{font-size:12px;line-height:15px;}
 .date-pill{font-size:13px;padding:5px 17px;}
 
+/* 写真：バブルを持たず角丸の画像をそのまま置く。
+   メッセージ最大幅いっぱいまで伸ばし、height:auto で縦横比を保つ。 */
+.photo-msg{flex:1 1 auto;min-width:0;max-width:100%;display:block;line-height:0;
+  border-radius:18px;overflow:hidden;-webkit-tap-highlight-color:rgba(0,0,0,0.06);}
+.photo-msg:active{filter:brightness(0.96);}
+.photo-msg img{display:block;width:100%;height:auto;}
+
 /* ファイル送信バブル（PDF） */
 .file-bubble{display:flex;align-items:center;gap:11px;padding:11px 13px;text-decoration:none;
   cursor:pointer;-webkit-tap-highlight-color:rgba(0,0,0,0.06);}
@@ -410,6 +417,14 @@ const FILES = {
   takei_schedule:     { name: '工程表_アーバンビルド_武井様.pdf', href: './files/takei_schedule.pdf', kb: 43 },
 };
 
+// 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
+const PHOTOS = {
+  remodel_bright_curtain_room_site:     { src: './img/remodel_bright_curtain_room_site.png', w: 800, h: 450 },
+  remodel_floor_subbase_site:           { src: './img/remodel_floor_subbase_site.png', w: 800, h: 450 },
+  remodel_kitchen_bathroom_site:        { src: './img/remodel_kitchen_bathroom_site.png', w: 800, h: 450 },
+  remodel_living_after_wallpaper_site:  { src: './img/remodel_living_after_wallpaper_site.png', w: 800, h: 450 },
+};
+
 // ── アーバンビルド酒井 スレッド ─────────────────────────
 // 追記するときは、この配列の末尾に日付ブロックを1つ足すだけでよい：
 //   { date: '8月27日（木）', messages: [
@@ -448,6 +463,7 @@ const DAYS_SAKAI = [
   ]},
   { date: '7月11日（土）', messages: [
     { from: 'me', time: '17:30', text: '木工事完了しました。\n床下地、開口下地、Mクロス下地まで済んでいます。' },
+    { from: 'me', time: '17:31', type: 'photo', photo: 'remodel_floor_subbase_site', alt: '木工事完了時の床下地' },
     { from: 'them', time: '18:12', text: 'ありがとうございます。\n順調ですね。' },
   ]},
   { date: '7月15日（水）', messages: [
@@ -457,6 +473,7 @@ const DAYS_SAKAI = [
   ]},
   { date: '7月17日（金）', messages: [
     { from: 'me', time: '17:20', text: '給排水衛生工事完了しました。\n浴室、キッチン、洗面台、トイレの設置まで済んでいます。' },
+    { from: 'me', time: '17:21', type: 'photo', photo: 'remodel_kitchen_bathroom_site', alt: '設置後のキッチンと水回り' },
     { from: 'them', time: '17:55', text: 'ありがとうございます。\n残りは内装と雑工事ですね。' },
     { from: 'me', time: '18:02', text: 'はい。\n来週で内装、その後クリーニングまで進めます。' },
   ]},
@@ -469,7 +486,8 @@ const DAYS_SAKAI = [
     { from: 'me', time: '16:30', text: '全工程完了しました。\n最終清掃と引き渡し前の確認まで済んでおります。' },
     { from: 'me', time: '16:32', text: '作業完了報告書をお送りします。' },
     { from: 'me', time: '16:32', type: 'file', file: 'takei_completion' },
-    { from: 'me', time: '16:35', text: '追加工事の発生はございませんでした。\n工期内に予定どおり完了しております。' },
+    { from: 'me', time: '16:33', type: 'photo', photo: 'remodel_living_after_wallpaper_site', alt: 'クロス施工後のリビング' },
+    { from: 'me', time: '16:35', text: '追加工事の発生はございませんでした。\n工期内に予定どおり完了しております。\n仕上がりの写真も併せてお送りします。' },
     { from: 'them', time: '17:20', text: 'ありがとうございました。\n確認のうえ、後日ご連絡します。' },
     { from: 'them', time: '17:22', text: '来週、金子様邸のほうもお見積りをお願いできますか。' },
     { from: 'me', time: '17:30', text: '承知しました。\n現地確認のうえ、来週中にお出しします。' },
@@ -516,6 +534,7 @@ const DAYS_SAKAI = [
   ]},
   { date: '8月24日（月）', messages: [
     { from: 'me', time: '18:20', text: '内装工事完了しました。\nオーダーカーテンの取り付けまで済んでおります。' },
+    { from: 'me', time: '18:21', type: 'photo', photo: 'remodel_bright_curtain_room_site', alt: 'オーダーカーテン取り付け後の室内' },
     { from: 'them', time: '18:50', text: 'ありがとうございます。\nカーテンの色味、施主様にも確認いただけましたか。' },
     { from: 'me', time: '18:55', text: 'はい、取り付け時に立ち会っていただきました。\n問題ないとのことです。' },
   ]},
@@ -650,8 +669,20 @@ function callBubble(msg, cls) {
     '</div>' + CALL_RINGTONE_ROW + '</div></div>';
 }
 
+// 写真：バブルを持たず、角丸の画像をそのまま置く。
+// 幅はメッセージ最大幅いっぱいまで伸び、height:auto で縦横比を維持する。
+// タップすると別タブで原寸の画像が開く。
+function photoBubble(msg) {
+  const p = PHOTOS[msg.photo];
+  if (!p) return `<div class="bubble bbl-me">${esc(msg.photo)}</div>`;
+  return `<a class="photo-msg" href="${p.src}" target="_blank" rel="noopener">` +
+    `<img src="${p.src}" width="${p.w}" height="${p.h}" alt="${esc(msg.alt || '')}" loading="lazy">` +
+    `</a>`;
+}
+
 function bubbleBody(msg, isMe, dayDate) {
   const cls = isMe ? 'bbl-me' : 'bbl-them';
+  if (msg.type === 'photo') return photoBubble(msg);
   if (msg.type === 'file') return fileBubble(msg, cls, dayDate);
   if (msg.type === 'call') return callBubble(msg, cls);
   return `<div class="bubble ${cls}">${esc(msg.text)}</div>`;
