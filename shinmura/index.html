@@ -116,6 +116,15 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .read-lbl{font-size:12px;line-height:14px;}
 .time-lbl{font-size:12px;line-height:15px;}
 .date-pill{font-size:13px;padding:5px 17px;}
+/* スクロール追従の日付ピル。本文中の .date-pill と同じ意匠のまま、背景だけ薄くする。
+   実測: 白い書類(≈#FDFAF2)の上でピル内部が #D9D6D0 -> rgba(100,100,100,0.24)
+   （本文中のピルは同じ灰色で alpha 0.35）。ヘッダー直下に高さ0の枠で浮かせる。 */
+.messages-area{position:relative;}
+.float-date-wrap{height:0;position:relative;z-index:10;display:flex;
+  justify-content:center;pointer-events:none;}
+.floating-date{margin-top:10px;background:rgba(100,100,100,0.24);
+  box-shadow:0 1px 3px rgba(0,0,0,0.12);opacity:0;transition:opacity 0.28s;}
+.floating-date.show{opacity:1;}
 
 /* 写真：バブルを持たず角丸の画像をそのまま置く。
    メッセージ最大幅いっぱいまで伸ばし、height:auto で縦横比を保つ。 */
@@ -380,6 +389,7 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
   </div>
 
+  <div class="float-date-wrap"><span class="date-pill floating-date" id="floating-date"></span></div>
   <div class="messages-area" id="messages-area"><!-- filled by JS --></div>
 
   <div class="input-bar">
@@ -801,12 +811,49 @@ function sendMsg() {
   }, 1200);
 }
 
+// ── スクロール追従の日付ピル ─────────────────────────
+// 表示中の日付ブロックに合わせて内容を切り替え、スクロールが止まったら遅れて消す。
+// 会話は innerHTML で描き直されるので、区切りはスクロールのたびに取り直す。
+// 会話が空のスレッドでは区切りが無いので、そのまま何も表示しない。
+let floatDateTimer = null;
+
+function hideFloatingDate() {
+  clearTimeout(floatDateTimer);
+  const el = document.getElementById('floating-date');
+  if (el) el.classList.remove('show');
+}
+
+function setupFloatingDate(area, el) {
+  if (!area || !el) return;
+  area.addEventListener('scroll', () => {
+    const dividers = area.querySelectorAll('.date-divider');
+    if (!dividers.length) return;          // 空スレッドは何も出さない
+    const st = area.scrollTop;
+    let label = '';
+    for (let i = 0; i < dividers.length; i++) {
+      if (dividers[i].offsetTop <= st + 16) {
+        const pill = dividers[i].querySelector('.date-pill');
+        label = pill ? pill.textContent : '';
+      } else {
+        break;
+      }
+    }
+    if (label) {
+      el.textContent = label;
+      el.classList.add('show');
+    }
+    clearTimeout(floatDateTimer);
+    floatDateTimer = setTimeout(() => { el.classList.remove('show'); }, 1100);
+  }, { passive: true });
+}
+
 function setThemeColor(color) {
   const el = document.querySelector('meta[name="theme-color"]');
   if (el) el.setAttribute('content', color);
 }
 
 function openChat(days, name, avatar) {
+  hideFloatingDate();
   currentDays = Array.isArray(days) ? days : [];
   currentAvatar = avatar || null;
   extraMessages = [];
@@ -822,6 +869,7 @@ function openChat(days, name, avatar) {
 }
 
 function closeChat() {
+  hideFloatingDate();
   document.getElementById('chat-view').style.display = 'none';
   document.getElementById('list-view').style.display = 'flex';
   setThemeColor('#ffffff');
@@ -835,6 +883,9 @@ Object.keys(THREADS).forEach((id) => {
   if (!row) return;
   row.addEventListener('click', () => openChat(THREADS[id].days, THREADS[id].name, THREADS[id].avatar));
 });
+
+setupFloatingDate(document.getElementById('messages-area'),
+                  document.getElementById('floating-date'));
 
 document.getElementById('back-btn').addEventListener('click', closeChat);
 document.getElementById('send-btn').addEventListener('click', sendMsg);
