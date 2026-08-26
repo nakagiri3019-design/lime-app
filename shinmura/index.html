@@ -108,27 +108,36 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .ai-dot{width:22px;height:22px;border-radius:50%;background:#7B68EE;flex-shrink:0;}
 .ai-chip{font-size:12.5px;color:#555;cursor:pointer;user-select:none;}
 .ai-chip:active{opacity:0.7;}
+/* ── 文字サイズ：実機LINEのスクショ実測に合わせて拡大 ──────────────
+   参考画像のアバター径 88px を CSS 36px として換算（スケール 2.42）。
+   本文の字面高 34px -> 34/2.42/0.88 = 約16px。ここを基準に各所を決めた。 */
+.bubble{font-size:16px;line-height:24px;padding:11px 15px;}
+.msg-content{max-width:78%;}
+.read-lbl{font-size:12px;line-height:14px;}
+.time-lbl{font-size:12px;line-height:15px;}
+.date-pill{font-size:13px;padding:5px 17px;}
+
 /* ファイル送信バブル（PDF） */
-.file-bubble{display:flex;align-items:center;gap:10px;padding:10px 12px;text-decoration:none;
+.file-bubble{display:flex;align-items:center;gap:11px;padding:11px 13px;text-decoration:none;
   cursor:pointer;-webkit-tap-highlight-color:rgba(0,0,0,0.06);}
 .file-bubble:active{filter:brightness(0.96);}
 .file-ico{flex-shrink:0;display:flex;align-items:center;}
-.file-txt{min-width:0;display:flex;flex-direction:column;gap:2px;}
-.file-name{font-size:13px;font-weight:700;color:#111;line-height:17px;word-break:break-all;}
-.file-size{font-size:11px;color:#6b6b6b;line-height:14px;}
+.file-txt{min-width:0;display:flex;flex-direction:column;gap:3px;}
+.file-name{font-size:15px;font-weight:700;color:#111;line-height:21px;word-break:break-all;}
+.file-sub{font-size:12.5px;color:#6b6b6b;line-height:17px;}
 /* 通話バブル（実機LINEのスクショに合わせた寸法・色） */
 .bbl-call{white-space:normal;}
-.call-card{display:flex;flex-direction:column;width:190px;box-sizing:border-box;}
+.call-card{display:flex;flex-direction:column;width:205px;box-sizing:border-box;}
 .call-card svg{display:block;}
-.call-main{display:flex;align-items:center;gap:9px;padding:0 0 7px;}
+.call-main{display:flex;align-items:center;gap:10px;padding:0 0 8px;}
 .call-phone-icon{flex-shrink:0;display:flex;}
-.call-info{min-width:0;display:flex;flex-direction:column;gap:1px;}
-.call-title{font-size:14.5px;font-weight:700;color:#111;line-height:1.32;}
-.call-duration{font-size:12px;color:rgba(0,0,0,0.5);line-height:1.3;}
-.call-ringtone-row{display:flex;align-items:center;gap:7px;
-  border-top:1px solid rgba(0,0,0,0.08);padding-top:7px;}
+.call-info{min-width:0;display:flex;flex-direction:column;gap:2px;}
+.call-title{font-size:15.5px;font-weight:700;color:#111;line-height:1.32;}
+.call-duration{font-size:13px;color:rgba(0,0,0,0.5);line-height:1.3;}
+.call-ringtone-row{display:flex;align-items:center;gap:8px;
+  border-top:1px solid rgba(0,0,0,0.08);padding-top:8px;}
 .call-music-icon{flex-shrink:0;display:flex;}
-.call-ringtone-text{flex:1;font-size:11.5px;color:rgba(0,0,0,0.45);line-height:1.2;}
+.call-ringtone-text{flex:1;font-size:12.5px;color:rgba(0,0,0,0.45);line-height:1.25;}
 .call-chevron{flex-shrink:0;display:flex;}
 
 </style>
@@ -539,14 +548,39 @@ function esc(t) {
   return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// PDF アイコン / 受話器アイコン（画像は使わず SVG で描画）
+// PDF アイコン（画像は使わず SVG で描画）
+// 白い角丸の枠の中に、Adobe Acrobat の「A」マーク風の図形。赤は実測値 #EE1C1F。
+// 寸法は参考画像の実測から：接合部 (22,27)、上の花弁は長さ15.6、脚は長さ13.6 で
+// 左右115°に開く。上は左右対称、脚は内側（Aの斜線になる側）をほぼ直線・外側だけ
+// 膨らませた非対称形にし、左脚は scale(-1,1) で鏡像にしている。
+const PDF_PETAL_TOP = 'M0 0C-2.6-5.4-2.4-10.6 0-15.6C2.4-10.6 2.6-5.4 0 0Z';
+const PDF_PETAL_LEG = 'M0 0C-1-4.6-1-9.4 0-13.6C3.7-9.4 3.6-4.6 0 0Z';
 const PDF_SVG =
-  '<svg width="30" height="34" viewBox="0 0 30 34" aria-hidden="true">' +
-  '<path d="M4 1.5H18L27 10.5V30A2.5 2.5 0 0 1 24.5 32.5H4A2.5 2.5 0 0 1 1.5 30V4A2.5 2.5 0 0 1 4 1.5Z" fill="#fff" stroke="#E24B4B" stroke-width="1.6" stroke-linejoin="round"/>' +
-  '<path d="M18 1.5V10.5H27" fill="none" stroke="#E24B4B" stroke-width="1.6" stroke-linejoin="round"/>' +
-  '<rect x="1.5" y="16" width="25.5" height="11" rx="1.5" fill="#E24B4B"/>' +
-  '<text x="14.25" y="24.4" text-anchor="middle" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="7.6" font-weight="700" letter-spacing="0.4">PDF</text>' +
-  '</svg>';
+  '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">' +
+  '<rect x="0.5" y="0.5" width="43" height="43" rx="11" fill="#FFFFFF" stroke="#E6E6E6"/>' +
+  '<g transform="translate(22,27)" fill="none" stroke="#EE1C1F" ' +
+  'stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round">' +
+  '<path d="' + PDF_PETAL_TOP + '"/>' +
+  '<path d="' + PDF_PETAL_LEG + '" transform="rotate(115)"/>' +
+  '<path d="' + PDF_PETAL_LEG + '" transform="scale(-1,1) rotate(115)"/>' +
+  '<path d="M-5.6 2H5.6"/>' +
+  '</g></svg>';
+
+// 有効期間 = 送信日時 + 7日。「〜7月1日 午後2:20」の形式（12時間表記・分は2桁）。
+const THREAD_YEAR = 2026;
+
+function expiryLabel(dayDate, time) {
+  const md = String(dayDate || '').match(/(\d+)月(\d+)日/);
+  const hm = String(time || '').match(/(\d+):(\d+)/);
+  if (!md || !hm) return '';
+  const d = new Date(THREAD_YEAR, Number(md[1]) - 1, Number(md[2]),
+                     Number(hm[1]), Number(hm[2]));
+  d.setDate(d.getDate() + 7);
+  const h = d.getHours();
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return '〜' + (d.getMonth() + 1) + '月' + d.getDate() + '日 ' +
+    (h < 12 ? '午前' : '午後') + h12 + ':' + ('0' + d.getMinutes()).slice(-2);
+}
 
 // 通話アイコン：丸背景＋塗りつぶしの黒い受話器（画像は使わず SVG）。
 // 丸の色は実機スクショの実測に合わせる。
@@ -584,14 +618,16 @@ function padDur(d) {
 
 // ファイル送信バブル：左に赤い PDF アイコン、右にファイル名（太字）とサイズ。
 // バブル全体が <a> なので、どこをタップしても別タブで PDF が開く。
-function fileBubble(msg, cls) {
+function fileBubble(msg, cls, dayDate) {
   const f = FILES[msg.file];
   if (!f) return `<div class="bubble ${cls}">${esc(msg.file)}</div>`;
+  const exp = expiryLabel(dayDate, msg.time);
   return `<a class="bubble ${cls} file-bubble" href="${f.href}" target="_blank" rel="noopener">` +
     `<span class="file-ico">${PDF_SVG}</span>` +
     `<span class="file-txt">` +
     `<span class="file-name">${esc(f.name)}</span>` +
-    `<span class="file-size">サイズ：${f.kb}KB</span>` +
+    (exp ? `<span class="file-sub">有効期間：${esc(exp)}</span>` : '') +
+    `<span class="file-sub">サイズ：${f.kb} KB</span>` +
     `</span></a>`;
 }
 
@@ -614,16 +650,16 @@ function callBubble(msg, cls) {
     '</div>' + CALL_RINGTONE_ROW + '</div></div>';
 }
 
-function bubbleBody(msg, isMe) {
+function bubbleBody(msg, isMe, dayDate) {
   const cls = isMe ? 'bbl-me' : 'bbl-them';
-  if (msg.type === 'file') return fileBubble(msg, cls);
+  if (msg.type === 'file') return fileBubble(msg, cls, dayDate);
   if (msg.type === 'call') return callBubble(msg, cls);
   return `<div class="bubble ${cls}">${esc(msg.text)}</div>`;
 }
 
-function renderBubble(msg, showMeta) {
+function renderBubble(msg, showMeta, dayDate) {
   const isMe = msg.from === 'me';
-  const bubble = bubbleBody(msg, isMe);
+  const bubble = bubbleBody(msg, isMe, dayDate);
   const meta = showMeta === false
     ? ''
     : isMe
@@ -661,7 +697,7 @@ function renderMessages() {
   currentDays.forEach((day) => {
     html += `<div class="date-divider"><span class="date-pill">${esc(day.date)}</span></div>`;
     day.messages.forEach((msg, mi) => {
-      html += renderBubble(msg, metaVisible(day.messages, mi));
+      html += renderBubble(msg, metaVisible(day.messages, mi), day.date);
     });
   });
 
