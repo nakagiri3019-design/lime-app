@@ -464,10 +464,14 @@ const FILES = {
 
 // 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
 const PHOTOS = {
-  remodel_bright_curtain_room_site:     { src: './img/remodel_bright_curtain_room_site.jpg', w: 800, h: 450 },
-  remodel_floor_subbase_site:           { src: './img/remodel_floor_subbase_site.jpg', w: 800, h: 450 },
-  remodel_kitchen_bathroom_site:        { src: './img/remodel_kitchen_bathroom_site.jpg', w: 800, h: 450 },
-  remodel_living_after_wallpaper_site:  { src: './img/remodel_living_after_wallpaper_site.jpg', w: 800, h: 450 },
+  remodel_bright_curtain_room_site:        { src: './img/remodel_bright_curtain_room_site.jpg', w: 800, h: 450 },
+  remodel_completion_wallpaper_door_site:  { src: './img/remodel_completion_wallpaper_door_site.jpg', w: 800, h: 450 },
+  remodel_electrical_completion_site:      { src: './img/remodel_electrical_completion_site.jpg', w: 800, h: 450 },
+  remodel_floor_subbase_site:              { src: './img/remodel_floor_subbase_site.jpg', w: 800, h: 450 },
+  remodel_handover_room_site:              { src: './img/remodel_handover_room_site.jpg', w: 800, h: 450 },
+  remodel_intercom_check_site:             { src: './img/remodel_intercom_check_site.jpg', w: 800, h: 450 },
+  remodel_kitchen_bathroom_site:           { src: './img/remodel_kitchen_bathroom_site.jpg', w: 800, h: 450 },
+  remodel_living_after_wallpaper_site:     { src: './img/remodel_living_after_wallpaper_site.jpg', w: 800, h: 450 },
 };
 
 // ── アーバンビルド酒井 スレッド ─────────────────────────
@@ -605,10 +609,12 @@ const DAYS_KANNO = [
   ]},
   { date: '7月1日（水）', messages: [
     { from: 'me', time: '17:30', text: '改修工事完了しました。\n壁紙、天井、ドア補修まで済んでます。' },
+    { from: 'me', time: '17:31', type: 'photo', photo: 'remodel_completion_wallpaper_door_site', alt: '改修工事完了後の壁紙とドア' },
     { from: 'them', time: '18:02', text: '早いですね！\nありがとうございます。' },
   ]},
   { date: '7月3日（金）', messages: [
     { from: 'me', time: '17:55', text: '電気工事完了しました。\nコンセント、ダクト、エアコンの交換まで終わってます。' },
+    { from: 'me', time: '17:56', type: 'photo', photo: 'remodel_electrical_completion_site', alt: 'エアコン交換後の室内' },
     { from: 'them', time: '18:30', text: 'ありがとうございます。\nエアコンは動作確認済みですか？' },
     { from: 'me', time: '18:35', text: 'はい、全部確認しました。問題ないです。' },
   ]},
@@ -662,6 +668,7 @@ const DAYS_KANNO = [
     { from: 'me', time: '18:00', text: '電気工事完了しました。\nダクト、エアコン、インターホンの修理も済んでます。' },
     { from: 'them', time: '18:32', text: 'インターホン直りましたか？' },
     { from: 'me', time: '18:38', text: 'はい、問題なく通話できてます。\n施主様にも確認いただきました。' },
+    { from: 'me', time: '18:39', type: 'photo', photo: 'remodel_intercom_check_site', alt: 'インターホンの動作確認' },
     { from: 'them', time: '18:45', text: 'よかったです。\nそこ気にされてたので助かります。' },
   ]},
   { date: '8月8日（土）', messages: [
@@ -675,6 +682,7 @@ const DAYS_KANNO = [
   ]},
   { date: '8月12日（水）', messages: [
     { from: 'me', time: '16:10', text: '全工程完了しました。\n引き渡しまで済んでます。' },
+    { from: 'me', time: '16:11', type: 'photo', photo: 'remodel_handover_room_site', alt: '引き渡し前の室内' },
     { from: 'me', time: '16:12', text: '作業完了報告書です。' },
     { from: 'me', time: '16:12', type: 'file', file: 'sakurai_completion' },
     { from: 'me', time: '16:15', text: 'こちらも追加工事なしで収まりました。' },
