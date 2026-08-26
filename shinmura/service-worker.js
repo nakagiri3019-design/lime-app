@@ -1,11 +1,13 @@
 // 新村版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-shinmura-cache-v1';
+const CACHE_NAME = 'lime-shinmura-cache-v2';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
+  './img/kanno_lion.png',
+  './img/noguchi_komorebi.png',
 ];
 
 self.addEventListener('install', (event) => {

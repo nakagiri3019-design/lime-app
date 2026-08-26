@@ -7,6 +7,7 @@
     (A) 自分側の表示名 = 新村（ME_NAME）
     (B) 友だちリスト 12件（全件ピン留め・data-ts で日時自動計算）
     (C) 各スレッドの会話は空（THREADS の days: []）
+    (D) アイコンは 4件のみ個別（img/ の写真2件 + ロゴSVG 2件）、残りは人型シルエット
   ■ デザイン(CSS)は他版と共通。触らないこと。
   ■ URL: https://nakagiri3019-design.github.io/lime-app/shinmura/（新村）
   ============================================================
@@ -160,8 +161,8 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
     <!-- アーバンビルド酒井 -->
     <div class="friend-row openable" id="row-sakai" data-ts="2026-08-26T09:42">
-      <div class="f-avatar" style="background:#B0C4D8;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      <div class="f-avatar">
+        <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">アーバンビルド酒井</span><span class="f-time"></span></div>
@@ -182,8 +183,8 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
     <!-- 菅野海斗 -->
     <div class="friend-row openable" id="row-kanno" data-ts="2026-08-25T10:15">
-      <div class="f-avatar" style="background:#B0C4D8;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      <div class="f-avatar">
+        <img src="./img/kanno_lion.png" alt="菅野海斗" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">菅野海斗</span><span class="f-time"></span></div>
@@ -204,8 +205,8 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
     <!-- SDM荒井 -->
     <div class="friend-row openable" id="row-arai" data-ts="2026-08-24T08:30">
-      <div class="f-avatar" style="background:#B0C4D8;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      <div class="f-avatar">
+        <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="SDM"><circle cx="50" cy="50" r="50" fill="#F5F2EA"/><circle cx="50" cy="50" r="49" fill="none" stroke="#D8D2C4" stroke-width="2"/><polygon points="50,26 64,50 36,50" fill="none" stroke="#C0392B" stroke-width="3" stroke-linejoin="round"/><text x="51.25" y="72" text-anchor="middle" fill="#2C3E50" letter-spacing="2.5" font-weight="700" font-family="Helvetica,Arial,sans-serif" font-size="20">SDM</text></svg>
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">SDM荒井</span><span class="f-time"></span></div>
@@ -226,8 +227,8 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
     <!-- 野口晋平 -->
     <div class="friend-row openable" id="row-noguchi" data-ts="2026-08-21T14:20">
-      <div class="f-avatar" style="background:#B0C4D8;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      <div class="f-avatar">
+        <img src="./img/noguchi_komorebi.png" alt="野口晋平" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">野口晋平</span><span class="f-time"></span></div>
@@ -358,7 +359,7 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 </div>
 <script>
 // ============================================================
-// 新村版 — 自分 = 新村 / 友だち8件 / 会話はすべて空
+// 新村版 — 自分 = 新村 / 友だち12件 / 会話はすべて空
 // ============================================================
 const ME_NAME = '新村';
 
@@ -369,23 +370,25 @@ const PERSON_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" 
 //   { date:'8月26日', messages:[{ from:'me'|'them', text:'…', time:'午前10:00' }] }
 // を追加する。from:'me' が新村（自分）側。
 const THREADS = {
-  'row-sayaka':    { name: 'さやか', days: [] },
-  'row-sakai':     { name: 'アーバンビルド酒井', days: [] },
-  'row-assetplus': { name: 'ASSET PLUS（アセットプラス）', days: [] },
-  'row-kanno':     { name: '菅野海斗', days: [] },
-  'row-keep':      { name: 'Keepメモ', days: [] },
-  'row-arai':      { name: 'SDM荒井', days: [] },
-  'row-takeshi':   { name: 'takeshi_work', days: [] },
-  'row-noguchi':   { name: '野口晋平', days: [] },
-  'row-kawaguchi': { name: '川口和輝', days: [] },
-  'row-miura':     { name: '三浦さん新村　物件紹介トークルーム', days: [] },
-  'row-yusuke2':   { name: 'ゆうすけ2', days: [] },
-  'row-remind':    { name: '新村リマインド', days: [] },
+  'row-sayaka':    { name: 'さやか', avatar: null, days: [] },
+  'row-sakai':     { name: 'アーバンビルド酒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>', days: [] },
+  'row-assetplus': { name: 'ASSET PLUS（アセットプラス）', avatar: null, days: [] },
+  'row-kanno':     { name: '菅野海斗', avatar: '<img src="./img/kanno_lion.png" alt="菅野海斗" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">', days: [] },
+  'row-keep':      { name: 'Keepメモ', avatar: null, days: [] },
+  'row-arai':      { name: 'SDM荒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="SDM"><circle cx="50" cy="50" r="50" fill="#F5F2EA"/><circle cx="50" cy="50" r="49" fill="none" stroke="#D8D2C4" stroke-width="2"/><polygon points="50,26 64,50 36,50" fill="none" stroke="#C0392B" stroke-width="3" stroke-linejoin="round"/><text x="51.25" y="72" text-anchor="middle" fill="#2C3E50" letter-spacing="2.5" font-weight="700" font-family="Helvetica,Arial,sans-serif" font-size="20">SDM</text></svg>', days: [] },
+  'row-takeshi':   { name: 'takeshi_work', avatar: null, days: [] },
+  'row-noguchi':   { name: '野口晋平', avatar: '<img src="./img/noguchi_komorebi.png" alt="野口晋平" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">', days: [] },
+  'row-kawaguchi': { name: '川口和輝', avatar: null, days: [] },
+  'row-miura':     { name: '三浦さん新村　物件紹介トークルーム', avatar: null, days: [] },
+  'row-yusuke2':   { name: 'ゆうすけ2', avatar: null, days: [] },
+  'row-remind':    { name: '新村リマインド', avatar: null, days: [] },
 };
 
 const AUTO_REPLIES = ['なるほど！', 'そうなんですね', 'わかりました！', 'ありがとうございます', '了解です。'];
 
 let currentDays = [];
+// 現在開いているトークの相手アイコン（一覧の f-avatar と同じものを使う）
+let currentAvatar = null;
 let extraMessages = [];
 
 function esc(t) {
@@ -405,7 +408,7 @@ function renderBubble(msg, showAvatar) {
     </div>`;
   } else {
     const avatarSlot = showAvatar
-      ? `<div class="avatar-slot"><div class="msg-av">${PERSON_SVG}</div></div>`
+      ? `<div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>`
       : `<div class="avatar-slot"></div>`;
     const indent = showAvatar ? '' : 'row-indent';
     return `<div class="msg-row row-them ${indent}">
@@ -458,8 +461,9 @@ function setThemeColor(color) {
   if (el) el.setAttribute('content', color);
 }
 
-function openChat(days, name) {
+function openChat(days, name, avatar) {
   currentDays = Array.isArray(days) ? days : [];
+  currentAvatar = avatar || null;
   extraMessages = [];
   document.getElementById('chat-name-el').textContent = name || '';
   document.getElementById('list-view').style.display = 'none';
@@ -480,11 +484,11 @@ function closeChat() {
   if (themeEl) themeEl.remove();
 }
 
-// Navigation — 8件すべて開ける（中身は空）
+// Navigation — 12件すべて開ける（中身は空）
 Object.keys(THREADS).forEach((id) => {
   const row = document.getElementById(id);
   if (!row) return;
-  row.addEventListener('click', () => openChat(THREADS[id].days, THREADS[id].name));
+  row.addEventListener('click', () => openChat(THREADS[id].days, THREADS[id].name, THREADS[id].avatar));
 });
 
 document.getElementById('back-btn').addEventListener('click', closeChat);
