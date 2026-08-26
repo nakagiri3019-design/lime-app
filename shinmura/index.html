@@ -108,6 +108,19 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .ai-dot{width:22px;height:22px;border-radius:50%;background:#7B68EE;flex-shrink:0;}
 .ai-chip{font-size:12.5px;color:#555;cursor:pointer;user-select:none;}
 .ai-chip:active{opacity:0.7;}
+/* ファイル送信バブル（PDF） */
+.file-bubble{display:flex;align-items:center;gap:10px;padding:10px 12px;text-decoration:none;
+  cursor:pointer;-webkit-tap-highlight-color:rgba(0,0,0,0.06);}
+.file-bubble:active{filter:brightness(0.96);}
+.file-ico{flex-shrink:0;display:flex;align-items:center;}
+.file-txt{min-width:0;display:flex;flex-direction:column;gap:2px;}
+.file-name{font-size:13px;font-weight:700;color:#111;line-height:17px;word-break:break-all;}
+.file-size{font-size:11px;color:#6b6b6b;line-height:14px;}
+/* 通話バブル（通話履歴 / 不在着信） */
+.call-bubble{display:flex;align-items:center;gap:8px;padding:10px 14px;}
+.call-txt{font-size:14px;line-height:20px;color:#111;white-space:nowrap;}
+.call-missed .call-txt{color:#E0483D;}
+
 </style>
 </head>
 <body>
@@ -159,17 +172,6 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
-    <!-- アーバンビルド酒井 -->
-    <div class="friend-row openable" id="row-sakai" data-ts="2026-08-26T09:42">
-      <div class="f-avatar">
-        <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>
-      </div>
-      <div class="f-info">
-        <div class="f-name-row"><span class="f-name">アーバンビルド酒井</span><span class="f-time"></span></div>
-        <div class="f-last">見積書の件、確認しました</div>
-      </div>
-      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
-    </div>
     <!-- ASSET PLUS（アセットプラス）(4) -->
     <div class="friend-row openable" id="row-assetplus" data-ts="2026-08-25T18:40">
       <div class="f-avatar" style="background:#B0C4D8;">
@@ -189,6 +191,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">菅野海斗</span><span class="f-time"></span></div>
         <div class="f-last">承知しました。明日確認します</div>
+      </div>
+      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
+    </div>
+    <!-- アーバンビルド酒井 -->
+    <div class="friend-row openable" id="row-sakai" data-ts="2026-08-24T18:55">
+      <div class="f-avatar">
+        <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">アーバンビルド酒井</span><span class="f-time"></span></div>
+        <div class="f-last">はい、取り付け時に立ち会っていただきました。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -365,15 +378,136 @@ const ME_NAME = '新村';
 
 const PERSON_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>';
 
+// 添付ファイル。表示名は元の日本語ファイル名、実体は files/ の半角名。
+// kb は実ファイルのバイト数から算出した値（1KB = 1024B、整数）。
+const FILES = {
+  kaneko_completion:  { name: '作業完了報告書_アーバンビルド_金子様.pdf', href: './files/kaneko_completion.pdf', kb: 62 },
+  kaneko_estimate:    { name: '見積書_アーバンビルド_金子様.pdf', href: './files/kaneko_estimate.pdf', kb: 62 },
+  kaneko_invoice:     { name: '【請求書】_アーバンビルド_金子様.pdf', href: './files/kaneko_invoice.pdf', kb: 214 },
+  kaneko_schedule:    { name: '工程表_アーバンビルド_金子様.pdf', href: './files/kaneko_schedule.pdf', kb: 43 },
+  takei_completion:   { name: '作業完了報告書_アーバンビルド_武井様.pdf', href: './files/takei_completion.pdf', kb: 60 },
+  takei_estimate:     { name: '見積書_アーバンビルド_武井様.pdf', href: './files/takei_estimate.pdf', kb: 60 },
+  takei_invoice:      { name: '【請求書】_アーバンビルド_武井様.pdf', href: './files/takei_invoice.pdf', kb: 209 },
+  takei_schedule:     { name: '工程表_アーバンビルド_武井様.pdf', href: './files/takei_schedule.pdf', kb: 43 },
+};
+
+// ── アーバンビルド酒井 スレッド ─────────────────────────
+// 追記するときは、この配列の末尾に日付ブロックを1つ足すだけでよい：
+//   { date: '8月27日（木）', messages: [
+//     { from:'me',   time:'9:00',  text:'本文' },
+//     { from:'them', time:'9:30',  text:'本文' },
+//     { from:'me',   time:'10:00', type:'file', file:'kaneko_invoice' },
+//     { from:'me',   time:'10:10', type:'call', dur:'5:00' },
+//     { from:'them', time:'10:20', type:'call', missed:true },
+//   ]},
+// from:'me' = 新村（右・緑）、from:'them' = 酒井（左・白＋アイコン）。
+const DAYS_SAKAI = [
+  { date: '6月24日（水）', messages: [
+    { from: 'me', time: '14:20', text: 'お世話になっております。\n武井様マンションのリノベーション、お見積りをお送りします。' },
+    { from: 'me', time: '14:20', type: 'file', file: 'takei_estimate' },
+    { from: 'me', time: '14:21', text: '工程表も併せてお送りします。\n7/3着工、7/23完了の予定で組んでおります。' },
+    { from: 'me', time: '14:21', type: 'file', file: 'takei_schedule' },
+    { from: 'them', time: '15:47', text: 'お世話になっております。\nありがとうございます。確認いたします。' },
+    { from: 'them', time: '16:05', type: 'call', dur: '11:23' },
+    { from: 'them', time: '16:32', text: '先ほどはありがとうございました。\n金額、工程とも問題ありません。\nこの内容で進めてください。' },
+    { from: 'me', time: '16:40', text: 'ありがとうございます。\n7/3着工で手配を進めます。' },
+  ]},
+  { date: '7月2日（木）', messages: [
+    { from: 'me', time: '17:15', text: '明日から着工となります。\n搬入と室内養生から入りますので、9時頃に現場に伺います。' },
+    { from: 'them', time: '17:38', text: '承知しました。\n鍵は管理人室で受け取れるよう手配済みです。\nよろしくお願いします。' },
+  ]},
+  { date: '7月4日（土）', messages: [
+    { from: 'me', time: '16:50', text: '養生完了しました。\n月曜から解体に入ります。' },
+    { from: 'them', time: '17:20', text: 'ありがとうございます。\n解体中の騒音について、下の階の方から念のため確認が入るかもしれません。\n何かあればご連絡ください。' },
+    { from: 'me', time: '17:28', text: '承知しました。\n作業は9時から17時の間で収めます。' },
+  ]},
+  { date: '7月8日（水）', messages: [
+    { from: 'me', time: '17:40', text: '解体完了しました。\n廃材と畳の処分も済んでおります。' },
+    { from: 'me', time: '17:45', type: 'call', dur: '6:08' },
+    { from: 'me', time: '17:55', text: '先ほどお伝えしたとおり、床下の傷みは見られませんでした。\nこのまま木工事に入って問題ありません。' },
+    { from: 'them', time: '18:05', text: '了解しました。\n追加が出なくてよかったです。' },
+  ]},
+  { date: '7月11日（土）', messages: [
+    { from: 'me', time: '17:30', text: '木工事完了しました。\n床下地、開口下地、Mクロス下地まで済んでいます。' },
+    { from: 'them', time: '18:12', text: 'ありがとうございます。\n順調ですね。' },
+  ]},
+  { date: '7月15日（水）', messages: [
+    { from: 'me', time: '17:55', text: '電気工事完了しました。\nスイッチコンセント、ダクト、エアコンの交換まで済んでおります。' },
+    { from: 'them', time: '18:30', text: 'ありがとうございます。\nエアコンの試運転は確認済みでしょうか。' },
+    { from: 'me', time: '18:35', text: 'はい、全室確認しました。問題ありません。' },
+  ]},
+  { date: '7月17日（金）', messages: [
+    { from: 'me', time: '17:20', text: '給排水衛生工事完了しました。\n浴室、キッチン、洗面台、トイレの設置まで済んでいます。' },
+    { from: 'them', time: '17:55', text: 'ありがとうございます。\n残りは内装と雑工事ですね。' },
+    { from: 'me', time: '18:02', text: 'はい。\n来週で内装、その後クリーニングまで進めます。' },
+  ]},
+  { date: '7月20日（月）', messages: [
+    { from: 'me', time: '18:10', text: '内装工事完了しました。\nクロス、畳、カーテンレールまで済んでおります。' },
+    { from: 'them', time: '18:40', text: 'ありがとうございます。\n仕上がりの写真、後ほどいただけますか。' },
+    { from: 'me', time: '18:45', text: '承知しました。\n最終清掃後にまとめてお送りします。' },
+  ]},
+  { date: '7月23日（木）', messages: [
+    { from: 'me', time: '16:30', text: '全工程完了しました。\n最終清掃と引き渡し前の確認まで済んでおります。' },
+    { from: 'me', time: '16:32', text: '作業完了報告書をお送りします。' },
+    { from: 'me', time: '16:32', type: 'file', file: 'takei_completion' },
+    { from: 'me', time: '16:35', text: '追加工事の発生はございませんでした。\n工期内に予定どおり完了しております。' },
+    { from: 'them', time: '17:20', text: 'ありがとうございました。\n確認のうえ、後日ご連絡します。' },
+    { from: 'them', time: '17:22', text: '来週、金子様邸のほうもお見積りをお願いできますか。' },
+    { from: 'me', time: '17:30', text: '承知しました。\n現地確認のうえ、来週中にお出しします。' },
+  ]},
+  { date: '7月25日（土）', messages: [
+    { from: 'me', time: '15:40', text: '金子様邸のリフォーム、お見積りをお送りします。' },
+    { from: 'me', time: '15:40', type: 'file', file: 'kaneko_estimate' },
+    { from: 'me', time: '15:41', text: '工程表も併せてお送りします。\n8/4着工、8/28完了の予定です。' },
+    { from: 'me', time: '15:41', type: 'file', file: 'kaneko_schedule' },
+    { from: 'me', time: '15:45', text: '今回はオーダーカーテンと配管清掃が入るため、\n武井様の案件より工期が4日ほど長くなっております。' },
+    { from: 'them', time: '16:50', text: '確認しました。\n内容承知です。この内容で進めてください。' },
+    { from: 'me', time: '17:00', text: 'ありがとうございます。\n8/4着工で手配します。' },
+  ]},
+  { date: '7月31日（金）', messages: [
+    { from: 'me', time: '11:20', text: '武井様マンションの請求書をお送りします。' },
+    { from: 'me', time: '11:20', type: 'file', file: 'takei_invoice' },
+    { from: 'me', time: '11:22', text: 'お支払期限は9/20となっております。\nご確認よろしくお願いいたします。' },
+    { from: 'them', time: '13:15', text: 'ありがとうございます。\n確認のうえ、経理に回します。' },
+  ]},
+  { date: '8月4日（火）', messages: [
+    { from: 'me', time: '9:15', text: '本日より金子様邸、着工しました。\n養生から進めます。' },
+    { from: 'them', time: '10:30', text: 'よろしくお願いします。' },
+  ]},
+  { date: '8月10日（月）', messages: [
+    { from: 'them', time: '14:22', type: 'call', missed: true },
+    { from: 'me', time: '14:50', text: 'すみません、現場で手が離せずでした。\n折り返します。' },
+    { from: 'me', time: '14:52', type: 'call', dur: '9:41' },
+    { from: 'me', time: '17:50', text: '解体完了しました。\n今回は水回りの配管まわりも開けているので、4日かかっております。' },
+    { from: 'me', time: '17:53', text: '先ほどお話ししたとおり、配管は交換が必要なほどの劣化はありませんでした。\n清掃と取り付け直しで対応します。' },
+    { from: 'them', time: '18:20', text: 'ありがとうございます。\n追加にならず助かります。' },
+  ]},
+  { date: '8月13日（木）', messages: [
+    { from: 'me', time: '17:35', text: '木工事完了しました。\n特殊設置の下地も含めて済んでおります。' },
+    { from: 'them', time: '18:10', text: 'ありがとうございます。' },
+  ]},
+  { date: '8月17日（月）', messages: [
+    { from: 'me', time: '18:00', text: '電気工事完了しました。\nエアコンは新規購入分の設置まで済んでおります。' },
+    { from: 'them', time: '18:35', text: 'ありがとうございます。\n試運転も問題ないでしょうか。' },
+    { from: 'me', time: '18:40', text: 'はい、確認済みです。' },
+  ]},
+  { date: '8月20日（木）', messages: [
+    { from: 'me', time: '17:45', text: '給排水衛生工事完了しました。\n水回りの清掃まで済んでおります。' },
+    { from: 'them', time: '18:15', text: 'ありがとうございます。\n順調ですね。' },
+  ]},
+  { date: '8月24日（月）', messages: [
+    { from: 'me', time: '18:20', text: '内装工事完了しました。\nオーダーカーテンの取り付けまで済んでおります。' },
+    { from: 'them', time: '18:50', text: 'ありがとうございます。\nカーテンの色味、施主様にも確認いただけましたか。' },
+    { from: 'me', time: '18:55', text: 'はい、取り付け時に立ち会っていただきました。\n問題ないとのことです。' },
+  ]},
+];
+
 // 各スレッドの会話。days が空配列 = 会話なし（空のトーク画面）。
-// 会話を足すときは days に
-//   { date:'8月26日', messages:[{ from:'me'|'them', text:'…', time:'午前10:00' }] }
-// を追加する。from:'me' が新村（自分）側。
 const THREADS = {
   'row-sayaka':    { name: 'さやか', avatar: null, days: [] },
-  'row-sakai':     { name: 'アーバンビルド酒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>', days: [] },
   'row-assetplus': { name: 'ASSET PLUS（アセットプラス）', avatar: null, days: [] },
   'row-kanno':     { name: '菅野海斗', avatar: '<img src="./img/kanno_lion.png" alt="菅野海斗" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">', days: [] },
+  'row-sakai':     { name: 'アーバンビルド酒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>', days: DAYS_SAKAI },
   'row-keep':      { name: 'Keepメモ', avatar: null, days: [] },
   'row-arai':      { name: 'SDM荒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="SDM"><circle cx="50" cy="50" r="50" fill="#F5F2EA"/><circle cx="50" cy="50" r="49" fill="none" stroke="#D8D2C4" stroke-width="2"/><polygon points="50,26 64,50 36,50" fill="none" stroke="#C0392B" stroke-width="3" stroke-linejoin="round"/><text x="51.25" y="72" text-anchor="middle" fill="#2C3E50" letter-spacing="2.5" font-weight="700" font-family="Helvetica,Arial,sans-serif" font-size="20">SDM</text></svg>', days: [] },
   'row-takeshi':   { name: 'takeshi_work', avatar: null, days: [] },
@@ -395,12 +529,58 @@ function esc(t) {
   return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function renderBubble(msg, showAvatar) {
+// PDF アイコン / 受話器アイコン（画像は使わず SVG で描画）
+const PDF_SVG =
+  '<svg width="30" height="34" viewBox="0 0 30 34" aria-hidden="true">' +
+  '<path d="M4 1.5H18L27 10.5V30A2.5 2.5 0 0 1 24.5 32.5H4A2.5 2.5 0 0 1 1.5 30V4A2.5 2.5 0 0 1 4 1.5Z" fill="#fff" stroke="#E24B4B" stroke-width="1.6" stroke-linejoin="round"/>' +
+  '<path d="M18 1.5V10.5H27" fill="none" stroke="#E24B4B" stroke-width="1.6" stroke-linejoin="round"/>' +
+  '<rect x="1.5" y="16" width="25.5" height="11" rx="1.5" fill="#E24B4B"/>' +
+  '<text x="14.25" y="24.4" text-anchor="middle" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="7.6" font-weight="700" letter-spacing="0.4">PDF</text>' +
+  '</svg>';
+
+function phoneSvg(color) {
+  return '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="' + color + '" ' +
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>';
+}
+
+// ファイル送信バブル：左に赤い PDF アイコン、右にファイル名（太字）とサイズ。
+// バブル全体が <a> なので、どこをタップしても別タブで PDF が開く。
+function fileBubble(msg, cls) {
+  const f = FILES[msg.file];
+  if (!f) return `<div class="bubble ${cls}">${esc(msg.file)}</div>`;
+  return `<a class="bubble ${cls} file-bubble" href="${f.href}" target="_blank" rel="noopener">` +
+    `<span class="file-ico">${PDF_SVG}</span>` +
+    `<span class="file-txt">` +
+    `<span class="file-name">${esc(f.name)}</span>` +
+    `<span class="file-size">サイズ：${f.kb}KB</span>` +
+    `</span></a>`;
+}
+
+// 通話バブル：受話器アイコン＋通話時間。応答なしは不在着信として赤で出す。
+function callBubble(msg, cls) {
+  const missed = !!msg.missed;
+  const label = missed ? '応答なし' : `通話時間 ${esc(msg.dur)}`;
+  return `<div class="bubble ${cls} call-bubble${missed ? ' call-missed' : ''}">` +
+    `<span class="call-ico">${phoneSvg(missed ? '#E0483D' : '#4A4A4A')}</span>` +
+    `<span class="call-txt">${label}</span></div>`;
+}
+
+function bubbleBody(msg, isMe) {
+  const cls = isMe ? 'bbl-me' : 'bbl-them';
+  if (msg.type === 'file') return fileBubble(msg, cls);
+  if (msg.type === 'call') return callBubble(msg, cls);
+  return `<div class="bubble ${cls}">${esc(msg.text)}</div>`;
+}
+
+function renderBubble(msg, showAvatar, showMeta) {
   const isMe = msg.from === 'me';
-  const bubble = `<div class="bubble ${isMe ? 'bbl-me' : 'bbl-them'}">${esc(msg.text)}</div>`;
-  const meta = isMe
-    ? `<div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">${esc(msg.time)}</span></div>`
-    : `<div class="msg-meta meta-them"><span class="time-lbl">${esc(msg.time)}</span></div>`;
+  const bubble = bubbleBody(msg, isMe);
+  const meta = showMeta === false
+    ? ''
+    : isMe
+      ? `<div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">${esc(msg.time)}</span></div>`
+      : `<div class="msg-meta meta-them"><span class="time-lbl">${esc(msg.time)}</span></div>`;
 
   if (isMe) {
     return `<div class="msg-row row-me">
@@ -422,17 +602,23 @@ function renderMessages() {
   const area = document.getElementById('messages-area');
   let html = '';
 
+  // 同じ送信者・同じ時刻が連続する場合、時刻(と既読)は最後の1件だけに出す（LINE と同じ）
+  function metaVisible(list, i) {
+    const n = list[i + 1];
+    return !(n && n.from === list[i].from && n.time === list[i].time);
+  }
+
   currentDays.forEach((day) => {
     html += `<div class="date-divider"><span class="date-pill">${esc(day.date)}</span></div>`;
     day.messages.forEach((msg, mi) => {
       const showAvatar = msg.from !== 'me' && (mi === 0 || day.messages[mi - 1].from !== 'them');
-      html += renderBubble(msg, showAvatar);
+      html += renderBubble(msg, showAvatar, metaVisible(day.messages, mi));
     });
   });
 
   extraMessages.forEach((msg, i) => {
     const showAvatar = msg.from !== 'me' && (i === 0 || extraMessages[i - 1].from !== 'them');
-    html += renderBubble(msg, showAvatar);
+    html += renderBubble(msg, showAvatar, metaVisible(extraMessages, i));
   });
 
   // 会話が1件も無いスレッドは html が '' のまま＝空のトーク画面として表示される
