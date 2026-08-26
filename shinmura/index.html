@@ -116,10 +116,20 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .file-txt{min-width:0;display:flex;flex-direction:column;gap:2px;}
 .file-name{font-size:13px;font-weight:700;color:#111;line-height:17px;word-break:break-all;}
 .file-size{font-size:11px;color:#6b6b6b;line-height:14px;}
-/* 通話バブル（通話履歴 / 不在着信） */
-.call-bubble{display:flex;align-items:center;gap:8px;padding:10px 14px;}
-.call-txt{font-size:14px;line-height:20px;color:#111;white-space:nowrap;}
-.call-missed .call-txt{color:#E0483D;}
+/* 通話バブル（実機LINEのスクショに合わせた寸法・色） */
+.bbl-call{white-space:normal;}
+.call-card{display:flex;flex-direction:column;width:190px;box-sizing:border-box;}
+.call-card svg{display:block;}
+.call-main{display:flex;align-items:center;gap:9px;padding:0 0 7px;}
+.call-phone-icon{flex-shrink:0;display:flex;}
+.call-info{min-width:0;display:flex;flex-direction:column;gap:1px;}
+.call-title{font-size:14.5px;font-weight:700;color:#111;line-height:1.32;}
+.call-duration{font-size:12px;color:rgba(0,0,0,0.5);line-height:1.3;}
+.call-ringtone-row{display:flex;align-items:center;gap:7px;
+  border-top:1px solid rgba(0,0,0,0.08);padding-top:7px;}
+.call-music-icon{flex-shrink:0;display:flex;}
+.call-ringtone-text{flex:1;font-size:11.5px;color:rgba(0,0,0,0.45);line-height:1.2;}
+.call-chevron{flex-shrink:0;display:flex;}
 
 </style>
 </head>
@@ -538,10 +548,38 @@ const PDF_SVG =
   '<text x="14.25" y="24.4" text-anchor="middle" fill="#fff" font-family="Helvetica,Arial,sans-serif" font-size="7.6" font-weight="700" letter-spacing="0.4">PDF</text>' +
   '</svg>';
 
-function phoneSvg(color) {
-  return '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="' + color + '" ' +
-    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>';
+// 通話アイコン：丸背景＋塗りつぶしの黒い受話器（画像は使わず SVG）。
+// 丸の色は実機スクショの実測に合わせる。
+//   相手側（白バブル）  : #F5F5F5 のグレー
+//   自分側（緑バブル）  : バブル(#AAD97A)より少し濃い緑
+function callPhoneSvg(isMe) {
+  return '<svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">' +
+    '<circle cx="20" cy="20" r="20" fill="' + (isMe ? '#9BD26B' : '#F5F5F5') + '"/>' +
+    '<path transform="translate(8,8)" d="M19.23 15.26l-2.54-.29a1.99 1.99 0 00-1.64.57l-1.84 1.84a15.05 15.05 0 01-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52A2.001 2.001 0 007.74 3H5.03c-1.13 0-2.07.94-2 2.07.53 8.54 7.36 15.36 15.89 15.89 1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.97z" fill="#111111"/></svg>';
+}
+
+// 「着信音・呼出音」行。左は緑の角丸バッジに白い音符、右端は「>」。
+// 見た目だけで、リンクとしては機能しない。
+const CALL_RINGTONE_ROW =
+  '<div class="call-ringtone-row">' +
+  '<span class="call-music-icon">' +
+  '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">' +
+  '<rect width="16" height="16" rx="4.5" fill="#4CC764"/>' +
+  '<path d="M6.35 10.5V5.55l4-.85V9.4" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>' +
+  '<ellipse cx="5.3" cy="10.6" rx="1.45" ry="1.15" fill="#fff"/>' +
+  '<ellipse cx="9.35" cy="9.5" rx="1.45" ry="1.15" fill="#fff"/>' +
+  '</svg></span>' +
+  '<span class="call-ringtone-text">着信音・呼出音</span>' +
+  '<span class="call-chevron">' +
+  '<svg width="7" height="12" viewBox="0 0 7 12" fill="none" stroke="rgba(0,0,0,0.35)" ' +
+  'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M1 1l5 5-5 5"/></svg></span>' +
+  '</div>';
+
+// 通話時間は駒宮版の表記に合わせて分を2桁にそろえる（6:08 -> 06:08）。値そのものは変えない。
+function padDur(d) {
+  const p = String(d).split(':');
+  return p.length === 2 ? ('0' + p[0]).slice(-2) + ':' + p[1] : String(d);
 }
 
 // ファイル送信バブル：左に赤い PDF アイコン、右にファイル名（太字）とサイズ。
@@ -557,13 +595,23 @@ function fileBubble(msg, cls) {
     `</span></a>`;
 }
 
-// 通話バブル：受話器アイコン＋通話時間。応答なしは不在着信として赤で出す。
+// 通話バブル（実機LINEの表記に合わせた表示）
+//   応答あり → 丸アイコン＋「音声通話が終了しました」＋ mm:ss の通話時間
+//   応答なし → グレー丸アイコン＋「不在着信」（通話時間なし）
+// いずれも区切り線を挟んで下部に「着信音・呼出音」行が付く。左右の振り分けは from に従う。
 function callBubble(msg, cls) {
-  const missed = !!msg.missed;
-  const label = missed ? '応答なし' : `通話時間 ${esc(msg.dur)}`;
-  return `<div class="bubble ${cls} call-bubble${missed ? ' call-missed' : ''}">` +
-    `<span class="call-ico">${phoneSvg(missed ? '#E0483D' : '#4A4A4A')}</span>` +
-    `<span class="call-txt">${label}</span></div>`;
+  const isMe = msg.from === 'me';
+  const icon = callPhoneSvg(isMe);
+  const info = msg.missed
+    ? '<span class="call-title">不在着信</span>'
+    : '<span class="call-title">音声通話が終了しました</span>' +
+      `<span class="call-duration">${esc(padDur(msg.dur))}</span>`;
+  return `<div class="bubble ${cls} bbl-call">` +
+    `<div class="call-card ${msg.missed ? 'call-missed' : 'call-ended'}">` +
+    '<div class="call-main">' +
+    `<span class="call-phone-icon">${icon}</span>` +
+    `<div class="call-info">${info}</div>` +
+    '</div>' + CALL_RINGTONE_ROW + '</div></div>';
 }
 
 function bubbleBody(msg, isMe) {
