@@ -621,7 +621,7 @@ function bubbleBody(msg, isMe) {
   return `<div class="bubble ${cls}">${esc(msg.text)}</div>`;
 }
 
-function renderBubble(msg, showAvatar, showMeta) {
+function renderBubble(msg, showMeta) {
   const isMe = msg.from === 'me';
   const bubble = bubbleBody(msg, isMe);
   const meta = showMeta === false
@@ -635,13 +635,12 @@ function renderBubble(msg, showAvatar, showMeta) {
       <div class="msg-content content-me">${meta}${bubble}</div>
     </div>`;
   } else {
-    // 連続メッセージの2通目以降はアイコンを消すが、枠(.avatar-slot 36px + gap 6px)は残す。
-    // これだけで左端が1通目と完全に揃うので、.row-indent は付けない。
-    // （両方付けると 42px + 36px + 6px = 84px となり 1通目より 42px 右にずれ、
-    //   さらに max-width:75% が縮んで固定幅の通話カードが圧迫される）
-    const avatarSlot = showAvatar
-      ? `<div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>`
-      : `<div class="avatar-slot"></div>`;
+    // LINE(PC版)と同じく、連続メッセージでも1通ごとに必ずアイコンを表示する。
+    // テキスト/ファイル/通話のどの行でも同じ .avatar-slot(36px) + gap(6px) を使うので、
+    // 左端は常に 42px で揃う。.row-indent は付けない
+    // （付けると 42px + 36px + 6px = 84px になり、1通目より 42px 右にずれる）。
+    const avatarSlot =
+      `<div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>`;
     return `<div class="msg-row row-them">
       ${avatarSlot}
       <div class="msg-content content-them">${bubble}${meta}</div>
@@ -662,14 +661,12 @@ function renderMessages() {
   currentDays.forEach((day) => {
     html += `<div class="date-divider"><span class="date-pill">${esc(day.date)}</span></div>`;
     day.messages.forEach((msg, mi) => {
-      const showAvatar = msg.from !== 'me' && (mi === 0 || day.messages[mi - 1].from !== 'them');
-      html += renderBubble(msg, showAvatar, metaVisible(day.messages, mi));
+      html += renderBubble(msg, metaVisible(day.messages, mi));
     });
   });
 
   extraMessages.forEach((msg, i) => {
-    const showAvatar = msg.from !== 'me' && (i === 0 || extraMessages[i - 1].from !== 'them');
-    html += renderBubble(msg, showAvatar, metaVisible(extraMessages, i));
+    html += renderBubble(msg, metaVisible(extraMessages, i));
   });
 
   // 会話が1件も無いスレッドは html が '' のまま＝空のトーク画面として表示される
