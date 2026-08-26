@@ -467,6 +467,11 @@ const PHOTOS = {
   '01_demolition_0801':                      { src: './img/01_demolition_0801.jpg', w: 800, h: 600 },
   '02_carpentry_0805':                       { src: './img/02_carpentry_0805.jpg', w: 800, h: 600 },
   '03_miscellaneous_work_0817':              { src: './img/03_miscellaneous_work_0817.jpg', w: 800, h: 600 },
+  '04_electrical_intercom_0627':             { src: './img/04_electrical_intercom_0627.jpg', w: 800, h: 600 },
+  '05_demolition_0725':                      { src: './img/05_demolition_0725.jpg', w: 800, h: 600 },
+  '06_interior_new_tatami_0805':             { src: './img/06_interior_new_tatami_0805.jpg', w: 800, h: 600 },
+  '07_carpentry_completed_0729':             { src: './img/07_carpentry_completed_0729.jpg', w: 800, h: 600 },
+  '08_handover_0808':                        { src: './img/08_handover_0808.jpg', w: 800, h: 600 },
   'remodel_bright_curtain_room_site':        { src: './img/remodel_bright_curtain_room_site.jpg', w: 800, h: 450 },
   'remodel_completion_wallpaper_door_site':  { src: './img/remodel_completion_wallpaper_door_site.jpg', w: 800, h: 450 },
   'remodel_electrical_completion_site':      { src: './img/remodel_electrical_completion_site.jpg', w: 800, h: 450 },
@@ -843,6 +848,7 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '17:20', text: '電気工事完了しました。\nダクト、エアコン、インターホンの修理も済んでます。' },
     { from: 'them', time: '17:55', text: 'インターホン直りましたか？' },
     { from: 'me', time: '18:00', text: 'はい、問題なく通話できてます。\n施主様にも確認いただきました。' },
+    { from: 'me', time: '18:01', type: 'photo', photo: '04_electrical_intercom_0627', alt: 'インターホン設置後の玄関' },
     { from: 'them', time: '18:10', text: '助かります。\nそこ気にされてたので。' },
   ]},
   { date: '6月30日（火）', messages: [
@@ -887,10 +893,12 @@ const DAYS_NOGUCHI = [
   { date: '7月25日（土）', messages: [
     { from: 'me', time: '17:50', text: '解体完了しました。\n廃材と畳の処分も終わってます。' },
     { from: 'me', time: '17:53', text: '床下も見ましたが、傷みはなかったです。\nこのまま木工事に入れます。' },
+    { from: 'me', time: '17:55', type: 'photo', photo: '05_demolition_0725', alt: '解体後の和室' },
     { from: 'them', time: '18:25', text: 'よかったです。\n追加にならず助かります。' },
   ]},
   { date: '7月29日（水）', messages: [
     { from: 'me', time: '18:00', text: '木工事完了しました。\n床下地、開口下地、Mクロスまで終わってます。' },
+    { from: 'me', time: '18:01', type: 'photo', photo: '07_carpentry_completed_0729', alt: '木工事完了時の床下地' },
     { from: 'them', time: '18:30', text: 'ありがとうございます。' },
   ]},
   { date: '7月31日（金）', messages: [
@@ -908,6 +916,7 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '17:35', text: '内装工事完了しました。\nクロス、畳、カーテンレールまで終わってます。' },
     { from: 'them', time: '18:05', text: 'ありがとうございます。\n畳は新しく入れ替えですよね？' },
     { from: 'me', time: '18:10', text: 'はい、新床で入れてます。' },
+    { from: 'me', time: '18:11', type: 'photo', photo: '06_interior_new_tatami_0805', alt: '入れ替えた新しい畳' },
   ]},
   { date: '8月7日（金）', messages: [
     { from: 'me', time: '17:25', text: '雑工事完了しました。\nハウスクリーニングと害虫駆除まで済んでます。' },
@@ -916,6 +925,7 @@ const DAYS_NOGUCHI = [
   ]},
   { date: '8月8日（土）', messages: [
     { from: 'me', time: '16:15', text: '全工程完了しました。\n引き渡しまで済んでます。' },
+    { from: 'me', time: '16:16', type: 'photo', photo: '08_handover_0808', alt: '引き渡し時の室内' },
     { from: 'me', time: '16:18', text: '作業完了報告書です。' },
     { from: 'me', time: '16:18', type: 'file', file: 'takeuchi_completion' },
     { from: 'me', time: '16:20', text: 'こちらも追加工事なしで収まりました。' },
