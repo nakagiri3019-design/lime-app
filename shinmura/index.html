@@ -5,7 +5,7 @@
   ============================================================
   ■ ベース: lime-app/noguchi/ 版をそのまま複製し、以下のみ差し替え
     (A) 自分側の表示名 = 新村（ME_NAME）
-    (B) 友だちリスト 8件（全件ピン留め・data-ts で日時自動計算）
+    (B) 友だちリスト 12件（全件ピン留め・data-ts で日時自動計算）
     (C) 各スレッドの会話は空（THREADS の days: []）
   ■ デザイン(CSS)は他版と共通。触らないこと。
   ■ URL: https://nakagiri3019-design.github.io/lime-app/shinmura/（新村）
@@ -158,6 +158,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
+    <!-- アーバンビルド酒井 -->
+    <div class="friend-row openable" id="row-sakai" data-ts="2026-08-26T09:42">
+      <div class="f-avatar" style="background:#B0C4D8;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">アーバンビルド酒井</span><span class="f-time"></span></div>
+        <div class="f-last">見積書の件、確認しました</div>
+      </div>
+      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
+    </div>
     <!-- ASSET PLUS（アセットプラス）(4) -->
     <div class="friend-row openable" id="row-assetplus" data-ts="2026-08-25T18:40">
       <div class="f-avatar" style="background:#B0C4D8;">
@@ -166,6 +177,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">ASSET PLUS（アセットプラス）(4)</span><span class="f-time"></span></div>
         <div class="f-last">別件対応もある中ありがとう！ よろしくです！</div>
+      </div>
+      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
+    </div>
+    <!-- 菅野海斗 -->
+    <div class="friend-row openable" id="row-kanno" data-ts="2026-08-25T10:15">
+      <div class="f-avatar" style="background:#B0C4D8;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">菅野海斗</span><span class="f-time"></span></div>
+        <div class="f-last">承知しました。明日確認します</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -180,6 +202,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
+    <!-- SDM荒井 -->
+    <div class="friend-row openable" id="row-arai" data-ts="2026-08-24T08:30">
+      <div class="f-avatar" style="background:#B0C4D8;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">SDM荒井</span><span class="f-time"></span></div>
+        <div class="f-last">お世話になっております</div>
+      </div>
+      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
+    </div>
     <!-- takeshi_work -->
     <div class="friend-row openable" id="row-takeshi" data-ts="2026-08-21T20:05">
       <div class="f-avatar" style="background:#B0C4D8;">
@@ -188,6 +221,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">takeshi_work</span><span class="f-time"></span></div>
         <div class="f-last">takeshi_workが写真を送信しました</div>
+      </div>
+      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
+    </div>
+    <!-- 野口晋平 -->
+    <div class="friend-row openable" id="row-noguchi" data-ts="2026-08-21T14:20">
+      <div class="f-avatar" style="background:#B0C4D8;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">野口晋平</span><span class="f-time"></span></div>
+        <div class="f-last">ありがとうございます</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -325,14 +369,18 @@ const PERSON_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" 
 //   { date:'8月26日', messages:[{ from:'me'|'them', text:'…', time:'午前10:00' }] }
 // を追加する。from:'me' が新村（自分）側。
 const THREADS = {
-  'row-sayaka':    { name: 'さやか',                             days: [] },
-  'row-assetplus': { name: 'ASSET PLUS（アセットプラス）',        days: [] },
-  'row-keep':      { name: 'Keepメモ',                           days: [] },
-  'row-takeshi':   { name: 'takeshi_work',                       days: [] },
-  'row-kawaguchi': { name: '川口和輝',                           days: [] },
-  'row-miura':     { name: '三浦さん新村　物件紹介トークルーム',  days: [] },
-  'row-yusuke2':   { name: 'ゆうすけ2',                          days: [] },
-  'row-remind':    { name: '新村リマインド',                      days: [] },
+  'row-sayaka':    { name: 'さやか', days: [] },
+  'row-sakai':     { name: 'アーバンビルド酒井', days: [] },
+  'row-assetplus': { name: 'ASSET PLUS（アセットプラス）', days: [] },
+  'row-kanno':     { name: '菅野海斗', days: [] },
+  'row-keep':      { name: 'Keepメモ', days: [] },
+  'row-arai':      { name: 'SDM荒井', days: [] },
+  'row-takeshi':   { name: 'takeshi_work', days: [] },
+  'row-noguchi':   { name: '野口晋平', days: [] },
+  'row-kawaguchi': { name: '川口和輝', days: [] },
+  'row-miura':     { name: '三浦さん新村　物件紹介トークルーム', days: [] },
+  'row-yusuke2':   { name: 'ゆうすけ2', days: [] },
+  'row-remind':    { name: '新村リマインド', days: [] },
 };
 
 const AUTO_REPLIES = ['なるほど！', 'そうなんですね', 'わかりました！', 'ありがとうございます', '了解です。'];
@@ -454,7 +502,7 @@ document.querySelectorAll('.ai-chip').forEach((chip) => {
 });
 
 // 友だち一覧: data-ts から日時表示を自動計算し、新着順にソート
-//   今日 → HH:MM / 昨日 → 昨日 / 2〜6日前 → 曜日 / それ以前 → M/D
+//   今日 → H:MM / 昨日 → 昨日 / 2〜6日前 → 曜日 / それ以前 → M/D
 (function () {
   var WD = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
   function fmtTime(ts) {
@@ -463,7 +511,8 @@ document.querySelectorAll('.ai-chip').forEach((chip) => {
     var dDay  = new Date(d.getFullYear(), d.getMonth(), d.getDate());
     var diff  = Math.round((today - dDay) / 86400000);
     if (diff <= 0) {
-      return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+      // 時は0埋めしない（9:42）。分は0埋めする（9:05）。
+      return d.getHours()+':'+('0'+d.getMinutes()).slice(-2);
     } else if (diff === 1) {
       return '昨日';
     } else if (diff <= 6) {
