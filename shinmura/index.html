@@ -262,17 +262,6 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
-    <!-- 野口晋平 -->
-    <div class="friend-row openable" id="row-noguchi" data-ts="2026-08-21T14:20">
-      <div class="f-avatar">
-        <img src="./img/noguchi_komorebi.png" alt="野口晋平" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
-      </div>
-      <div class="f-info">
-        <div class="f-name-row"><span class="f-name">野口晋平</span><span class="f-time"></span></div>
-        <div class="f-last">ありがとうございます</div>
-      </div>
-      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
-    </div>
     <!-- 川口和輝 -->
     <div class="friend-row openable" id="row-kawaguchi" data-ts="2026-08-20T16:30">
       <div class="f-avatar" style="background:#B0C4D8;">
@@ -302,6 +291,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">菅野海斗</span><span class="f-time"></span></div>
+        <div class="f-last">ありがとうございます。確認しておきます。</div>
+      </div>
+      <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
+    </div>
+    <!-- 野口晋平 -->
+    <div class="friend-row openable" id="row-noguchi" data-ts="2026-08-15T13:30">
+      <div class="f-avatar">
+        <img src="./img/noguchi_komorebi.png" alt="野口晋平" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">野口晋平</span><span class="f-time"></span></div>
         <div class="f-last">ありがとうございます。確認しておきます。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
@@ -448,10 +448,18 @@ const FILES = {
   takei_estimate:         { name: '見積書_アーバンビルド_武井様.pdf', href: './files/takei_estimate.pdf', kb: 60 },
   takei_invoice:          { name: '【請求書】_アーバンビルド_武井様.pdf', href: './files/takei_invoice.pdf', kb: 209 },
   takei_schedule:         { name: '工程表_アーバンビルド_武井様.pdf', href: './files/takei_schedule.pdf', kb: 43 },
+  takeuchi_completion:    { name: '作業完了報告書_GIK_竹内様.pdf', href: './files/takeuchi_completion.pdf', kb: 59 },
+  takeuchi_estimate:      { name: '見積書_GIK_竹内様.pdf', href: './files/takeuchi_estimate.pdf', kb: 59 },
+  takeuchi_invoice:       { name: '【請求書】_GIK_竹内様.pdf', href: './files/takeuchi_invoice.pdf', kb: 200 },
+  takeuchi_schedule:      { name: '工程表_GIK_竹内様.pdf', href: './files/takeuchi_schedule.pdf', kb: 42 },
   urushibara_completion:  { name: '作業完了報告書_SDM_漆原様.pdf', href: './files/urushibara_completion.pdf', kb: 54 },
   urushibara_estimate:    { name: '見積書_SDM_漆原様.pdf', href: './files/urushibara_estimate.pdf', kb: 54 },
   urushibara_invoice:     { name: '【請求書】_SDM_漆原様.pdf', href: './files/urushibara_invoice.pdf', kb: 190 },
   urushibara_schedule:    { name: '工程表_SDM_漆原様.pdf', href: './files/urushibara_schedule.pdf', kb: 41 },
+  yamaki_completion:      { name: '作業完了報告書_GIK_山木様.pdf', href: './files/yamaki_completion.pdf', kb: 55 },
+  yamaki_estimate:        { name: '見積書_GIK_山木様.pdf', href: './files/yamaki_estimate.pdf', kb: 55 },
+  yamaki_invoice:         { name: '【請求書】_GIK_山木様.pdf', href: './files/yamaki_invoice.pdf', kb: 192 },
+  yamaki_schedule:        { name: '工程表_GIK_山木様.pdf', href: './files/yamaki_schedule.pdf', kb: 40 },
 };
 
 // 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
@@ -791,6 +799,122 @@ const DAYS_ARAI = [
   ]},
 ];
 
+// ── 野口晋平 スレッド ──────────────────────────────
+// 書式は他スレッドと同じ。末尾に日付ブロックを1つ足すだけで追記できる。
+// from:'me' = 新村（右・緑）、from:'them' = 野口（左・白＋木漏れ日の写真）。
+const DAYS_NOGUCHI = [
+  { date: '6月9日（火）', messages: [
+    { from: 'me', time: '10:30', text: 'お疲れさまです。\n山木様邸の見積、できました。' },
+    { from: 'me', time: '10:30', type: 'file', file: 'yamaki_estimate' },
+    { from: 'me', time: '10:31', text: '工程表も一緒に送ります。\n6/20着工、7/3完了で組んでます。' },
+    { from: 'me', time: '10:31', type: 'file', file: 'yamaki_schedule' },
+    { from: 'them', time: '12:45', text: 'お疲れさまです！\nありがとうございます、確認します。' },
+    { from: 'them', time: '14:10', type: 'call', dur: '07:52' },
+    { from: 'them', time: '14:40', text: 'さっきはありがとうございました。\n金額も工期も問題ないです。\nこのまま進めてください。' },
+    { from: 'me', time: '15:00', text: '了解です。\n6/20着工で押さえます。' },
+  ]},
+  { date: '6月19日（金）', messages: [
+    { from: 'me', time: '17:30', text: '明日から山木様邸、入ります。\n搬入と養生から始めます。' },
+    { from: 'them', time: '18:05', text: 'よろしくお願いします！\n鍵は現地で受け取れるようにしておきます。' },
+  ]},
+  { date: '6月22日（月）', messages: [
+    { from: 'me', time: '17:45', text: '仮設工事完了しました。\n搬入と養生まで終わってます。' },
+    { from: 'them', time: '18:20', text: 'ありがとうございます。\n明日から木工事ですね。' },
+  ]},
+  { date: '6月25日（木）', messages: [
+    { from: 'me', time: '18:00', text: '木工事完了しました。\n床下地、ベニア、Mクロスまで終わってます。' },
+    { from: 'them', time: '18:35', text: '順調ですね。\nありがとうございます。' },
+  ]},
+  { date: '6月27日（土）', messages: [
+    { from: 'me', time: '17:20', text: '電気工事完了しました。\nダクト、エアコン、インターホンの修理も済んでます。' },
+    { from: 'them', time: '17:55', text: 'インターホン直りましたか？' },
+    { from: 'me', time: '18:00', text: 'はい、問題なく通話できてます。\n施主様にも確認いただきました。' },
+    { from: 'them', time: '18:10', text: '助かります。\nそこ気にされてたので。' },
+  ]},
+  { date: '6月30日（火）', messages: [
+    { from: 'me', time: '18:15', text: '給排水衛生工事完了しました。\n浴室、キッチン、洗面台、トイレの設置まで終わってます。' },
+    { from: 'them', time: '18:45', text: 'ありがとうございます。\nあとは内装だけですね。' },
+    { from: 'me', time: '18:50', text: 'そうです。\n2日で仕上げて、金曜に引き渡します。' },
+  ]},
+  { date: '7月2日（木）', messages: [
+    { from: 'me', time: '17:40', text: '内装工事完了しました。\nクロス、カーテンレール、フローリングまで終わってます。' },
+    { from: 'them', time: '18:15', text: 'ありがとうございます。\n明日で完了ですか？' },
+    { from: 'me', time: '18:20', text: 'はい、最終清掃して引き渡します。' },
+  ]},
+  { date: '7月3日（金）', messages: [
+    { from: 'me', time: '16:20', text: '全工程完了しました。\n引き渡しまで済んでます。' },
+    { from: 'me', time: '16:22', text: '作業完了報告書です。' },
+    { from: 'me', time: '16:22', type: 'file', file: 'yamaki_completion' },
+    { from: 'me', time: '16:25', text: '追加工事もなく、工期内に収まりました。' },
+    { from: 'them', time: '17:10', text: 'ありがとうございました！\n確認して連絡します。' },
+    { from: 'them', time: '17:15', text: '来週、竹内様邸のほうも見積お願いできますか。' },
+    { from: 'them', time: '17:18', type: 'call', dur: '05:20' },
+    { from: 'me', time: '17:35', text: '了解です。\nさっき聞いた内容も踏まえて、現地見てから出します。' },
+  ]},
+  { date: '7月9日（木）', messages: [
+    { from: 'me', time: '14:30', text: '竹内様邸の見積、できました。' },
+    { from: 'me', time: '14:30', type: 'file', file: 'takeuchi_estimate' },
+    { from: 'me', time: '14:31', text: '工程表も送ります。\n7/21着工、8/8完了の予定です。' },
+    { from: 'me', time: '14:31', type: 'file', file: 'takeuchi_schedule' },
+    { from: 'me', time: '14:36', text: '今回は解体と雑工事が入るので、山木様より長めです。\n畳の処分もあるので、解体に3日見てます。' },
+    { from: 'them', time: '16:20', text: '確認しました。\n問題ないです、この内容で進めてください。' },
+    { from: 'me', time: '16:35', text: 'ありがとうございます。\n7/21着工で手配します。' },
+  ]},
+  { date: '7月15日（水）', messages: [
+    { from: 'me', time: '11:10', text: '山木様邸の請求書です。' },
+    { from: 'me', time: '11:10', type: 'file', file: 'yamaki_invoice' },
+    { from: 'me', time: '11:12', text: '支払期限は9/10になってます。\nよろしくお願いします。' },
+    { from: 'them', time: '13:25', text: 'ありがとうございます。\n経理に回しておきます。' },
+  ]},
+  { date: '7月21日（火）', messages: [
+    { from: 'me', time: '9:25', text: '竹内様邸、着工しました。\n今日明日は搬入と養生です。' },
+    { from: 'them', time: '10:40', text: 'よろしくお願いします！' },
+  ]},
+  { date: '7月25日（土）', messages: [
+    { from: 'me', time: '17:50', text: '解体完了しました。\n廃材と畳の処分も終わってます。' },
+    { from: 'me', time: '17:53', text: '床下も見ましたが、傷みはなかったです。\nこのまま木工事に入れます。' },
+    { from: 'them', time: '18:25', text: 'よかったです。\n追加にならず助かります。' },
+  ]},
+  { date: '7月29日（水）', messages: [
+    { from: 'me', time: '18:00', text: '木工事完了しました。\n床下地、開口下地、Mクロスまで終わってます。' },
+    { from: 'them', time: '18:30', text: 'ありがとうございます。' },
+  ]},
+  { date: '7月31日（金）', messages: [
+    { from: 'them', time: '11:15', type: 'call', missed: true },
+    { from: 'me', time: '11:50', text: 'すみません、現場で出られずでした。\n折り返します。' },
+    { from: 'me', time: '11:52', type: 'call', dur: '06:35' },
+    { from: 'me', time: '17:45', text: '電気工事完了しました。\nスイッチコンセント、ダクト、エアコンの交換まで終わってます。' },
+    { from: 'them', time: '18:20', text: 'ありがとうございます。\nさっきの件も承知しました。' },
+  ]},
+  { date: '8月3日（月）', messages: [
+    { from: 'me', time: '18:10', text: '給排水衛生工事完了しました。\n水回り一式、設置まで終わってます。' },
+    { from: 'them', time: '18:40', text: 'ありがとうございます。\nあとは内装と雑工事ですね。' },
+  ]},
+  { date: '8月5日（水）', messages: [
+    { from: 'me', time: '17:35', text: '内装工事完了しました。\nクロス、畳、カーテンレールまで終わってます。' },
+    { from: 'them', time: '18:05', text: 'ありがとうございます。\n畳は新しく入れ替えですよね？' },
+    { from: 'me', time: '18:10', text: 'はい、新床で入れてます。' },
+  ]},
+  { date: '8月7日（金）', messages: [
+    { from: 'me', time: '17:25', text: '雑工事完了しました。\nハウスクリーニングと害虫駆除まで済んでます。' },
+    { from: 'me', time: '17:28', text: '明日、最終清掃して引き渡します。' },
+    { from: 'them', time: '18:00', text: '承知しました！\nよろしくお願いします。' },
+  ]},
+  { date: '8月8日（土）', messages: [
+    { from: 'me', time: '16:15', text: '全工程完了しました。\n引き渡しまで済んでます。' },
+    { from: 'me', time: '16:18', text: '作業完了報告書です。' },
+    { from: 'me', time: '16:18', type: 'file', file: 'takeuchi_completion' },
+    { from: 'me', time: '16:20', text: 'こちらも追加工事なしで収まりました。' },
+    { from: 'them', time: '17:05', text: 'ありがとうございました！\n2件続けてスムーズで助かりました。' },
+  ]},
+  { date: '8月15日（土）', messages: [
+    { from: 'me', time: '11:20', text: '竹内様邸の請求書です。' },
+    { from: 'me', time: '11:20', type: 'file', file: 'takeuchi_invoice' },
+    { from: 'me', time: '11:22', text: '支払期限は10/10です。\nご確認よろしくお願いします。' },
+    { from: 'them', time: '13:30', text: 'ありがとうございます。\n確認しておきます。' },
+  ]},
+];
+
 // 各スレッドの会話。days が空配列 = 会話なし（空のトーク画面）。
 const THREADS = {
   'row-sayaka':    { name: 'さやか', avatar: null, days: [] },
@@ -798,10 +922,10 @@ const THREADS = {
   'row-sakai':     { name: 'アーバンビルド酒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="URBAN BUILD"><circle cx="50" cy="50" r="50" fill="#1F3A5F"/><rect x="16" y="16" width="68" height="68" fill="none" stroke="#C9A961" stroke-width="1.6"/><text x="50.9" y="48" text-anchor="middle" fill="#ffffff" letter-spacing="1.8" font-family="Georgia,serif" font-size="15">URBAN</text><text x="50.75" y="64" text-anchor="middle" fill="#C9A961" letter-spacing="1.5" font-family="Georgia,serif" font-size="9.5">BUILD</text></svg>', days: DAYS_SAKAI },
   'row-keep':      { name: 'Keepメモ', avatar: null, days: [] },
   'row-takeshi':   { name: 'takeshi_work', avatar: null, days: [] },
-  'row-noguchi':   { name: '野口晋平', avatar: '<img src="./img/noguchi_komorebi.png" alt="野口晋平" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">', days: [] },
   'row-kawaguchi': { name: '川口和輝', avatar: null, days: [] },
   'row-arai':      { name: 'SDM荒井', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="SDM"><circle cx="50" cy="50" r="50" fill="#F5F2EA"/><circle cx="50" cy="50" r="49" fill="none" stroke="#D8D2C4" stroke-width="2"/><polygon points="50,26 64,50 36,50" fill="none" stroke="#C0392B" stroke-width="3" stroke-linejoin="round"/><text x="51.25" y="72" text-anchor="middle" fill="#2C3E50" letter-spacing="2.5" font-weight="700" font-family="Helvetica,Arial,sans-serif" font-size="20">SDM</text></svg>', days: DAYS_ARAI },
   'row-kanno':     { name: '菅野海斗', avatar: '<img src="./img/kanno_lion.png" alt="菅野海斗" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">', days: DAYS_KANNO },
+  'row-noguchi':   { name: '野口晋平', avatar: '<img src="./img/noguchi_komorebi.png" alt="野口晋平" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">', days: DAYS_NOGUCHI },
   'row-miura':     { name: '三浦さん新村　物件紹介トークルーム', avatar: null, days: [] },
   'row-yusuke2':   { name: 'ゆうすけ2', avatar: null, days: [] },
   'row-remind':    { name: '新村リマインド', avatar: null, days: [] },
