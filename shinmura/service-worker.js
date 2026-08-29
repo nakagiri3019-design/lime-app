@@ -1,5 +1,5 @@
 // 新村版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-shinmura-cache-v18';
+const CACHE_NAME = 'lime-shinmura-cache-v19';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
