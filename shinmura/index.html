@@ -444,6 +444,10 @@ const FILES = {
   'sakurai_estimate':       { name: '見積書_TAG_櫻井様.pdf', href: './files/sakurai_estimate.pdf', kb: 56 },
   'sakurai_invoice':        { name: '【請求書】_TAG_櫻井様.pdf', href: './files/sakurai_invoice.pdf', kb: 194 },
   'sakurai_schedule':       { name: '工程表_TAG_櫻井様.pdf', href: './files/sakurai_schedule.pdf', kb: 42 },
+  'tomatsu_completion':     { name: '作業完了報告書_SDM_戸松様.pdf', href: './files/tomatsu_completion.pdf', kb: 54 },
+  'tomatsu_estimate':       { name: '見積書_SDM_戸松様.pdf', href: './files/tomatsu_estimate.pdf', kb: 54 },
+  'tomatsu_invoice':        { name: '【請求書】_SDM_戸松様.pdf', href: './files/tomatsu_invoice.pdf', kb: 193 },
+  'tomatsu_schedule':       { name: '工程表_SDM_戸松様.pdf', href: './files/tomatsu_schedule.pdf', kb: 41 },
   'miyake_completion':      { name: '作業完了報告書_TAG_三宅様.pdf', href: './files/miyake_completion.pdf', kb: 54 },
   'miyake_estimate':        { name: '見積書_TAG_三宅様.pdf', href: './files/miyake_estimate.pdf', kb: 54 },
   'miyake_invoice':         { name: '【請求書】_TAG_三宅様.pdf', href: './files/miyake_invoice.pdf', kb: 195 },
@@ -770,6 +774,52 @@ const DAYS_KANNO = [
 // 書式は DAYS_SAKAI / DAYS_KANNO と同じ。末尾に日付ブロックを1つ足すだけで追記できる。
 // from:'me' = 新村（右・緑）、from:'them' = 荒井（左・白＋SDMロゴ）。
 const DAYS_ARAI = [
+  { date: '4月14日（火）', messages: [
+    { from: 'me', time: '10:24', text: 'お世話になっております。\n戸松様マンションのリフォーム工事につきまして、お見積りをお送りします。' },
+    { from: 'me', time: '10:24', type: 'file', file: 'tomatsu_estimate' },
+    { from: 'me', time: '10:25', text: '工程表も併せてお送りします。\n4/28着工、5/7完了の予定で組んでおります。' },
+    { from: 'me', time: '10:25', type: 'file', file: 'tomatsu_schedule' },
+    { from: 'them', time: '13:46', text: 'お世話になっております。\nありがとうございます。確認いたします。' },
+    { from: 'them', time: '14:52', type: 'call', dur: '8:17' },
+    { from: 'them', time: '15:23', text: '先ほどはありがとうございました。\n金額、工程とも問題ありません。\nこの内容で進めてください。' },
+    { from: 'me', time: '15:38', text: 'ありがとうございます。\n4/28着工で手配を進めます。' },
+  ]},
+  { date: '4月27日（月）', messages: [
+    { from: 'me', time: '17:18', text: '明日から着工となります。\n改修工事から入りますので、9時頃に現場へ伺います。' },
+    { from: 'them', time: '17:51', text: '承知しました。\n鍵はこちらで手配しておきます。\nよろしくお願いします。' },
+  ]},
+  { date: '4月28日（火）', messages: [
+    { from: 'me', time: '17:42', text: '改修工事完了しました。\n壁紙、天井の張り替え、ドア補修まで済んでおります。' },
+    { from: 'them', time: '18:16', text: 'ありがとうございます。\n明日から電気工事ですね。' },
+    { from: 'me', time: '18:22', text: 'はい。\n3日ほどかかる見込みです。' },
+  ]},
+  { date: '5月1日（金）', messages: [
+    { from: 'me', time: '18:07', text: '電気工事完了しました。\nコンセント、ダクト、エアコンの交換まで済んでおります。' },
+    { from: 'them', time: '18:34', text: 'ありがとうございます。\nエアコンの動作確認はお済みでしょうか。' },
+    { from: 'me', time: '18:39', text: 'はい、全室確認しております。問題ありません。' },
+  ]},
+  { date: '5月4日（月）', messages: [
+    { from: 'me', time: '17:53', text: '給排水衛生工事完了しました。\n浴室、キッチン、洗面台、トイレの設置まで済んでおります。' },
+    { from: 'them', time: '18:21', text: 'ありがとうございます。\n残りは内装ですね。' },
+    { from: 'me', time: '18:27', text: 'はい。\n明日から2日で仕上げ、木曜に引き渡しの予定です。' },
+  ]},
+  { date: '5月6日（水）', messages: [
+    { from: 'me', time: '17:36', text: '内装工事完了しました。\nクロス、カーテンレール、フローリングまで済んでおります。' },
+    { from: 'them', time: '18:09', text: 'ありがとうございます。\n順調に進んでいますね。' },
+  ]},
+  { date: '5月7日（木）', messages: [
+    { from: 'me', time: '16:22', text: '全工程完了しました。\n最終清掃と引き渡し前の確認まで済んでおります。' },
+    { from: 'me', time: '16:26', text: '作業完了報告書をお送りします。' },
+    { from: 'me', time: '16:26', type: 'file', file: 'tomatsu_completion' },
+    { from: 'me', time: '16:29', text: '追加工事の発生はございませんでした。\n工期内に予定どおり完了しております。' },
+    { from: 'them', time: '17:14', text: 'ありがとうございました。\n確認のうえ、ご連絡いたします。' },
+  ]},
+  { date: '5月20日（水）', messages: [
+    { from: 'me', time: '11:12', text: '戸松様マンションの請求書をお送りします。' },
+    { from: 'me', time: '11:12', type: 'file', file: 'tomatsu_invoice' },
+    { from: 'me', time: '11:14', text: 'お支払期限は7/31となっております。\nご確認よろしくお願いいたします。' },
+    { from: 'them', time: '13:38', text: 'ありがとうございます。\n確認のうえ、経理に回します。' },
+  ]},
   { date: '6月14日（日）', messages: [
     { from: 'me', time: '10:40', text: 'お世話になっております。\n漆原様マンションのリフォーム工事につきまして、お見積りをお送りします。' },
     { from: 'me', time: '10:40', type: 'file', file: 'urushibara_estimate' },
