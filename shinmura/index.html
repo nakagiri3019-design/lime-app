@@ -448,6 +448,10 @@ const FILES = {
   'tomatsu_estimate':       { name: '見積書_SDM_戸松様.pdf', href: './files/tomatsu_estimate.pdf', kb: 54 },
   'tomatsu_invoice':        { name: '【請求書】_SDM_戸松様.pdf', href: './files/tomatsu_invoice.pdf', kb: 193 },
   'tomatsu_schedule':       { name: '工程表_SDM_戸松様.pdf', href: './files/tomatsu_schedule.pdf', kb: 41 },
+  'aihara_completion':      { name: '作業完了報告書_アーバンビルド_相原様.pdf', href: './files/aihara_completion.pdf', kb: 60 },
+  'aihara_estimate':        { name: '見積書_アーバンビルド_相原様.pdf', href: './files/aihara_estimate.pdf', kb: 60 },
+  'aihara_invoice':         { name: '【請求書】_アーバンビルド_相原様.pdf', href: './files/aihara_invoice.pdf', kb: 213 },
+  'aihara_schedule':        { name: '工程表_アーバンビルド_相原様.pdf', href: './files/aihara_schedule.pdf', kb: 43 },
   'kuwashima_completion':   { name: '作業完了報告書_GIK_桑島様.pdf', href: './files/kuwashima_completion.pdf', kb: 55 },
   'kuwashima_estimate':     { name: '見積書_GIK_桑島様.pdf', href: './files/kuwashima_estimate.pdf', kb: 55 },
   'kuwashima_invoice':      { name: '【請求書】_GIK_桑島様.pdf', href: './files/kuwashima_invoice.pdf', kb: 198 },
@@ -505,6 +509,56 @@ const PHOTOS = {
 //   ]},
 // from:'me' = 新村（右・緑）、from:'them' = 酒井（左・白＋アイコン）。
 const DAYS_SAKAI = [
+  { date: '5月25日（月）', messages: [
+    { from: 'me', time: '11:15', text: 'お世話になっております。\n相原様マンションのリノベーション工事につきまして、お見積りをお送りします。' },
+    { from: 'me', time: '11:15', type: 'file', file: 'aihara_estimate' },
+    { from: 'me', time: '11:16', text: '工程表も併せてお送りします。\n6/3着工、6/13完了の予定で組んでおります。' },
+    { from: 'me', time: '11:16', type: 'file', file: 'aihara_schedule' },
+    { from: 'them', time: '14:22', text: 'お世話になっております。\nありがとうございます。確認いたします。' },
+    { from: 'them', time: '15:08', type: 'call', dur: '7:34' },
+    { from: 'them', time: '15:36', text: '先ほどはありがとうございました。\n金額、工程とも問題ありません。\nこの内容で進めてください。' },
+    { from: 'me', time: '15:47', text: 'ありがとうございます。\n6/3着工で手配を進めます。' },
+  ]},
+  { date: '6月2日（火）', messages: [
+    { from: 'me', time: '17:22', text: '明日から着工となります。\n搬入と室内養生から入りますので、9時頃に現場へ伺います。' },
+    { from: 'them', time: '17:54', text: '承知しました。\n鍵は管理人室で受け取れるよう手配済みです。\nよろしくお願いします。' },
+  ]},
+  { date: '6月5日（金）', messages: [
+    { from: 'me', time: '17:38', text: '解体完了しました。\n廃材と畳の処分も済んでおります。' },
+    { from: 'me', time: '17:41', text: '床下を確認しましたが、傷みは見られませんでした。\nこのまま木工事に入って問題ありません。' },
+    { from: 'them', time: '18:12', text: '承知しました。\n追加が出なくて何よりです。' },
+  ]},
+  { date: '6月8日（月）', messages: [
+    { from: 'me', time: '18:06', text: '木工事完了しました。\n床下地、開口下地、Mクロス下地まで済んでおります。' },
+    { from: 'them', time: '18:33', text: 'ありがとうございます。\n順調に進んでいますね。' },
+  ]},
+  { date: '6月9日（火）', messages: [
+    { from: 'me', time: '17:52', text: '電気工事完了しました。\nスイッチコンセント、ダクト、エアコンの交換まで済んでおります。' },
+    { from: 'them', time: '18:24', text: 'ありがとうございます。\nエアコンの試運転はお済みでしょうか。' },
+    { from: 'me', time: '18:29', text: 'はい、全室確認しております。問題ありません。' },
+  ]},
+  { date: '6月10日（水）', messages: [
+    { from: 'me', time: '18:14', text: '給排水衛生工事完了しました。\n浴室、キッチン、洗面台、トイレの設置まで済んでおります。' },
+    { from: 'them', time: '18:41', text: 'ありがとうございます。\n残りは内装と雑工事ですね。' },
+    { from: 'me', time: '18:46', text: 'はい。\n明日内装を仕上げ、明後日クリーニングに入ります。' },
+  ]},
+  { date: '6月11日（木）', messages: [
+    { from: 'me', time: '17:33', text: '内装工事完了しました。\nクロス、畳、カーテンレールまで済んでおります。' },
+    { from: 'them', time: '18:07', text: 'ありがとうございます。\n畳は新しく入れ替えていただいた形ですね。' },
+    { from: 'me', time: '18:12', text: 'はい、新床で入れております。' },
+  ]},
+  { date: '6月12日（金）', messages: [
+    { from: 'me', time: '17:26', text: '雑工事完了しました。\nハウスクリーニングと害虫駆除まで済んでおります。' },
+    { from: 'me', time: '17:29', text: '明日、最終清掃を行って引き渡しとなります。' },
+    { from: 'them', time: '17:58', text: '承知しました。\nよろしくお願いします。' },
+  ]},
+  { date: '6月13日（土）', messages: [
+    { from: 'me', time: '16:18', text: '全工程完了しました。\n引き渡しまで済んでおります。' },
+    { from: 'me', time: '16:21', text: '作業完了報告書をお送りします。' },
+    { from: 'me', time: '16:21', type: 'file', file: 'aihara_completion' },
+    { from: 'me', time: '16:24', text: '追加工事の発生はございませんでした。\n工期内に予定どおり完了しております。' },
+    { from: 'them', time: '17:12', text: 'ありがとうございました。\n確認のうえ、ご連絡いたします。' },
+  ]},
   { date: '6月24日（水）', messages: [
     { from: 'me', time: '14:20', text: 'お世話になっております。\n武井様マンションのリノベーション、お見積りをお送りします。' },
     { from: 'me', time: '14:20', type: 'file', file: 'takei_estimate' },
@@ -514,6 +568,12 @@ const DAYS_SAKAI = [
     { from: 'them', time: '16:05', type: 'call', dur: '11:23' },
     { from: 'them', time: '16:32', text: '先ほどはありがとうございました。\n金額、工程とも問題ありません。\nこの内容で進めてください。' },
     { from: 'me', time: '16:40', text: 'ありがとうございます。\n7/3着工で手配を進めます。' },
+  ]},
+  { date: '6月30日（火）', messages: [
+    { from: 'me', time: '10:48', text: '相原様マンションの請求書をお送りします。' },
+    { from: 'me', time: '10:48', type: 'file', file: 'aihara_invoice' },
+    { from: 'me', time: '10:51', text: 'お支払期限は8/20となっております。\nご確認よろしくお願いいたします。' },
+    { from: 'them', time: '13:26', text: 'ありがとうございます。\n確認のうえ、経理に回します。' },
   ]},
   { date: '7月2日（木）', messages: [
     { from: 'me', time: '17:15', text: '明日から着工となります。\n搬入と室内養生から入りますので、9時頃に現場に伺います。' },
