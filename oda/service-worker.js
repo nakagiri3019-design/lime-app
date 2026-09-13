@@ -1,11 +1,22 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v1';
+const CACHE_NAME = 'lime-oda-cache-v2';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
+  './img/ogasawara_before.jpg',
+  './img/ogasawara_during.jpg',
+  './img/ogasawara_after.jpg',
+  './img/sato_toilet_before.jpg',
+  './img/sato_toilet_after.jpg',
+  './img/sato_basin_before.jpg',
+  './img/sato_basin_during.jpg',
+  './img/sato_basin_after.jpg',
+  './img/iijima_bath_before.jpg',
+  './img/iijima_bath_during.jpg',
+  './img/iijima_bath_after.jpg',
 ];
 
 self.addEventListener('install', (event) => {

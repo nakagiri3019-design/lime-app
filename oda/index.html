@@ -428,22 +428,17 @@ const FILES = {
 
 // 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
 const PHOTOS = {
-  '01_demolition_0801':                      { src: './img/01_demolition_0801.jpg', w: 800, h: 600 },
-  '02_carpentry_0805':                       { src: './img/02_carpentry_0805.jpg', w: 800, h: 600 },
-  '03_miscellaneous_work_0817':              { src: './img/03_miscellaneous_work_0817.jpg', w: 800, h: 600 },
-  '04_electrical_intercom_0627':             { src: './img/04_electrical_intercom_0627.jpg', w: 800, h: 600 },
-  '05_demolition_0725':                      { src: './img/05_demolition_0725.jpg', w: 800, h: 600 },
-  '06_interior_new_tatami_0805':             { src: './img/06_interior_new_tatami_0805.jpg', w: 800, h: 600 },
-  '07_carpentry_completed_0729':             { src: './img/07_carpentry_completed_0729.jpg', w: 800, h: 600 },
-  '08_handover_0808':                        { src: './img/08_handover_0808.jpg', w: 800, h: 600 },
-  'remodel_bright_curtain_room_site':        { src: './img/remodel_bright_curtain_room_site.jpg', w: 800, h: 450 },
-  'remodel_completion_wallpaper_door_site':  { src: './img/remodel_completion_wallpaper_door_site.jpg', w: 800, h: 450 },
-  'remodel_electrical_completion_site':      { src: './img/remodel_electrical_completion_site.jpg', w: 800, h: 450 },
-  'remodel_floor_subbase_site':              { src: './img/remodel_floor_subbase_site.jpg', w: 800, h: 450 },
-  'remodel_handover_room_site':              { src: './img/remodel_handover_room_site.jpg', w: 800, h: 450 },
-  'remodel_intercom_check_site':             { src: './img/remodel_intercom_check_site.jpg', w: 800, h: 450 },
-  'remodel_kitchen_bathroom_site':           { src: './img/remodel_kitchen_bathroom_site.jpg', w: 800, h: 450 },
-  'remodel_living_after_wallpaper_site':     { src: './img/remodel_living_after_wallpaper_site.jpg', w: 800, h: 450 },
+  'ogasawara_before':      { src: './img/ogasawara_before.jpg', w: 1200, h: 900 },
+  'ogasawara_during':      { src: './img/ogasawara_during.jpg', w: 1200, h: 900 },
+  'ogasawara_after':       { src: './img/ogasawara_after.jpg', w: 1200, h: 900 },
+  'sato_toilet_before':    { src: './img/sato_toilet_before.jpg', w: 900, h: 1200 },
+  'sato_toilet_after':     { src: './img/sato_toilet_after.jpg', w: 900, h: 1200 },
+  'sato_basin_before':     { src: './img/sato_basin_before.jpg', w: 1200, h: 900 },
+  'sato_basin_during':     { src: './img/sato_basin_during.jpg', w: 1200, h: 900 },
+  'sato_basin_after':      { src: './img/sato_basin_after.jpg', w: 1200, h: 900 },
+  'iijima_bath_before':    { src: './img/iijima_bath_before.jpg', w: 1200, h: 900 },
+  'iijima_bath_during':    { src: './img/iijima_bath_during.jpg', w: 1200, h: 901 },
+  'iijima_bath_after':     { src: './img/iijima_bath_after.jpg', w: 900, h: 1200 },
 };
 
 // ── 野口（株式会社EID） スレッド ─────────────────────────
@@ -495,14 +490,18 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '17:10', text: '冴島邸のエコキュート、本日据付・試運転まで完了しました。\nお湯も問題なく出ています。' },
     { from: 'me', time: '17:11', text: '小笠原邸は明日から足場を組みます。' },
     { from: 'them', time: '17:40', text: '早いですね、助かります。\n小笠原様には足場の件伝えておきます。' },
+    { from: 'me', time: '17:45', type: 'photo', photo: 'ogasawara_before', alt: '足場設置前の小笠原邸 外壁' },
+    { from: 'me', time: '17:46', text: '小笠原邸、足場前の現状です。' },
   ]},
   { date: '8月28日（金）', messages: [
     { from: 'me', time: '16:45', text: '小笠原邸、高圧洗浄・ケレン・コーキング打ち替えまで終わり、下塗りに入りました。\n天気次第ですが9月頭には仕上げに入れそうです。' },
+    { from: 'me', time: '16:46', type: 'photo', photo: 'ogasawara_during', alt: '下塗り中の小笠原邸 外壁' },
     { from: 'them', time: '18:00', text: '了解です。天気だけ心配ですね。' },
   ]},
   { date: '9月6日（日）', messages: [
     { from: 'me', time: '15:30', text: '小笠原邸の外壁塗装、本日仕上げ・雨樋・足場解体まで完了しました。\n冴島邸と合わせて完了報告書をお送りします。' },
     { from: 'me', time: '15:31', type: 'file', file: 'eid_saejima_report' },
+    { from: 'me', time: '15:32', type: 'photo', photo: 'ogasawara_after', alt: '塗装完了後の小笠原邸 外壁' },
     { from: 'them', time: '16:20', text: 'お疲れ様でした。\n小笠原様、色味すごく気に入ってました。' },
   ]},
   { date: '9月10日（木）', messages: [
@@ -533,6 +532,15 @@ const DAYS_GOTO = [
     { from: 'me', time: '17:20', text: 'めじろ台の排水管やり替え、本日完了しました。\n明日から佐藤様邸の浴室に入ります。' },
     { from: 'them', time: '17:50', text: 'お疲れ様です。早いですね。' },
   ]},
+  { date: '7月22日（水）', messages: [
+    { from: 'me', time: '17:20', text: '佐藤様邸、トイレと洗面台の交換が終わりました。' },
+    { from: 'me', time: '17:21', type: 'photo', photo: 'sato_toilet_before', alt: '交換前の佐藤様邸 トイレ' },
+    { from: 'me', time: '17:21', type: 'photo', photo: 'sato_toilet_after', alt: '交換後の佐藤様邸 トイレ' },
+    { from: 'me', time: '17:22', type: 'photo', photo: 'sato_basin_before', alt: '交換前の佐藤様邸 洗面台' },
+    { from: 'me', time: '17:22', type: 'photo', photo: 'sato_basin_during', alt: '交換作業中の佐藤様邸 洗面台' },
+    { from: 'me', time: '17:23', type: 'photo', photo: 'sato_basin_after', alt: '交換後の佐藤様邸 洗面台' },
+    { from: 'them', time: '18:05', text: 'ありがとうございます。洗面台きれいになりましたね。' },
+  ]},
   { date: '7月28日（火）', messages: [
     { from: 'me', time: '16:40', text: '佐藤様邸、浴室・トイレとも完了しました。\n黒木様邸は明日から解体に入ります。TOTOの搬入は8/3で調整済みです。' },
     { from: 'them', time: '18:10', text: '了解です。黒木様邸は外壁も一緒なので、進捗またお願いします。' },
@@ -559,15 +567,18 @@ const DAYS_GOTO = [
   ]},
   { date: '8月20日（木）', messages: [
     { from: 'me', time: '8:50', text: '飯島邸、本日から在来浴室の解体に入ります。' },
+    { from: 'me', time: '8:51', type: 'photo', photo: 'iijima_bath_before', alt: '解体前の飯島邸 浴室' },
     { from: 'them', time: '9:15', text: 'よろしくお願いします。' },
   ]},
   { date: '8月28日（金）', messages: [
     { from: 'me', time: '17:00', text: '飯島邸、解体・残土処分・配管切り回し・土間コンクリートまで完了しました。\n養生後、9/2からユニットバス組み立てに入ります。' },
+    { from: 'me', time: '17:01', type: 'photo', photo: 'iijima_bath_during', alt: '土間コンクリート施工後の飯島邸 浴室' },
     { from: 'them', time: '17:35', text: '了解です。飯島様には仮設シャワーの件も伝えてあります。' },
   ]},
   { date: '9月7日（月）', messages: [
     { from: 'me', time: '16:30', text: '飯島邸の浴室改修、本日クロスとリモコン取付まで完了し、お引き渡ししました。\n完了報告書をお送りします。' },
     { from: 'me', time: '16:31', type: 'file', file: 'fukutomi_iijima_report' },
+    { from: 'me', time: '16:32', type: 'photo', photo: 'iijima_bath_after', alt: '改修後の飯島邸 浴室' },
     { from: 'them', time: '17:20', text: 'お疲れ様でした！\n飯島様、追い焚きが気に入ったそうです。' },
   ]},
   { date: '9月10日（木）', messages: [
