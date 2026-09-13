@@ -439,6 +439,10 @@ const PHOTOS = {
   'iijima_bath_before':    { src: './img/iijima_bath_before.jpg', w: 1200, h: 900 },
   'iijima_bath_during':    { src: './img/iijima_bath_during.jpg', w: 1200, h: 901 },
   'iijima_bath_after':     { src: './img/iijima_bath_after.jpg', w: 900, h: 1200 },
+  'zanshin_setup_delivery': { src: './img/zanshin_setup_delivery.jpg', w: 1200, h: 900 },
+  'zanshin_setup_progress': { src: './img/zanshin_setup_progress.jpg', w: 1200, h: 900 },
+  'zanshin_setup_night':   { src: './img/zanshin_setup_night.jpg', w: 1200, h: 900 },
+  'zanshin_setup_restored': { src: './img/zanshin_setup_restored.jpg', w: 1200, h: 900 },
 };
 
 // ── 野口（株式会社EID） スレッド ─────────────────────────
@@ -609,10 +613,13 @@ const DAYS_NIIYAMA = [
   { date: '7月22日（水）', messages: [
     { from: 'me', time: '7:50', text: 'おはようございます。\n本日搬入・仮設養生から入ります。造作は明日からです。' },
     { from: 'them', time: '8:30', text: 'お願いします。\n会場管理の方には話通してあります。' },
+    { from: 'me', time: '9:40', type: 'photo', photo: 'zanshin_setup_delivery', alt: '資材搬入・養生' },
+    { from: 'me', time: '9:41', text: '資材搬入・養生まで済みました。' },
   ]},
   { date: '8月3日（月）', messages: [
     { from: 'me', time: '18:20', text: '撤去・残置物処分まで完了し、会場を原状で引き渡しました。\n完了報告書をお送りします。' },
     { from: 'me', time: '18:21', type: 'file', file: 'zanshin_0803_report' },
+    { from: 'me', time: '18:22', type: 'photo', photo: 'zanshin_setup_restored', alt: '撤去・原状回復後' },
     { from: 'them', time: '19:00', text: 'お疲れ様でした！\n期間中トラブルなしで助かりました。' },
   ]},
   { date: '8月10日（月）', messages: [
@@ -633,9 +640,14 @@ const DAYS_NIIYAMA = [
   { date: '8月26日（水）', messages: [
     { from: 'me', time: '8:00', text: '本日搬入・養生開始です。看板は8/28に取付予定です。' },
     { from: 'them', time: '8:40', text: 'よろしくお願いします。' },
+    { from: 'me', time: '16:50', type: 'photo', photo: 'zanshin_setup_progress', alt: 'テント設営中' },
+    { from: 'me', time: '16:51', text: '夕方時点でテント半分まで上がりました。床上げと配電盤も入っています。' },
+    { from: 'them', time: '17:30', text: '順調ですね。よろしくお願いします。' },
   ]},
   { date: '9月1日（火）', messages: [
     { from: 'me', time: '12:10', text: '設営完了しています。\n電気・照明の点灯確認も済みました。' },
+    { from: 'me', time: '12:11', type: 'photo', photo: 'zanshin_setup_night', alt: '設営完了・点灯確認' },
+    { from: 'me', time: '12:12', text: '昨夜の点灯確認の写真です。' },
     { from: 'them', time: '12:45', text: '確認しました。看板の位置ばっちりです。' },
   ]},
   { date: '9月4日（金）', messages: [
