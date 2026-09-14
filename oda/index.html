@@ -6,7 +6,7 @@
   ■ ベース: lime-app/shinmura/ 版をそのまま複製し、以下のみ差し替え
     (A) 自分側の表示名 = 尾田（株式会社888house）
     (B) 友だちリスト 10件（全件ピン留め・data-ts で日時自動計算）
-    (C) 取引先3件（野口・後藤・新山）は PDF 添付つきの会話、他7件は会話のみ
+    (C) 取引先3件（野口・後藤・与沢）は PDF 添付つきの会話、他7件は会話のみ
     (D) アイコンは全件、既定の人型シルエットを色違いで使用
   ■ デザイン(CSS)は他版と共通。触らないこと。
   ■ URL: https://nakagiri3019-design.github.io/lime-app/oda/（尾田）
@@ -208,13 +208,13 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
 
     <!-- 野口（株式会社EID） -->
-    <div class="friend-row openable" id="row-noguchi" data-ts="2026-09-14T11:40">
+    <div class="friend-row openable" id="row-noguchi" data-ts="2026-09-14T11:35">
       <div class="f-avatar">
         <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="野口"><circle cx="50" cy="50" r="50" fill="#3B6EA5"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">野口（株式会社EID）</span><span class="f-time"></span></div>
-        <div class="f-last">ありがとうございます、助かります！</div>
+        <div class="f-last">こちらこそ。引き続きよろしくお願いします。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -225,18 +225,18 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">後藤（福富建設株式会社）</span><span class="f-time"></span></div>
-        <div class="f-last">ありがとうございます！</div>
+        <div class="f-last">ぜひよろしくお願いします。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
-    <!-- 新山（株式会社ZAN-SHIN） -->
+    <!-- 与沢（株式会社ZAN-SHIN） -->
     <div class="friend-row openable" id="row-niiyama" data-ts="2026-09-14T13:10">
       <div class="f-avatar">
-        <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="新山"><circle cx="50" cy="50" r="50" fill="#8C5A3C"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>
+        <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="与沢"><circle cx="50" cy="50" r="50" fill="#8C5A3C"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>
       </div>
       <div class="f-info">
-        <div class="f-name-row"><span class="f-name">新山（株式会社ZAN-SHIN）</span><span class="f-time"></span></div>
-        <div class="f-last">ありがとうございます、助かります。</div>
+        <div class="f-name-row"><span class="f-name">与沢（株式会社ZAN-SHIN）</span><span class="f-time"></span></div>
+        <div class="f-last">承知しました。お待ちしています。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -514,9 +514,8 @@ const DAYS_NOGUCHI = [
     { from: 'them', time: '12:05', text: '確認しました。10/20で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:00', text: '野口さん、お願いがあります。\n先日お送りした冴島邸・小笠原邸の完了報告書、下の発注者確認欄にご署名と押印をいただけないでしょうか。\n認印で大丈夫です。' },
-    { from: 'them', time: '11:35', text: 'いいですよ。\n印刷して押しておきます。今週中にPDFで返します。' },
-    { from: 'me', time: '11:40', text: 'ありがとうございます、助かります！' },
+    { from: 'me', time: '11:00', text: '野口さん、先日ご署名いただいた完了報告書2件、確かに受領しました。\nお手数をおかけしました、ありがとうございます。' },
+    { from: 'them', time: '11:35', text: 'こちらこそ。\n引き続きよろしくお願いします。' },
   ]},
 ];
 
@@ -591,16 +590,16 @@ const DAYS_GOTO = [
     { from: 'them', time: '11:15', text: '確認しました。10/20で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:05', text: '後藤さん、お手数ですが、飯島邸の完了報告書の発注者確認欄にご署名と押印をお願いできますか。\n認印で結構です。' },
-    { from: 'them', time: '12:10', text: '分かりました。\n押印して今週中に送ります。' },
-    { from: 'me', time: '12:15', text: 'ありがとうございます！' },
+    { from: 'me', time: '11:05', text: '後藤さん、ご署名いただいた完了報告書2件、受け取りました。\nお忙しいところありがとうございました。' },
+    { from: 'them', time: '12:10', text: 'いえいえ。\n次の案件もまたお願いします。' },
+    { from: 'me', time: '12:15', text: 'ぜひよろしくお願いします。' },
   ]},
 ];
 
-// ── 新山（株式会社ZAN-SHIN） スレッド ─────────────────────────
-const DAYS_NIIYAMA = [
+// ── 与沢（株式会社ZAN-SHIN） スレッド ─────────────────────────
+const DAYS_YOZAWA = [
   { date: '7月13日（月）', messages: [
-    { from: 'me', time: '13:30', text: '新山さん、お世話になっております。\n7月の会場設営、見積書をお送りします。' },
+    { from: 'me', time: '13:30', text: '与沢さん、お世話になっております。\n7月の会場設営、見積書をお送りします。' },
     { from: 'me', time: '13:31', type: 'file', file: 'zanshin_0713_estimate' },
     { from: 'me', time: '13:32', text: '造作・テント・床上げ・電気照明・備品設置、撤去と残置物処分まで一式で税込 3,597,000円です。' },
     { from: 'them', time: '15:00', text: 'ありがとうございます。\n電気の仮設は前回より増えてますね、照明増やした分ですか？' },
@@ -628,7 +627,7 @@ const DAYS_NIIYAMA = [
     { from: 'them', time: '13:40', text: '受け取りました。9/30で処理します。' },
   ]},
   { date: '8月14日（金）', messages: [
-    { from: 'me', time: '14:00', text: '新山さん、8月末の会場設営の見積書です。' },
+    { from: 'me', time: '14:00', text: '与沢さん、8月末の会場設営の見積書です。' },
     { from: 'me', time: '14:01', type: 'file', file: 'zanshin_0814_estimate' },
     { from: 'me', time: '14:02', text: '今回は看板・サイン工事が追加、電気は前回より少なめです。\n税込 3,223,000円です。' },
     { from: 'them', time: '16:30', text: 'ありがとうございます。週明けに返事します。' },
@@ -661,9 +660,9 @@ const DAYS_NIIYAMA = [
     { from: 'them', time: '14:20', text: '受領しました。10/30で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:10', text: '新山さん、先日の完了報告書（9/4分）の発注者確認欄に、ご署名と押印をお願いできますか。\n認印で大丈夫です。' },
-    { from: 'them', time: '13:05', text: '了解です。押して返しますね。' },
-    { from: 'me', time: '13:10', text: 'ありがとうございます、助かります。' },
+    { from: 'me', time: '11:10', text: '与沢さん、ご署名いただいた完了報告書2件、確かに受領しました。\nありがとうございました。' },
+    { from: 'them', time: '13:05', text: 'お疲れ様です。\n来月も同じ会場で予定があるので、また日程決まったら連絡します。' },
+    { from: 'me', time: '13:10', text: '承知しました。お待ちしています。' },
   ]},
 ];
 
@@ -768,7 +767,7 @@ const DAYS_HAHA = [
 const THREADS = {
   'row-noguchi':      { name: '野口（株式会社EID）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="野口"><circle cx="50" cy="50" r="50" fill="#3B6EA5"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_NOGUCHI },
   'row-goto':         { name: '後藤（福富建設株式会社）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="後藤"><circle cx="50" cy="50" r="50" fill="#2E7D6B"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_GOTO },
-  'row-niiyama':      { name: '新山（株式会社ZAN-SHIN）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="新山"><circle cx="50" cy="50" r="50" fill="#8C5A3C"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_NIIYAMA },
+  'row-niiyama':      { name: '与沢（株式会社ZAN-SHIN）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="与沢"><circle cx="50" cy="50" r="50" fill="#8C5A3C"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_YOZAWA },
   'row-nakamura':     { name: '中村（大和創建）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="中村"><circle cx="50" cy="50" r="50" fill="#6B7FA8"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_NAKAMURA },
   'row-hasebe':       { name: '長谷部（長谷部総合設備）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="長谷部"><circle cx="50" cy="50" r="50" fill="#4F7C8A"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_HASEBE },
   'row-sasaki':       { name: '佐々木（888house）', avatar: '<svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="佐々木"><circle cx="50" cy="50" r="50" fill="#A0703C"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>', days: DAYS_SASAKI },
