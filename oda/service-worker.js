@@ -1,5 +1,5 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v5';
+const CACHE_NAME = 'lime-oda-cache-v6';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',

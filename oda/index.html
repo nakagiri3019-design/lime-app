@@ -152,20 +152,15 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .file-txt{min-width:0;display:flex;flex-direction:column;gap:3px;}
 .file-name{font-size:15px;font-weight:700;color:#111;line-height:21px;word-break:break-all;}
 .file-sub{font-size:12.5px;color:#6b6b6b;line-height:17px;}
-/* 通話バブル（実機LINEのスクショに合わせた寸法・色） */
-.bbl-call{white-space:normal;}
-.call-card{display:flex;flex-direction:column;width:205px;box-sizing:border-box;}
-.call-card svg{display:block;}
-.call-main{display:flex;align-items:center;gap:10px;padding:0 0 8px;}
-.call-phone-icon{flex-shrink:0;display:flex;}
-.call-info{min-width:0;display:flex;flex-direction:column;gap:2px;}
-.call-title{font-size:15.5px;font-weight:700;color:#111;line-height:1.32;}
-.call-duration{font-size:13px;color:rgba(0,0,0,0.5);line-height:1.3;}
-.call-ringtone-row{display:flex;align-items:center;gap:8px;
-  border-top:1px solid rgba(0,0,0,0.08);padding-top:8px;}
-.call-music-icon{flex-shrink:0;display:flex;}
-.call-ringtone-text{flex:1;font-size:12.5px;color:rgba(0,0,0,0.45);line-height:1.25;}
-.call-chevron{flex-shrink:0;display:flex;}
+/* 通話バブル（LINEの通話履歴風）。角丸・背景色・文字サイズは .bubble / .bbl-me / .bbl-them をそのまま使う。
+   左に受話器アイコン、右にラベル（audio のみ下段に小さく通話時間）。 */
+.call-bubble{display:flex;align-items:center;gap:10px;white-space:nowrap;}
+.call-ico{flex-shrink:0;display:flex;}
+.call-ico svg{display:block;}
+.call-txt{display:flex;flex-direction:column;}
+.call-label{color:#111;}
+.call-missed .call-label{color:#D6453D;}
+.call-dur{font-size:12.5px;line-height:17px;color:rgba(0,0,0,0.5);}
 
 </style>
 </head>
@@ -463,7 +458,8 @@ const DAYS_NOGUCHI = [
   { date: '7月7日（火）', messages: [
     { from: 'them', time: '14:05', text: 'お疲れ様です。\nNX商事さんの件、この内容で進めてください。' },
     { from: 'them', time: '14:06', text: '着工は7/15で大丈夫ですか？' },
-    { from: 'me', time: '14:20', text: 'ありがとうございます！\n7/15着工で手配します。工期は3週間ほど見ています。' },
+    { from: 'me', time: '14:10', type: 'call', call: 'audio', duration: '6:48' },
+    { from: 'me', time: '14:20', text: 'お電話ありがとうございました。\n7/15着工で手配します。工期は3週間ほど見ています。' },
   ]},
   { date: '7月15日（水）', messages: [
     { from: 'me', time: '8:40', text: 'おはようございます。\n本日からNX商事様、高圧洗浄とケレンから入ります。' },
@@ -504,6 +500,8 @@ const DAYS_NOGUCHI = [
   { date: '8月20日（木）', messages: [
     { from: 'me', time: '17:10', text: '冴島邸のエコキュート、本日据付・試運転まで完了しました。\nお湯も問題なく出ています。' },
     { from: 'me', time: '17:11', text: '小笠原邸は明日から足場を組みます。' },
+    { from: 'them', time: '17:25', type: 'call', call: 'missed' },
+    { from: 'me', time: '17:32', type: 'call', call: 'audio', duration: '3:05' },
     { from: 'them', time: '17:40', text: '早いですね、助かります。\n小笠原様には足場の件伝えておきます。' },
     { from: 'me', time: '17:45', type: 'photo', photo: 'ogasawara_before', alt: '足場設置前の小笠原邸 外壁' },
     { from: 'me', time: '17:46', text: '小笠原邸、足場前の現状です。' },
@@ -523,6 +521,9 @@ const DAYS_NOGUCHI = [
     { from: 'them', time: '9:15', text: '冴島邸・小笠原邸の完了報告書、署名しました。PDFでお送りします。' },
     { from: 'them', time: '9:16', type: 'file', file: 'eid_saejima_report_signed' },
     { from: 'me', time: '9:30', text: '朝早くからありがとうございます。確かに受け取りました。' },
+    { from: 'them', time: '13:40', type: 'call', call: 'audio', duration: '2:17' },
+    { from: 'them', time: '13:45', text: '今お電話した件、小笠原様から追加で門扉の塗装も頼めないかとのことです。\n後日見積お願いします。' },
+    { from: 'me', time: '13:50', text: '承知しました。現地確認してからお出しします。' },
   ]},
   { date: '9月10日（木）', messages: [
     { from: 'me', time: '10:20', text: '冴島邸・小笠原邸分の請求書です。\n振込期日は10/20でお願いします。' },
@@ -544,7 +545,8 @@ const DAYS_GOTO = [
     { from: 'them', time: '13:20', text: 'ありがとうございます。\n黒木様邸の外壁は近似色でOKでした。' },
   ]},
   { date: '7月9日（木）', messages: [
-    { from: 'them', time: '9:45', text: '3件ともこの内容でお願いします。\n順番はめじろ台→佐藤様邸→黒木様邸で。' },
+    { from: 'them', time: '9:20', type: 'call', call: 'audio', duration: '11:26' },
+    { from: 'them', time: '9:45', text: 'さっき電話で話した通り、3件ともこの内容でお願いします。\n順番はめじろ台→佐藤様邸→黒木様邸で。' },
     { from: 'me', time: '10:05', text: '承知しました。\n7/15からめじろ台に入ります。' },
   ]},
   { date: '7月16日（木）', messages: [
@@ -584,6 +586,8 @@ const DAYS_GOTO = [
     { from: 'them', time: '15:30', text: 'ありがとうございます。\n飯島様に見せて返事します。' },
   ]},
   { date: '8月13日（木）', messages: [
+    { from: 'me', time: '9:50', type: 'call', call: 'canceled' },
+    { from: 'me', time: '9:52', type: 'call', call: 'audio', duration: '4:33' },
     { from: 'them', time: '10:20', text: '飯島様OKです。この内容で進めてください。\n8/20からで大丈夫ですか？' },
     { from: 'me', time: '10:35', text: 'ありがとうございます。8/20着工で手配します。\n解体〜土間〜配管で1週間、養生期間を挟んでユニットバス組み立てです。' },
   ]},
@@ -596,6 +600,10 @@ const DAYS_GOTO = [
     { from: 'me', time: '17:00', text: '飯島邸、解体・残土処分・配管切り回し・土間コンクリートまで完了しました。\n養生後、9/2からユニットバス組み立てに入ります。' },
     { from: 'me', time: '17:01', type: 'photo', photo: 'iijima_bath_during', alt: '土間コンクリート施工後の飯島邸 浴室' },
     { from: 'them', time: '17:35', text: '了解です。飯島様には仮設シャワーの件も伝えてあります。' },
+    { from: 'them', time: '19:10', type: 'call', call: 'missed' },
+    { from: 'me', time: '19:40', text: 'すみません、現場で出られませんでした。\n何かありましたか？' },
+    { from: 'them', time: '19:48', text: '大したことじゃない、飯島さんが仮設シャワーの時間聞いてただけ。\nもう伝えといたから大丈夫。' },
+    { from: 'me', time: '19:50', text: 'ありがとうございます、助かります。' },
   ]},
   { date: '9月7日（月）', messages: [
     { from: 'me', time: '16:30', text: '飯島邸の浴室改修、本日クロスとリモコン取付まで完了し、お引き渡ししました。\n完了報告書をお送りします。' },
@@ -607,6 +615,7 @@ const DAYS_GOTO = [
     { from: 'them', time: '14:20', text: '尾田くん、飯島邸の報告書サインしといた。\n遅くなってごめん。' },
     { from: 'them', time: '14:21', type: 'file', file: 'fukutomi_iijima_report_signed' },
     { from: 'me', time: '14:35', text: 'とんでもないです、ありがとうございます。\n請求書は明日お送りします。' },
+    { from: 'them', time: '16:05', type: 'call', call: 'audio', duration: '1:52' },
   ]},
   { date: '9月10日（木）', messages: [
     { from: 'me', time: '10:30', text: '飯島邸分の請求書です。\n振込期日は10/20でお願いします。' },
@@ -630,6 +639,7 @@ const DAYS_YOZAWA = [
     { from: 'me', time: '15:20', text: 'はい、ステージ側のスポットを追加した分です。' },
   ]},
   { date: '7月14日（火）', messages: [
+    { from: 'them', time: '9:55', type: 'call', call: 'audio', duration: '8:14' },
     { from: 'them', time: '10:10', text: '内容OKです。この見積で進めてください。\n設営は7/22からでお願いします。' },
     { from: 'me', time: '10:25', text: '承知しました。7/22搬入・設営開始で手配します。' },
   ]},
@@ -662,7 +672,8 @@ const DAYS_YOZAWA = [
     { from: 'them', time: '16:30', text: 'ありがとうございます。週明けに返事します。' },
   ]},
   { date: '8月17日（月）', messages: [
-    { from: 'them', time: '9:40', text: 'この内容でお願いします。\n設営開始は8/26、撤去完了9/4で。' },
+    { from: 'me', time: '9:30', type: 'call', call: 'missed' },
+    { from: 'them', time: '9:40', text: '折り返しできずすみません。\nこの内容でお願いします。設営開始は8/26、撤去完了9/4で。' },
     { from: 'me', time: '9:55', text: '承知しました。8/26搬入で手配します。' },
   ]},
   { date: '8月26日（水）', messages: [
@@ -677,6 +688,9 @@ const DAYS_YOZAWA = [
     { from: 'me', time: '12:11', type: 'photo', photo: 'zanshin_setup_night', alt: '設営完了・点灯確認' },
     { from: 'me', time: '12:12', text: '昨夜の点灯確認の写真です。' },
     { from: 'them', time: '12:45', text: '確認しました。看板の位置ばっちりです。' },
+    { from: 'them', time: '18:20', type: 'call', call: 'audio', duration: '5:07' },
+    { from: 'me', time: '18:30', text: '先ほどのステージ袖の配線、明朝一番で直します。' },
+    { from: 'them', time: '18:35', text: 'お願いします。' },
   ]},
   { date: '9月4日（金）', messages: [
     { from: 'me', time: '17:40', text: '撤去まで完了し、会場を引き渡しました。\n完了報告書をお送りします。' },
@@ -707,10 +721,13 @@ const DAYS_NAKAMURA = [
     { from: 'me', time: '19:15', text: '助かります。よろしくお願いします。' },
   ]},
   { date: '8月27日（木）', messages: [
+    { from: 'them', time: '16:20', type: 'call', call: 'audio', duration: '2:40' },
     { from: 'them', time: '16:40', text: '土間打ち終わりました。\n養生4日みて、9/2にTOTOの職人と合わせます。' },
     { from: 'me', time: '17:05', text: '了解です。ありがとうございます。' },
   ]},
   { date: '9月13日（日）', messages: [
+    { from: 'them', time: '19:50', type: 'call', call: 'missed' },
+    { from: 'them', time: '19:51', type: 'call', call: 'missed' },
     { from: 'them', time: '20:15', text: '尾田さん、来月の大田区の内装、日程出ました？' },
     { from: 'me', time: '20:40', text: 'まだオーナーさん待ちです。決まったらすぐ連絡します。\n10月前半は空けておいてもらえると助かります。' },
     { from: 'them', time: '20:45', text: '了解。空けときます。' },
@@ -742,6 +759,7 @@ const DAYS_SASAKI = [
     { from: 'them', time: '9:40', text: '了解です。' },
   ]},
   { date: '9月11日（金）', messages: [
+    { from: 'me', time: '12:55', type: 'call', call: 'audio', duration: '0:48' },
     { from: 'me', time: '13:10', text: '明日の築地の物件内覧、14時で入ってるから鍵お願い。' },
     { from: 'them', time: '13:25', text: '分かりました。13時半に現地行きます。' },
     { from: 'me', time: '13:30', text: 'よろしく。' },
@@ -790,6 +808,7 @@ const DAYS_KENTA = [
 // ── 母 スレッド ─────────────────────────
 const DAYS_HAHA = [
   { date: '9月3日（木）', messages: [
+    { from: 'them', time: '18:30', type: 'call', call: 'missed' },
     { from: 'them', time: '18:40', text: 'ちゃんとご飯食べてる？\n今度の連休帰ってこれる？' },
     { from: 'me', time: '20:15', text: '食べてるよ。連休は現場が入ってるから難しいかも。\n10月にまた連絡する。' },
     { from: 'them', time: '20:20', text: '無理しないでね。' },
@@ -860,39 +879,19 @@ function expiryLabel(dayDate, time) {
     (h < 12 ? '午前' : '午後') + h12 + ':' + ('0' + d.getMinutes()).slice(-2);
 }
 
-// 通話アイコン：丸背景＋塗りつぶしの黒い受話器（画像は使わず SVG）。
-// 丸の色は実機スクショの実測に合わせる。
+// 通話アイコン：丸背景＋塗りつぶしの受話器（画像は使わず SVG）。
 //   相手側（白バブル）  : #F5F5F5 のグレー
 //   自分側（緑バブル）  : バブル(#AAD97A)より少し濃い緑
-function callPhoneSvg(isMe) {
+//   受話器の色は不在着信のみラベルと同じ赤系、それ以外は黒。
+function callPhoneSvg(isMe, missed) {
   return '<svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">' +
     '<circle cx="20" cy="20" r="20" fill="' + (isMe ? '#9BD26B' : '#F5F5F5') + '"/>' +
-    '<path transform="translate(8,8)" d="M19.23 15.26l-2.54-.29a1.99 1.99 0 00-1.64.57l-1.84 1.84a15.05 15.05 0 01-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52A2.001 2.001 0 007.74 3H5.03c-1.13 0-2.07.94-2 2.07.53 8.54 7.36 15.36 15.89 15.89 1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.97z" fill="#111111"/></svg>';
+    '<path transform="translate(8,8)" d="M19.23 15.26l-2.54-.29a1.99 1.99 0 00-1.64.57l-1.84 1.84a15.05 15.05 0 01-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52A2.001 2.001 0 007.74 3H5.03c-1.13 0-2.07.94-2 2.07.53 8.54 7.36 15.36 15.89 15.89 1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.97z" fill="' + (missed ? '#D6453D' : '#111111') + '"/></svg>';
 }
 
-// 「着信音・呼出音」行。左は緑の角丸バッジに白い音符、右端は「>」。
-// 見た目だけで、リンクとしては機能しない。
-const CALL_RINGTONE_ROW =
-  '<div class="call-ringtone-row">' +
-  '<span class="call-music-icon">' +
-  '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">' +
-  '<rect width="16" height="16" rx="4.5" fill="#4CC764"/>' +
-  '<path d="M6.35 10.5V5.55l4-.85V9.4" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '<ellipse cx="5.3" cy="10.6" rx="1.45" ry="1.15" fill="#fff"/>' +
-  '<ellipse cx="9.35" cy="9.5" rx="1.45" ry="1.15" fill="#fff"/>' +
-  '</svg></span>' +
-  '<span class="call-ringtone-text">着信音・呼出音</span>' +
-  '<span class="call-chevron">' +
-  '<svg width="7" height="12" viewBox="0 0 7 12" fill="none" stroke="rgba(0,0,0,0.35)" ' +
-  'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-  '<path d="M1 1l5 5-5 5"/></svg></span>' +
-  '</div>';
-
-// 通話時間は駒宮版の表記に合わせて分を2桁にそろえる（6:08 -> 06:08）。値そのものは変えない。
-function padDur(d) {
-  const p = String(d).split(':');
-  return p.length === 2 ? ('0' + p[0]).slice(-2) + ':' + p[1] : String(d);
-}
+// 通話の種類ごとの表示ラベル（バブル内）と、友だち一覧 f-last 用のプレビュー
+const CALL_LABELS = { audio: '音声通話', missed: '不在着信', canceled: 'キャンセル' };
+const CALL_PREVIEWS = { audio: '[音声通話]', missed: '[不在着信]', canceled: '[キャンセル]' };
 
 // ファイル送信バブル：左に赤い PDF アイコン、右にファイル名（太字）とサイズ。
 // バブル全体が <a> なので、どこをタップしても別タブで PDF が開く。
@@ -909,23 +908,19 @@ function fileBubble(msg, cls, dayDate) {
     `</span></a>`;
 }
 
-// 通話バブル（実機LINEの表記に合わせた表示）
-//   応答あり → 丸アイコン＋「音声通話が終了しました」＋ mm:ss の通話時間
-//   応答なし → グレー丸アイコン＋「不在着信」（通話時間なし）
-// いずれも区切り線を挟んで下部に「着信音・呼出音」行が付く。左右の振り分けは from に従う。
+// 通話バブル（LINEの通話履歴風）。書式：{ type:'call', call:'audio'|'missed'|'canceled', duration:'5:32' }
+//   audio    → 受話器アイコン＋「音声通話」、下段に小さく「通話時間 5:32」
+//   missed   → 受話器アイコン＋「不在着信」（赤系、通話時間なし）
+//   canceled → 受話器アイコン＋「キャンセル」（通話時間なし）
+// 左右・既読・時刻は通常メッセージと同じ扱い（renderBubble 側で処理）。
 function callBubble(msg, cls) {
-  const isMe = msg.from === 'me';
-  const icon = callPhoneSvg(isMe);
-  const info = msg.missed
-    ? '<span class="call-title">不在着信</span>'
-    : '<span class="call-title">音声通話が終了しました</span>' +
-      `<span class="call-duration">${esc(padDur(msg.dur))}</span>`;
-  return `<div class="bubble ${cls} bbl-call">` +
-    `<div class="call-card ${msg.missed ? 'call-missed' : 'call-ended'}">` +
-    '<div class="call-main">' +
-    `<span class="call-phone-icon">${icon}</span>` +
-    `<div class="call-info">${info}</div>` +
-    '</div>' + CALL_RINGTONE_ROW + '</div></div>';
+  const kind = CALL_LABELS[msg.call] ? msg.call : 'audio';
+  const dur = kind === 'audio' && msg.duration
+    ? `<span class="call-dur">通話時間 ${esc(msg.duration)}</span>` : '';
+  return `<div class="bubble ${cls} call-bubble call-${kind}">` +
+    `<span class="call-ico">${callPhoneSvg(msg.from === 'me', kind === 'missed')}</span>` +
+    `<span class="call-txt"><span class="call-label">${CALL_LABELS[kind]}</span>${dur}</span>` +
+    '</div>';
 }
 
 // 写真：バブルを持たず、角丸の画像をそのまま置く。
@@ -1159,6 +1154,11 @@ document.querySelectorAll('.ai-chip').forEach((chip) => {
   rows.forEach(function (r) {
     var el = r.querySelector('.f-time');
     if (el) el.textContent = fmtTime(r.dataset.ts);
+    // 最終メッセージが通話なら f-last を [音声通話] / [不在着信] にする（それ以外は HTML の文言のまま）
+    var t = THREADS[r.id], lastDay = t && t.days[t.days.length - 1];
+    var last = lastDay && lastDay.messages[lastDay.messages.length - 1];
+    var fLast = r.querySelector('.f-last');
+    if (last && last.type === 'call' && fLast) fLast.textContent = CALL_PREVIEWS[last.call] || CALL_PREVIEWS.audio;
   });
   rows.sort(function (a, b) { return new Date(b.dataset.ts) - new Date(a.dataset.ts); });
   rows.forEach(function (r) { fl.appendChild(r); });
