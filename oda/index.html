@@ -214,18 +214,18 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">野口（株式会社EID）</span><span class="f-time"></span></div>
-        <div class="f-last">こちらこそ。引き続きよろしくお願いします。</div>
+        <div class="f-last">大丈夫です、10/20で処理予定です。報告書も揃っているので助かりました。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
     <!-- 後藤（福富建設株式会社） -->
-    <div class="friend-row openable" id="row-goto" data-ts="2026-09-14T12:15">
+    <div class="friend-row openable" id="row-goto" data-ts="2026-09-14T12:20">
       <div class="f-avatar">
         <svg viewBox="0 0 100 100" width="100%" height="100%" role="img" aria-label="後藤"><circle cx="50" cy="50" r="50" fill="#2E7D6B"/><g transform="translate(26,26) scale(2)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></g></svg>
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">後藤（福富建設株式会社）</span><span class="f-time"></span></div>
-        <div class="f-last">ぜひよろしくお願いします。</div>
+        <div class="f-last">じゃあ来週あたりで調整するわ。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -236,7 +236,7 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">与沢（株式会社ZAN-SHIN）</span><span class="f-time"></span></div>
-        <div class="f-last">承知しました。お待ちしています。</div>
+        <div class="f-last">承知しました。今週中に見積をお送りします。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -424,6 +424,12 @@ const FILES = {
   'zanshin_0814_estimate':       { name: '御見積書_会場設営工事_0814.pdf', href: './files/zanshin_0814_estimate.pdf', kb: 184 },
   'zanshin_0904_report':         { name: '作業完了報告書_会場設営工事_0904.pdf', href: './files/zanshin_0904_report.pdf', kb: 183 },
   'zanshin_0910_invoice':        { name: '請求書_会場設営工事_0910.pdf', href: './files/zanshin_0910_invoice.pdf', kb: 953 },
+  'fukutomi_3ken_report_signed':   { name: '作業完了報告書_めじろ台・佐藤様邸・黒木様邸_署名済.pdf', href: './files/fukutomi_3ken_report_signed.pdf', kb: 1173 },
+  'fukutomi_iijima_report_signed': { name: '作業完了報告書_飯島邸浴室改修_署名済.pdf', href: './files/fukutomi_iijima_report_signed.pdf', kb: 1480 },
+  'zanshin_0803_report_signed':    { name: '作業完了報告書_会場設営工事_0803_署名済.pdf', href: './files/zanshin_0803_report_signed.pdf', kb: 1076 },
+  'zanshin_0904_report_signed':    { name: '作業完了報告書_会場設営工事_0904_署名済.pdf', href: './files/zanshin_0904_report_signed.pdf', kb: 1060 },
+  'eid_nx_report_signed':          { name: '作業完了報告書_NX商事塗装工事_署名済.pdf', href: './files/eid_nx_report_signed.pdf', kb: 1182 },
+  'eid_saejima_report_signed':     { name: '作業完了報告書_冴島邸・小笠原邸_署名済.pdf', href: './files/eid_saejima_report_signed.pdf', kb: 1356 },
 };
 
 // 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
@@ -481,6 +487,11 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '16:22', text: '完了報告書です。請求書は8/10付でお送りします。' },
     { from: 'them', time: '17:05', text: 'お疲れ様でした！\nNX商事さんからも仕上がりきれいと連絡ありました。' },
   ]},
+  { date: '8月7日（金）', messages: [
+    { from: 'them', time: '10:20', text: '完了報告書、確認欄に記入してスキャンしました。\n原本は次回お会いした時にお渡しします。' },
+    { from: 'them', time: '10:21', type: 'file', file: 'eid_nx_report_signed' },
+    { from: 'me', time: '10:40', text: '早速ありがとうございます。\n原本はお手すきの時で大丈夫です。' },
+  ]},
   { date: '8月10日（月）', messages: [
     { from: 'me', time: '10:30', text: 'NX商事様分の請求書をお送りします。\n振込期日は9/21でお願いします。' },
     { from: 'me', time: '10:31', type: 'file', file: 'eid_nx_invoice' },
@@ -508,14 +519,19 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '15:32', type: 'photo', photo: 'ogasawara_after', alt: '塗装完了後の小笠原邸 外壁' },
     { from: 'them', time: '16:20', text: 'お疲れ様でした。\n小笠原様、色味すごく気に入ってました。' },
   ]},
+  { date: '9月7日（月）', messages: [
+    { from: 'them', time: '9:15', text: '冴島邸・小笠原邸の完了報告書、署名しました。PDFでお送りします。' },
+    { from: 'them', time: '9:16', type: 'file', file: 'eid_saejima_report_signed' },
+    { from: 'me', time: '9:30', text: '朝早くからありがとうございます。確かに受け取りました。' },
+  ]},
   { date: '9月10日（木）', messages: [
     { from: 'me', time: '10:20', text: '冴島邸・小笠原邸分の請求書です。\n振込期日は10/20でお願いします。' },
     { from: 'me', time: '10:21', type: 'file', file: 'eid_saejima_invoice' },
     { from: 'them', time: '12:05', text: '確認しました。10/20で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:00', text: '野口さん、先日ご署名いただいた完了報告書2件、確かに受領しました。\nお手数をおかけしました、ありがとうございます。' },
-    { from: 'them', time: '11:35', text: 'こちらこそ。\n引き続きよろしくお願いします。' },
+    { from: 'me', time: '11:00', text: '野口さん、今月の請求分、経理の方で問題なく進んでいますでしょうか。\n何か不足があれば言ってください。' },
+    { from: 'them', time: '11:35', text: '大丈夫です、10/20で処理予定です。\n報告書も揃っているので助かりました。' },
   ]},
 ];
 
@@ -552,6 +568,9 @@ const DAYS_GOTO = [
     { from: 'me', time: '16:00', text: '黒木様邸、浴室交換と外壁補修・塗装まで本日完了しました。\n3件分の完了報告書をお送りします。' },
     { from: 'me', time: '16:01', type: 'file', file: 'fukutomi_3ken_report' },
     { from: 'them', time: '16:45', text: 'お疲れ様でした。\n黒木様から外壁の色ぴったりだったと聞いてます。' },
+    { from: 'them', time: '17:30', text: '報告書、今サインして印押しといたよ。\nスキャンしたの送るね。' },
+    { from: 'them', time: '17:31', type: 'file', file: 'fukutomi_3ken_report_signed' },
+    { from: 'me', time: '17:45', text: '助かります！ありがとうございます。' },
   ]},
   { date: '8月10日（月）', messages: [
     { from: 'me', time: '10:40', text: '3件分の請求書です。\n振込期日は9/21でお願いします。' },
@@ -584,15 +603,20 @@ const DAYS_GOTO = [
     { from: 'me', time: '16:32', type: 'photo', photo: 'iijima_bath_after', alt: '改修後の飯島邸 浴室' },
     { from: 'them', time: '17:20', text: 'お疲れ様でした！\n飯島様、追い焚きが気に入ったそうです。' },
   ]},
+  { date: '9月9日（水）', messages: [
+    { from: 'them', time: '14:20', text: '尾田くん、飯島邸の報告書サインしといた。\n遅くなってごめん。' },
+    { from: 'them', time: '14:21', type: 'file', file: 'fukutomi_iijima_report_signed' },
+    { from: 'me', time: '14:35', text: 'とんでもないです、ありがとうございます。\n請求書は明日お送りします。' },
+  ]},
   { date: '9月10日（木）', messages: [
     { from: 'me', time: '10:30', text: '飯島邸分の請求書です。\n振込期日は10/20でお願いします。' },
     { from: 'me', time: '10:31', type: 'file', file: 'fukutomi_iijima_invoice' },
     { from: 'them', time: '11:15', text: '確認しました。10/20で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:05', text: '後藤さん、ご署名いただいた完了報告書2件、受け取りました。\nお忙しいところありがとうございました。' },
-    { from: 'them', time: '12:10', text: 'いえいえ。\n次の案件もまたお願いします。' },
-    { from: 'me', time: '12:15', text: 'ぜひよろしくお願いします。' },
+    { from: 'them', time: '12:10', text: 'そういえば来月、志木の物件で外壁やりたいって話があるんだけど、見てもらえる？' },
+    { from: 'me', time: '12:15', text: 'もちろんです。現調の日程、いつでも合わせます。' },
+    { from: 'them', time: '12:20', text: 'じゃあ来週あたりで調整するわ。' },
   ]},
 ];
 
@@ -620,6 +644,11 @@ const DAYS_YOZAWA = [
     { from: 'me', time: '18:21', type: 'file', file: 'zanshin_0803_report' },
     { from: 'me', time: '18:22', type: 'photo', photo: 'zanshin_setup_restored', alt: '撤去・原状回復後' },
     { from: 'them', time: '19:00', text: 'お疲れ様でした！\n期間中トラブルなしで助かりました。' },
+  ]},
+  { date: '8月5日（水）', messages: [
+    { from: 'them', time: '11:05', type: 'file', file: 'zanshin_0803_report_signed' },
+    { from: 'them', time: '11:05', text: '署名済です。' },
+    { from: 'me', time: '11:20', text: '受け取りました。ありがとうございます。' },
   ]},
   { date: '8月10日（月）', messages: [
     { from: 'me', time: '10:50', text: '7月分の請求書です。\n振込期日は9/30でお願いします。' },
@@ -654,15 +683,19 @@ const DAYS_YOZAWA = [
     { from: 'me', time: '17:41', type: 'file', file: 'zanshin_0904_report' },
     { from: 'them', time: '18:20', text: 'お疲れ様でした！' },
   ]},
+  { date: '9月5日（土）', messages: [
+    { from: 'them', time: '10:40', text: '完了報告書、確認しました。' },
+    { from: 'them', time: '10:41', type: 'file', file: 'zanshin_0904_report_signed' },
+    { from: 'me', time: '11:00', text: 'ありがとうございます。' },
+  ]},
   { date: '9月10日（木）', messages: [
     { from: 'me', time: '11:00', text: '8月末分の請求書です。\n振込期日は10/30でお願いします。' },
     { from: 'me', time: '11:01', type: 'file', file: 'zanshin_0910_invoice' },
     { from: 'them', time: '14:20', text: '受領しました。10/30で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:10', text: '与沢さん、ご署名いただいた完了報告書2件、確かに受領しました。\nありがとうございました。' },
-    { from: 'them', time: '13:05', text: 'お疲れ様です。\n来月も同じ会場で予定があるので、また日程決まったら連絡します。' },
-    { from: 'me', time: '13:10', text: '承知しました。お待ちしています。' },
+    { from: 'them', time: '13:05', text: '10月のイベント、日程出ました。10/21〜10/26で会場は同じです。\n見積お願いします。' },
+    { from: 'me', time: '13:10', text: '承知しました。今週中に見積をお送りします。' },
   ]},
 ];
 

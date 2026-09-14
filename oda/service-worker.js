@@ -1,5 +1,5 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v4';
+const CACHE_NAME = 'lime-oda-cache-v5';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
@@ -21,6 +21,12 @@ const PRECACHE_URLS = [
   './img/zanshin_setup_progress.jpg',
   './img/zanshin_setup_night.jpg',
   './img/zanshin_setup_restored.jpg',
+  './files/eid_nx_report_signed.pdf',
+  './files/eid_saejima_report_signed.pdf',
+  './files/fukutomi_3ken_report_signed.pdf',
+  './files/fukutomi_iijima_report_signed.pdf',
+  './files/zanshin_0803_report_signed.pdf',
+  './files/zanshin_0904_report_signed.pdf',
 ];
 
 self.addEventListener('install', (event) => {
