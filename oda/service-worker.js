@@ -1,5 +1,5 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v8';
+const CACHE_NAME = 'lime-oda-cache-v9';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
@@ -21,6 +21,11 @@ const PRECACHE_URLS = [
   './img/zanshin_setup_progress.jpg',
   './img/zanshin_setup_night.jpg',
   './img/zanshin_setup_restored.jpg',
+  './img/av_noguchi.jpg',
+  './img/av_goto.jpg',
+  './img/av_yozawa.jpg',
+  './img/av_nakamura.jpg',
+  './img/av_haha.jpg',
   './files/eid_nx_report_signed.pdf',
   './files/eid_saejima_report_signed.pdf',
   './files/fukutomi_3ken_report_signed.pdf',
