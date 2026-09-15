@@ -1,5 +1,5 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v9';
+const CACHE_NAME = 'lime-oda-cache-v10';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
@@ -26,6 +26,11 @@ const PRECACHE_URLS = [
   './img/av_yozawa.jpg',
   './img/av_nakamura.jpg',
   './img/av_haha.jpg',
+  './img/av_hasebe.jpg',
+  './img/av_sasaki.jpg',
+  './img/av_tanaka.jpg',
+  './img/av_yamaguchi.jpg',
+  './img/av_kenta.jpg',
   './files/eid_nx_report_signed.pdf',
   './files/eid_saejima_report_signed.pdf',
   './files/fukutomi_3ken_report_signed.pdf',
