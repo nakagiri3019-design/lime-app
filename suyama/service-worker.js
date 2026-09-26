@@ -1,5 +1,5 @@
 // 陶山版 専用キャッシュ。ルート版 / noguchi 版 / shinmura 版とは独立させること。
-const CACHE_NAME = 'lime-suyama-cache-v2';
+const CACHE_NAME = 'lime-suyama-cache-v3';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
