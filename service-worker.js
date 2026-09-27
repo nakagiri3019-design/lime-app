@@ -1,10 +1,12 @@
-﻿const CACHE_NAME = 'lime-cache-v27';
+﻿const CACHE_NAME = 'lime-cache-v28';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
+  './icons/icon-maskable-192.png',
+  './icons/icon-maskable-512.png',
   './avatars/ito_yu.png',
 ];
 
