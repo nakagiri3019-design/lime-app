@@ -8,7 +8,8 @@
     (B) 友だちリスト 10件（全件ピン留め・data-ts で日時自動計算）
     (C) 取引先3件（野口・後藤・与沢）は PDF 添付つきの会話、他7件は会話のみ
     (D) アイコンは全件、既定の人型シルエットを色違いで使用
-  ■ デザイン(CSS)は他版と共通。触らないこと。
+  ■ デザイン(CSS)は他版と共通だったが、2026-09 にトーク画面だけ LINE 本家寄せに変更
+    （背景 #8CABD9・吹き出しのしっぽ・12時間表記・入力欄・AI バー）。他版とは別物。
   ■ URL: https://nakagiri3019-design.github.io/lime-app/oda/（尾田）
   ============================================================
 -->
@@ -62,16 +63,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 
 /* ── CHAT VIEW ───────────────────────────── */
 #chat-view{display:none;flex-direction:column;height:100%;}
-.chat-header{background:#8FA7C8;padding:12px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.chat-header{background:#8CABD9;padding:12px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .back-btn{background:none;border:none;cursor:pointer;padding:2px;display:flex;align-items:center;}
-.chat-name{font-weight:700;font-size:17px;flex:1;color:#111;}
+.chat-name{font-weight:700;font-size:17px;flex:1;color:#111;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.chat-icons{flex-shrink:0;}
 .chat-icons{display:flex;gap:18px;align-items:center;}
 .c-icon-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;}
 .video-box{width:24px;height:24px;border:1.8px solid #333;border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;}
 .video-ear{position:absolute;top:-4px;width:2px;height:6px;background:#333;border-radius:1px;}
 .video-text{font-size:10px;font-weight:700;color:#333;margin-top:2px;}
 
-.messages-area{flex:1;overflow-y:auto;background:#8FA7C8;padding:12px 10px;}
+.messages-area{flex:1;overflow-y:auto;background:#8CABD9;padding:12px 10px;}
 .date-divider{display:flex;justify-content:center;margin:10px 0 14px;}
 .date-pill{background:rgba(100,100,100,0.35);color:#fff;font-size:12px;padding:4px 16px;border-radius:20px;font-weight:500;}
 
@@ -80,15 +82,24 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .row-me{flex-direction:row-reverse;}
 .row-them{flex-direction:row;}
 .row-indent{padding-left:42px;}
-.avatar-slot{width:36px;flex-shrink:0;align-self:flex-start;}
-.msg-av{width:36px;height:36px;border-radius:50%;overflow:hidden;background:#B0C4D8;display:flex;align-items:center;justify-content:center;}
+.avatar-slot{width:40px;flex-shrink:0;align-self:flex-start;}
+.msg-av{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#B0C4D8;display:flex;align-items:center;justify-content:center;}
+/* 相手の吹き出しはアイコンの上端に揃える（meta は msg-content 内で下端揃えのまま） */
+.row-them .msg-content{align-self:flex-start;}
 /* content = bubble + meta side by side, flush at bottom */
 .msg-content{display:flex;align-items:flex-end;gap:4px;max-width:75%;}
 .content-me{flex-direction:row;}
 .content-them{flex-direction:row;}
 .bubble{padding:10px 14px;border-radius:18px;font-size:14.5px;line-height:22px;color:#111;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,0.12);}
-.bbl-me{background:#AAD97A;border-top-right-radius:4px;}
-.bbl-them{background:#fff;border-top-left-radius:4px;}
+.bbl-me{background:#AAD97A;}
+.bbl-them{background:#fff;}
+/* しっぽ：同じ人の連続メッセージの1通目だけに付ける（.tail）。相手は左上に左向き、自分は右上に右向き。 */
+.bubble.tail{position:relative;}
+.bubble.tail::before{content:'';position:absolute;top:0;width:8px;height:11px;}
+.bbl-them.tail{border-top-left-radius:0;}
+.bbl-them.tail::before{left:-7px;background:#fff;clip-path:polygon(0 0,100% 0,100% 100%);}
+.bbl-me.tail{border-top-right-radius:0;}
+.bbl-me.tail::before{right:-7px;background:#AAD97A;clip-path:polygon(0 0,100% 0,0 100%);}
 .msg-meta{flex-shrink:0;padding-bottom:2px;display:flex;flex-direction:column;}
 .meta-me{align-items:flex-end;}
 .meta-them{align-items:flex-start;}
@@ -101,12 +112,17 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .input-wrap{flex:1;position:relative;display:flex;align-items:center;}
 .msg-input{width:100%;border:1px solid #ddd;border-radius:22px;padding:9px 38px 9px 14px;font-size:15px;background:#fafafa;color:#111;outline:none;font-family:inherit;line-height:1.4;}
 .smile-slot{position:absolute;right:10px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.send-btn{background:#06C755;border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+/* 送信ボタンは入力中だけ表示し、マイクと入れ替える（.typing は JS が付け外し） */
+.send-btn{background:none;border:none;padding:2px;display:none;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.input-bar.typing #mic-btn{display:none;}
+.input-bar.typing .send-btn{display:flex;}
 
 /* AI bar */
-.ai-bar{background:#ececec;border-top:1px solid #ddd;padding:7px 14px;display:flex;align-items:center;gap:14px;flex-shrink:0;}
-.ai-dot{width:22px;height:22px;border-radius:50%;background:#7B68EE;flex-shrink:0;}
-.ai-chip{font-size:12.5px;color:#555;cursor:pointer;user-select:none;}
+.ai-bar{background:#fff;border-top:1px solid #eee;padding:7px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;overflow-x:auto;scrollbar-width:none;}
+.ai-bar::-webkit-scrollbar{display:none;}
+.ai-dot{width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ai-chip{font-size:12.5px;color:#333;cursor:pointer;user-select:none;white-space:nowrap;flex-shrink:0;
+  border:1px solid #DDD;border-radius:999px;padding:5px 11px;line-height:1.2;background:#fff;}
 .ai-chip:active{opacity:0.7;}
 /* ── 文字サイズ：実機LINEのスクショ実測に合わせて拡大 ──────────────
    参考画像のアバター径 88px を CSS 36px として換算（スケール 2.42）。
@@ -154,7 +170,9 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 .file-sub{font-size:12.5px;color:#6b6b6b;line-height:17px;}
 /* 通話バブル（ルート版 lime-app/index.html の実装を移植） */
 .bbl-call{white-space:normal;}
-.call-card{display:flex;flex-direction:column;width:190px;box-sizing:border-box;}
+/* 幅は文言に合わせて伸ばす（最小190px）。文言は折り返さない。上限は .msg-content の max-width のまま。 */
+.call-card{display:flex;flex-direction:column;width:auto;min-width:190px;box-sizing:border-box;}
+.call-title,.call-title-lg,.call-duration,.call-ringtone-text{white-space:nowrap;}
 .call-card svg{display:block;}
 .call-missed{}
 .call-missed-main{display:flex;align-items:center;gap:8px;padding:0 0 4px;}
@@ -354,12 +372,13 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
 <div id="chat-view">
   <div class="chat-header">
     <button class="back-btn" id="back-btn">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
     <span class="chat-name" id="chat-name-el"></span>
     <div class="chat-icons">
-      <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-      <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></button>
+      <!-- 検索：虫めがねの円の中に時計の針（12時と3時方向） -->
+      <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="7.5"/><path d="M10.5 6.5v4h3.5"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></svg></button>
+      <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></button>
       <button class="c-icon-btn">
         <div class="video-box">
           <div class="video-ear" style="left:3px;"></div>
@@ -367,7 +386,7 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
           <span class="video-text">31</span>
         </div>
       </button>
-      <button class="c-icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#333"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
+      <button class="c-icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
     </div>
   </div>
 
@@ -375,26 +394,28 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
   <div class="messages-area" id="messages-area"><!-- filled by JS --></div>
 
   <div class="input-bar">
-    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></button>
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="4.5" x2="12" y2="19.5"/><line x1="4.5" y1="12" x2="19.5" y2="12"/></svg></button>
     <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></button>
-    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button>
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4.5"/><path d="M3.5 17.5l5.5-6 4 4.2 2.6-2.7 4.9 4.9"/></svg></button>
     <div class="input-wrap">
-      <input class="msg-input" id="msg-input" type="text" placeholder="メッセージを入力" autocomplete="off">
+      <input class="msg-input" id="msg-input" type="text" placeholder="" autocomplete="off">
       <div class="smile-slot">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
       </div>
     </div>
     <button class="i-icon-btn" id="mic-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10c0 3.9 3.1 7 7 7s7-3.1 7-7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></button>
-    <button class="send-btn" id="send-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    <button class="send-btn" id="send-btn" aria-label="送信">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M3.4 20.4l17.45-7.48a1 1 0 000-1.84L3.4 3.6a.99.99 0 00-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z" fill="#06C755"/></svg>
     </button>
   </div>
 
   <div class="ai-bar">
-    <div class="ai-dot"></div>
-    <span class="ai-chip">返信を提案</span>
-    <span class="ai-chip">話題を提案</span>
-    <span class="ai-chip">ムードを分析</span>
+    <!-- ボット顔：青〜紫グラデーションの丸い吹き出しに目2つ -->
+    <div class="ai-dot"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="aiGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D8BFF"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs><path d="M12 2.5c5.5 0 9.5 3.8 9.5 8.6s-4 8.6-9.5 8.6c-1.2 0-2.3-.2-3.4-.5L4 21.2l1.1-3.9C3.4 15.8 2.5 13.6 2.5 11.1 2.5 6.3 6.5 2.5 12 2.5z" fill="url(#aiGrad)"/><circle cx="8.8" cy="11" r="1.5" fill="#fff"/><circle cx="15.2" cy="11" r="1.5" fill="#fff"/></svg></div>
+    <span class="ai-chip">返信提案</span>
+    <span class="ai-chip">話題提案</span>
+    <span class="ai-chip">ムード分析</span>
+    <span class="ai-chip">豆知識</span>
   </div>
 </div>
 
@@ -1024,20 +1045,35 @@ function photoBubble(msg, meta) {
     '</div>';
 }
 
-function bubbleBody(msg, isMe, dayDate) {
-  const cls = isMe ? 'bbl-me' : 'bbl-them';
+// 表示用の時刻：データの「H:MM」（24時間）を LINE と同じ「午前11:47」「午後0:21」にする。
+// 0時台は午前0:xx、12時台は午後0:xx。形式が違う文字列はそのまま出す。データは書き換えない。
+function fmtTime12(t) {
+  const m = String(t || '').match(/^(\d{1,2}):(\d{2})$/);
+  if (!m) return t || '';
+  const h = Number(m[1]);
+  return (h < 12 ? '午前' : '午後') + (h % 12) + ':' + m[2];
+}
+
+function bubbleBody(msg, isMe, dayDate, tail) {
+  const cls = (isMe ? 'bbl-me' : 'bbl-them') + (tail ? ' tail' : '');
   if (msg.type === 'file') return fileBubble(msg, cls, dayDate);
   if (msg.type === 'call') return callBubble(msg, cls);
   return `<div class="bubble ${cls}">${esc(msg.text)}</div>`;
 }
 
-function renderBubble(msg, showMeta, dayDate) {
+// first = 同じ人の連続メッセージの1通目か。1通目だけしっぽとアイコンを出し、
+// 2通目以降はアイコン枠を空のまま残して左端をそろえる（LINE 本家と同じ）。
+function renderBubble(msg, showMeta, dayDate, first) {
   const isMe = msg.from === 'me';
+  const t12 = esc(fmtTime12(msg.time));
   const meta = showMeta === false
     ? ''
     : isMe
-      ? `<div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">${esc(msg.time)}</span></div>`
-      : `<div class="msg-meta meta-them"><span class="time-lbl">${esc(msg.time)}</span></div>`;
+      ? `<div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">${t12}</span></div>`
+      : `<div class="msg-meta meta-them"><span class="time-lbl">${t12}</span></div>`;
+  const avatarSlot = first === false
+    ? '<div class="avatar-slot"></div>'
+    : `<div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>`;
 
   // 写真は meta を写真の外へ絶対配置するため、msg-content には写真だけを入れる
   if (msg.type === 'photo') {
@@ -1048,23 +1084,19 @@ function renderBubble(msg, showMeta, dayDate) {
     </div>`;
     }
     return `<div class="msg-row row-them">
-      <div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>
+      ${avatarSlot}
       <div class="msg-content content-them photo-content">${body}</div>
     </div>`;
   }
 
-  const bubble = bubbleBody(msg, isMe, dayDate);
+  const bubble = bubbleBody(msg, isMe, dayDate, first !== false);
   if (isMe) {
     return `<div class="msg-row row-me">
       <div class="msg-content content-me">${meta}${bubble}</div>
     </div>`;
   } else {
-    // LINE(PC版)と同じく、連続メッセージでも1通ごとに必ずアイコンを表示する。
-    // テキスト/ファイル/通話のどの行でも同じ .avatar-slot(36px) + gap(6px) を使うので、
-    // 左端は常に 42px で揃う。.row-indent は付けない
-    // （付けると 42px + 36px + 6px = 84px になり、1通目より 42px 右にずれる）。
-    const avatarSlot =
-      `<div class="avatar-slot"><div class="msg-av">${currentAvatar || PERSON_SVG}</div></div>`;
+    // テキスト/ファイル/通話のどの行でも同じ .avatar-slot(40px) + gap(6px) を使うので、
+    // 左端は常に 46px で揃う（2通目以降は中身が空の枠）。.row-indent は付けない。
     return `<div class="msg-row row-them">
       ${avatarSlot}
       <div class="msg-content content-them">${bubble}${meta}</div>
@@ -1082,15 +1114,20 @@ function renderMessages() {
     return !(n && n.from === list[i].from && n.time === list[i].time);
   }
 
+  // 同じ送信者の連続は、日付の区切りをまたがない範囲で「2通目以降」とみなす
+  let prevFrom = null;
+  const isFirst = (msg) => { const f = msg.from !== prevFrom; prevFrom = msg.from; return f; };
+
   currentDays.forEach((day) => {
     html += `<div class="date-divider"><span class="date-pill">${esc(day.date)}</span></div>`;
+    prevFrom = null;
     day.messages.forEach((msg, mi) => {
-      html += renderBubble(msg, metaVisible(day.messages, mi), day.date);
+      html += renderBubble(msg, metaVisible(day.messages, mi), day.date, isFirst(msg));
     });
   });
 
   extraMessages.forEach((msg, i) => {
-    html += renderBubble(msg, metaVisible(extraMessages, i));
+    html += renderBubble(msg, metaVisible(extraMessages, i), undefined, isFirst(msg));
   });
 
   // 会話が1件も無いスレッドは html が '' のまま＝空のトーク画面として表示される
@@ -1102,12 +1139,15 @@ function sendMsg() {
   const input = document.getElementById('msg-input');
   const text = input.value.trim();
   if (!text) return;
-  const now = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', hour12: true });
+  // データと同じ「H:MM」（24時間）で持ち、表示は fmtTime12 で12時間表記にする
+  const hm = () => { const d = new Date(); return d.getHours() + ':' + ('0' + d.getMinutes()).slice(-2); };
+  const now = hm();
   extraMessages.push({ from: 'me', text, time: now });
   input.value = '';
+  updateSendToggle();
   renderMessages();
   setTimeout(() => {
-    const t2 = new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', hour12: true });
+    const t2 = hm();
     const reply = AUTO_REPLIES[Math.floor(Math.random() * AUTO_REPLIES.length)];
     extraMessages.push({ from: 'them', text: reply, time: t2 });
     renderMessages();
@@ -1197,9 +1237,17 @@ document.getElementById('msg-input').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
 });
 
+// 空欄のときはマイク、文字があるときだけ緑の送信矢印（.input-bar に .typing）
+function updateSendToggle() {
+  const input = document.getElementById('msg-input');
+  document.querySelector('.input-bar').classList.toggle('typing', input.value.trim() !== '');
+}
+document.getElementById('msg-input').addEventListener('input', updateSendToggle);
+
 document.querySelectorAll('.ai-chip').forEach((chip) => {
   chip.addEventListener('click', () => {
     document.getElementById('msg-input').value = chip.textContent;
+    updateSendToggle();
     document.getElementById('msg-input').focus();
   });
 });
