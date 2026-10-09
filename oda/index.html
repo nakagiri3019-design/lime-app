@@ -252,29 +252,29 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
 
     <!-- 野口（株式会社EID） -->
-    <div class="friend-row openable" id="row-noguchi" data-ts="2026-09-22T11:10">
+    <div class="friend-row openable" id="row-noguchi" data-ts="2026-10-07T12:15">
       <div class="f-avatar">
         <img src="./img/av_noguchi.jpg" alt="野口" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">野口（株式会社EID）</span><span class="f-time"></span></div>
-        <div class="f-last">助かります。よろしくお願いします。</div>
+        <div class="f-last">承知しました。よろしくお願いいたします。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
     <!-- 後藤（福富建設株式会社） -->
-    <div class="friend-row openable" id="row-goto" data-ts="2026-09-22T15:40">
+    <div class="friend-row openable" id="row-goto" data-ts="2026-10-08T17:48">
       <div class="f-avatar">
         <img src="./img/av_goto.jpg" alt="後藤" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">後藤（福富建設株式会社）</span><span class="f-time"></span></div>
-        <div class="f-last">ありがとうございます。オーナーさんに見せて、来週には返事できると思います。</div>
+        <div class="f-last">了解です！じゃあその内容で配っておきます。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
     <!-- 与沢（株式会社ZAN-SHIN） -->
-    <div class="friend-row openable" id="row-yozawa" data-ts="2026-09-18T09:50">
+    <div class="friend-row openable" id="row-yozawa" data-ts="2026-10-06T14:22">
       <div class="f-avatar">
         <img src="./img/av_yozawa.jpg" alt="与沢" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
@@ -477,9 +477,11 @@ const FILES = {
   'zanshin_0904_report_signed':    { name: '作業完了報告書_会場設営工事_0904_署名済.pdf', href: './files/zanshin_0904_report_signed.pdf', kb: 1060 },
   'eid_nx_report_signed':          { name: '作業完了報告書_NX商事塗装工事_署名済.pdf', href: './files/eid_nx_report_signed.pdf', kb: 1182 },
   'eid_saejima_report_signed':     { name: '作業完了報告書_冴島邸・小笠原邸_署名済.pdf', href: './files/eid_saejima_report_signed.pdf', kb: 1356 },
-  'eid_ogasawara_gate_estimate':    { name: '御見積書_小笠原邸門扉塗装.pdf', href: './files/eid_ogasawara_gate_estimate.pdf', kb: 187 },
   'fukutomi_shiki_estimate':        { name: '御見積書_志木市アパート外壁塗装.pdf', href: './files/fukutomi_shiki_estimate.pdf', kb: 193 },
-  'zanshin_1021_estimate':          { name: '御見積書_会場設営工事_1021.pdf', href: './files/zanshin_1021_estimate.pdf', kb: 186 },
+  'eid_shiokawa_takashima_estimate':         { name: '御見積書_塩川邸・高島邸.pdf', href: './files/eid_shiokawa_takashima_estimate.pdf', kb: 194 },
+  'eid_shiokawa_takashima_report_signed':    { name: '作業完了報告書_塩川邸・高島邸.pdf', href: './files/eid_shiokawa_takashima_report_signed.pdf', kb: 3894 },
+  'zanshin_0924_estimate':                   { name: '御見積書_会場設営工事.pdf', href: './files/zanshin_0924_estimate.pdf', kb: 188 },
+  'zanshin_0924_report_signed':              { name: '作業完了報告書_会場設営工事.pdf', href: './files/zanshin_0924_report_signed.pdf', kb: 473 },
 };
 
 // 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
@@ -585,24 +587,42 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '10:21', type: 'file', file: 'eid_saejima_invoice' },
     { from: 'them', time: '12:05', text: '確認しました。10/20で処理します。' },
   ]},
-  { date: '9月14日（月）', messages: [
-    { from: 'me', time: '11:00', text: '野口さん、今月の請求分、経理の方で問題なく進んでいますでしょうか。\n何か不足があれば言ってください。' },
-    { from: 'them', time: '11:35', text: '大丈夫です、10/20で処理予定です。\n報告書も揃っているので助かりました。' },
+  { date: '9月11日（金）', messages: [
+    { from: 'me', time: '15:24', text: '野口さん、お世話になっております。\n塩川邸のユニットバス工事と、高島邸の内装・設備工事のお見積りです。' },
+    { from: 'me', time: '15:25', type: 'file', file: 'eid_shiokawa_takashima_estimate' },
+    { from: 'me', time: '15:27', text: '2件まとめて、税込3,740,000円です。\n塩川邸はサザナHTのPタイプで組んでいます。\n工期は9月18日から10月6日で見ています。' },
+    { from: 'them', time: '17:08', text: 'ありがとうございます。\n塩川様・高島様に確認のうえ、ご連絡いたします。' },
   ]},
-  { date: '9月16日（水）', messages: [
-    { from: 'me', time: '17:20', text: '野口さん、先日お話のあった小笠原邸の門扉ですが、昨日現地を見てきました。\n鉄部に錆が出ていたので、ケレンと錆止めを入れる前提で組みます。' },
-    { from: 'them', time: '18:05', text: '早速ありがとうございます。\n小笠原様にもお伝えしておきます。' },
+  { date: '9月14日（月）', messages: [
+    { from: 'them', time: '10:36', text: 'お世話になっております。\n塩川様・高島様とも、お見積りの内容で承認をいただきました。' },
+    { from: 'them', time: '10:37', text: '予定どおり、9月18日からの着工でお願いいたします。' },
+    { from: 'me', time: '10:52', text: 'ありがとうございます。\n18日は塩川邸の既存ユニット解体から入ります。\n高島邸は、塩川邸の解体が終わってからクロスを進めます。' },
+    { from: 'them', time: '11:05', text: '承知しました。\n両家にもそのようにお伝えします。' },
   ]},
   { date: '9月18日（金）', messages: [
-    { from: 'me', time: '11:40', text: '小笠原邸の門扉塗装、お見積りです。' },
-    { from: 'me', time: '11:41', type: 'file', file: 'eid_ogasawara_gate_estimate' },
-    { from: 'me', time: '11:42', text: '税込187,000円です。外壁の足場は解体済みなので、脚立作業で3日ほど見ています。' },
-    { from: 'them', time: '14:15', text: '拝見しました。\n小笠原様に確認してご返事します。' },
+    { from: 'me', time: '8:47', text: '塩川邸、本日から既存ユニットの解体に入ります。' },
+    { from: 'them', time: '9:12', text: 'よろしくお願いいたします。' },
   ]},
-  { date: '9月22日（火）', messages: [
-    { from: 'them', time: '10:30', text: '小笠原様、この内容でOKとのことです。\n10月上旬でお願いできますか。' },
-    { from: 'me', time: '10:55', text: 'ありがとうございます。10/5から3日間で押さえます。\n前日に職人から小笠原様へご連絡します。' },
-    { from: 'them', time: '11:10', text: '助かります。よろしくお願いします。' },
+  { date: '9月24日（木）', messages: [
+    { from: 'me', time: '17:16', text: '塩川邸、窓枠まわりの躯体補修と分電盤の移設まで終わりました。\n明日からユニットの組み立てに入ります。' },
+    { from: 'them', time: '17:41', text: 'ご報告ありがとうございます。\n給湯器の交換日は、前日までに塩川様へお伝えいただけますでしょうか。' },
+    { from: 'me', time: '17:49', text: '承知しました。\n28日に交換予定なので、本日中にご連絡しておきます。' },
+  ]},
+  { date: '9月30日（水）', messages: [
+    { from: 'them', time: '14:03', type: 'call', call: 'ended', duration: '03:18' },
+    { from: 'them', time: '14:09', text: '先ほどはありがとうございました。\n高島邸の水栓は、キッチンと洗面の2箇所で確定とのことです。' },
+    { from: 'me', time: '14:14', text: '承知しました。部材を手配します。' },
+  ]},
+  { date: '10月6日（火）', messages: [
+    { from: 'me', time: '16:38', text: '塩川邸・高島邸とも、本日すべて完了し、お引き渡ししました。' },
+    { from: 'me', time: '16:41', text: '完了報告書をメールでお送りしました。\n発注者確認欄へのご署名・ご捺印をお願いいたします。' },
+    { from: 'them', time: '17:20', text: 'お疲れさまでした。\n確認して、明日返送いたします。' },
+  ]},
+  { date: '10月7日（水）', messages: [
+    { from: 'them', time: '11:42', type: 'file', file: 'eid_shiokawa_takashima_report_signed' },
+    { from: 'them', time: '11:43', text: '署名・捺印済みの完了報告書です。\nご確認ください。' },
+    { from: 'me', time: '12:01', text: 'ありがとうございます。確かに受領しました。\nご請求書は10日付でお送りします。' },
+    { from: 'them', time: '12:15', text: '承知しました。よろしくお願いいたします。' },
   ]},
 ];
 
@@ -713,6 +733,28 @@ const DAYS_GOTO = [
     { from: 'me', time: '13:12', text: 'シリコン塗料の3回塗り、クラック補修とシーリング打ち替えを含めて税込3,003,000円です。\n工期は足場含めて4週間ほど見ています。' },
     { from: 'them', time: '15:40', text: 'ありがとうございます。\nオーナーさんに見せて、来週には返事できると思います。' },
   ]},
+  { date: '9月29日（火）', messages: [
+    { from: 'them', time: '10:12', text: '尾田さん、おはようございます！\n志木の件、オーナーさんOKでした。' },
+    { from: 'them', time: '10:13', text: 'ひとつだけ、ベランダの手すりも一緒に塗れないかって相談がありまして。' },
+    { from: 'me', time: '10:40', text: 'おはようございます、ありがとうございます！\n手すりなら足場があるうちに一緒にできます。追加分だけ別でお出ししますね。' },
+    { from: 'them', time: '10:45', text: '助かります！' },
+  ]},
+  { date: '10月1日（木）', messages: [
+    { from: 'me', time: '14:20', text: '手すりの追加分、税込132,000円でいけます。\n全戸分、鉄部の錆止め込みです。' },
+    { from: 'them', time: '15:03', text: '了解です。それで進めましょう。\n正式に発注で大丈夫です！' },
+    { from: 'me', time: '15:10', text: 'ありがとうございます！\n足場の段取りに入ります。' },
+  ]},
+  { date: '10月6日（火）', messages: [
+    { from: 'them', time: '11:05', type: 'call', call: 'missed' },
+    { from: 'me', time: '11:20', type: 'call', call: 'ended', duration: '05:36' },
+    { from: 'them', time: '11:30', text: 'さっきはありがとうございました。\n足場は19日の月曜からでお願いします。\n入居者さんへのお知らせは、うちで回しておきます。' },
+    { from: 'me', time: '11:35', text: '了解です。お知らせのほう、よろしくお願いします。\n洗浄は21日からの予定です。' },
+  ]},
+  { date: '10月8日（木）', messages: [
+    { from: 'them', time: '17:20', text: '尾田さん、入居者さんへのお知らせ、明日配る予定です。\n駐車場は普段どおり使えるって書いて大丈夫ですかね？' },
+    { from: 'me', time: '17:45', text: '大丈夫です。足場は建物側だけなので、駐車場はそのまま使えます。\n洗浄の日だけ、車に水がかからないよう養生します。' },
+    { from: 'them', time: '17:48', text: '了解です！\nじゃあその内容で配っておきます。' },
+  ]},
 ];
 
 // ── 与沢（株式会社ZAN-SHIN） スレッド ─────────────────────────
@@ -794,24 +836,36 @@ const DAYS_YOZAWA = [
     { from: 'them', time: '14:20', text: '受領しました。10/30で処理します。' },
   ]},
   { date: '9月14日（月）', messages: [
-    { from: 'them', time: '13:05', text: '10月のイベント、日程出ました。10/21〜10/26で会場は同じです。\n見積お願いします。' },
-    { from: 'me', time: '13:10', text: '承知しました。今週中に見積をお送りします。' },
+    { from: 'me', time: '13:52', text: '与沢さん、お世話になっております。\n会場設営工事のお見積りです。' },
+    { from: 'me', time: '13:53', type: 'file', file: 'zanshin_0924_estimate' },
+    { from: 'me', time: '13:55', text: '税込4,323,000円です。\n設営は9月24日から10月5日で見ています。' },
+    { from: 'them', time: '15:30', text: '確認します。' },
   ]},
-  { date: '9月15日（火）', messages: [
-    { from: 'me', time: '10:20', text: '与沢さん、10月のイベントの件、会場は前回と同じで承知しました。\nテントと床上げは同規模でよろしいでしょうか。' },
-    { from: 'them', time: '11:45', text: '同規模でお願いします。\n看板は今回もあります。前回より1枚多いです。' },
-    { from: 'me', time: '12:00', text: '承知しました。その前提でお見積りします。' },
+  { date: '9月16日（水）', messages: [
+    { from: 'them', time: '10:18', text: '見積り、この内容で発注します。' },
+    { from: 'them', time: '10:19', text: '24日、8時搬入でお願いします。' },
+    { from: 'me', time: '10:35', text: 'ありがとうございます。\n24日8時、トラック2台で伺います。' },
+    { from: 'them', time: '10:40', text: 'よろしくお願いします。' },
   ]},
-  { date: '9月17日（木）', messages: [
-    { from: 'me', time: '14:30', text: '10月分のお見積りです。' },
-    { from: 'me', time: '14:31', type: 'file', file: 'zanshin_1021_estimate' },
-    { from: 'me', time: '14:32', text: '看板が1枚増えた分と、照明を少し足して税込3,465,000円です。' },
-    { from: 'them', time: '16:50', text: '確認します。' },
+  { date: '9月24日（木）', messages: [
+    { from: 'me', time: '7:58', text: '本日から設営に入ります。\n搬入は予定どおり8時から始めます。' },
+    { from: 'them', time: '8:20', text: '了解です。' },
   ]},
-  { date: '9月18日（金）', messages: [
-    { from: 'them', time: '9:30', text: 'この内容でお願いします。\n搬入は10/21の8時から入れます。' },
-    { from: 'me', time: '9:45', text: '承知しました。人員と資材を手配します。\n前回と同じ段取りで進めます。' },
-    { from: 'them', time: '9:50', text: 'お願いします。' },
+  { date: '10月1日（木）', messages: [
+    { from: 'them', time: '16:20', type: 'call', call: 'ended', duration: '02:47' },
+    { from: 'them', time: '16:25', text: '先ほどの件、音響の確認は3日の午後でお願いします。' },
+    { from: 'me', time: '16:31', text: '承知しました。\n3日の13時に、音響・映像の担当と伺います。' },
+  ]},
+  { date: '10月5日（月）', messages: [
+    { from: 'me', time: '17:12', text: '会場設営、本日すべて完了しました。\n清掃と廃材の搬出も終わっています。' },
+    { from: 'me', time: '17:14', text: '完了報告書をメールでお送りしました。\nご署名・ご捺印をお願いいたします。' },
+    { from: 'them', time: '17:40', text: '確認します。' },
+  ]},
+  { date: '10月6日（火）', messages: [
+    { from: 'them', time: '14:05', type: 'file', file: 'zanshin_0924_report_signed' },
+    { from: 'them', time: '14:06', text: '押印しました。' },
+    { from: 'me', time: '14:20', text: 'ありがとうございます。受領しました。\n請求書は10日付でお送りします。' },
+    { from: 'them', time: '14:22', text: 'お願いします。' },
   ]},
 ];
 
