@@ -1,5 +1,5 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v18';
+const CACHE_NAME = 'lime-oda-cache-v19';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
@@ -21,6 +21,20 @@ const PRECACHE_URLS = [
   './img/zanshin_setup_progress.jpg',
   './img/zanshin_setup_night.jpg',
   './img/zanshin_setup_restored.jpg',
+  './img/eid_shiokawa_01_exterior.jpg',
+  './img/eid_shiokawa_02_before.jpg',
+  './img/eid_shiokawa_03_demolished.jpg',
+  './img/eid_shiokawa_04_demolished.jpg',
+  './img/eid_shiokawa_05_wall_board.jpg',
+  './img/eid_shiokawa_06_wall_open.jpg',
+  './img/eid_shiokawa_07_wall_mortar.jpg',
+  './img/eid_shiokawa_08_wall_finish.jpg',
+  './img/eid_takashima_01_living_before.jpg',
+  './img/eid_takashima_02_living_after.jpg',
+  './img/eid_takashima_03_hallway.jpg',
+  './img/eid_takashima_04_room2f.jpg',
+  './img/eid_takashima_05_kitchen_before.jpg',
+  './img/eid_takashima_06_kitchen_after.jpg',
   './img/av_noguchi.jpg',
   './img/av_goto.jpg',
   './img/av_yozawa.jpg',
