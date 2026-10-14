@@ -252,13 +252,13 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
     </div>
 
     <!-- 野口（株式会社EID） -->
-    <div class="friend-row openable" id="row-noguchi" data-ts="2026-10-07T12:15">
+    <div class="friend-row openable" id="row-noguchi" data-ts="2026-10-13T10:20">
       <div class="f-avatar">
         <img src="./img/av_noguchi.jpg" alt="野口" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">野口（株式会社EID）</span><span class="f-time"></span></div>
-        <div class="f-last">承知しました。よろしくお願いいたします。</div>
+        <div class="f-last">承知しました。今週中に現地を確認して、お見積りをお出しします。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -274,13 +274,13 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
     <!-- 与沢（株式会社ZAN-SHIN） -->
-    <div class="friend-row openable" id="row-yozawa" data-ts="2026-10-06T14:22">
+    <div class="friend-row openable" id="row-yozawa" data-ts="2026-10-14T11:45">
       <div class="f-avatar">
         <img src="./img/av_yozawa.jpg" alt="与沢" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center;">
       </div>
       <div class="f-info">
         <div class="f-name-row"><span class="f-name">与沢（株式会社ZAN-SHIN）</span><span class="f-time"></span></div>
-        <div class="f-last">お願いします。</div>
+        <div class="f-last">承知しました。21日、8時搬入で手配済みです。</div>
       </div>
       <div class="f-pin" aria-label="ピン留め"><svg width="13" height="13" viewBox="0 0 24 24" fill="#b6b6b6"><path d="M14.5 2 22 9.5l-1.9 1.9-1.6-.5-3.3 3.3.7 3.4-1.6 1.6-4.1-4.1-5 5-1.3-1.3 5-5L4.8 9.7l1.6-1.6 3.4.7 3.3-3.3-.5-1.6L14.5 2z"/></svg></div>
     </div>
@@ -482,6 +482,8 @@ const FILES = {
   'eid_shiokawa_takashima_report_signed':    { name: '作業完了報告書_塩川邸・高島邸.pdf', href: './files/eid_shiokawa_takashima_report_signed.pdf', kb: 3894 },
   'zanshin_0924_estimate':                   { name: '御見積書_会場設営工事.pdf', href: './files/zanshin_0924_estimate.pdf', kb: 188 },
   'zanshin_0924_report_signed':              { name: '作業完了報告書_会場設営工事.pdf', href: './files/zanshin_0924_report_signed.pdf', kb: 473 },
+  'eid_shiokawa_invoice':                    { name: '請求書_塩川邸・高島邸.pdf', href: './files/eid_shiokawa_invoice.pdf', kb: 896 },
+  'zanshin_1010_invoice':                    { name: '請求書_会場設営工事_1010.pdf', href: './files/zanshin_1010_invoice.pdf', kb: 894 },
 };
 
 // 送信写真。w/h は配置した画像の実寸（縦横比の維持に使う）。
@@ -671,6 +673,15 @@ const DAYS_NOGUCHI = [
     { from: 'them', time: '11:43', text: '署名・捺印済みの完了報告書です。\nご確認ください。' },
     { from: 'me', time: '12:01', text: 'ありがとうございます。確かに受領しました。\nご請求書は10日付でお送りします。' },
     { from: 'them', time: '12:15', text: '承知しました。よろしくお願いいたします。' },
+  ]},
+  { date: '10月10日（土）', messages: [
+    { from: 'me', time: '10:15', text: '塩川邸・高島邸分の請求書です。\n税込3,740,000円、振込期日は11/20でお願いします。' },
+    { from: 'me', time: '10:16', type: 'file', file: 'eid_shiokawa_invoice' },
+    { from: 'them', time: '11:32', text: '拝受しました。\n11/20で処理いたします。' },
+  ]},
+  { date: '10月13日（火）', messages: [
+    { from: 'them', time: '9:48', text: 'お世話になっております。\n塩川様から、浴室の鏡を1枚追加できないかとご相談がありました。\nお見積りをお願いできますでしょうか。' },
+    { from: 'me', time: '10:20', text: '承知しました。\n今週中に現地を確認して、お見積りをお出しします。' },
   ]},
 ];
 
@@ -892,6 +903,15 @@ const DAYS_YOZAWA = [
     { from: 'them', time: '14:06', text: '押印しました。' },
     { from: 'me', time: '14:20', text: 'ありがとうございます。受領しました。\n請求書は10日付でお送りします。' },
     { from: 'them', time: '14:22', text: 'お願いします。' },
+  ]},
+  { date: '10月10日（土）', messages: [
+    { from: 'me', time: '10:40', text: '9/24〜10/5分の請求書です。\n税込4,323,000円、振込期日は11/30でお願いします。' },
+    { from: 'me', time: '10:41', type: 'file', file: 'zanshin_1010_invoice' },
+    { from: 'them', time: '13:05', text: '受領しました。11/30で処理します。' },
+  ]},
+  { date: '10月14日（水）', messages: [
+    { from: 'them', time: '11:20', text: '21日からの分も予定どおりでお願いします。' },
+    { from: 'me', time: '11:45', text: '承知しました。\n21日、8時搬入で手配済みです。' },
   ]},
 ];
 
