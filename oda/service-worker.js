@@ -1,5 +1,5 @@
 // 尾田版 専用キャッシュ。ルート版 / noguchi 版とは独立させること。
-const CACHE_NAME = 'lime-oda-cache-v23';
+const CACHE_NAME = 'lime-oda-cache-v24';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
@@ -35,6 +35,18 @@ const PRECACHE_URLS = [
   './img/eid_takashima_04_room2f.jpg',
   './img/eid_takashima_05_kitchen_before.jpg',
   './img/eid_takashima_06_kitchen_after.jpg',
+  './img/goto_ootake_sample.jpg',
+  './img/goto_ootake_yukashita.jpg',
+  './img/goto_kawashima_ecocute.jpg',
+  './img/goto_miyazaki_doma.jpg',
+  './img/goto_kojima_gaiheki.jpg',
+  './img/noguchi_yamanaka_color.jpg',
+  './img/noguchi_yamanaka_kaitai.jpg',
+  './img/noguchi_kumekawa_senjo.jpg',
+  './img/noguchi_yamanaka_unitbath.jpg',
+  './img/noguchi_kumekawa_nakanuri.jpg',
+  './img/yozawa_zumen.jpg',
+  './img/yozawa_stage.jpg',
   './img/av_noguchi.jpg',
   './img/av_goto.jpg',
   './img/av_yozawa.jpg',

@@ -525,6 +525,18 @@ const PHOTOS = {
   'eid_takashima_04_room2f':         { src: './img/eid_takashima_04_room2f.jpg', w: 1108, h: 1477 },
   'eid_takashima_05_kitchen_before': { src: './img/eid_takashima_05_kitchen_before.jpg', w: 1108, h: 1477 },
   'eid_takashima_06_kitchen_after':  { src: './img/eid_takashima_06_kitchen_after.jpg', w: 1108, h: 1477 },
+  'goto_ootake_sample':              { src: './img/goto_ootake_sample.jpg', w: 1200, h: 900 },
+  'goto_ootake_yukashita':           { src: './img/goto_ootake_yukashita.jpg', w: 1200, h: 900 },
+  'goto_kawashima_ecocute':          { src: './img/goto_kawashima_ecocute.jpg', w: 900, h: 1200 },
+  'goto_miyazaki_doma':              { src: './img/goto_miyazaki_doma.jpg', w: 1200, h: 900 },
+  'goto_kojima_gaiheki':             { src: './img/goto_kojima_gaiheki.jpg', w: 1200, h: 900 },
+  'noguchi_yamanaka_color':          { src: './img/noguchi_yamanaka_color.jpg', w: 1200, h: 900 },
+  'noguchi_yamanaka_kaitai':         { src: './img/noguchi_yamanaka_kaitai.jpg', w: 1200, h: 900 },
+  'noguchi_kumekawa_senjo':          { src: './img/noguchi_kumekawa_senjo.jpg', w: 900, h: 1200 },
+  'noguchi_yamanaka_unitbath':       { src: './img/noguchi_yamanaka_unitbath.jpg', w: 1200, h: 900 },
+  'noguchi_kumekawa_nakanuri':       { src: './img/noguchi_kumekawa_nakanuri.jpg', w: 900, h: 1200 },
+  'yozawa_zumen':                    { src: './img/yozawa_zumen.jpg', w: 1200, h: 900 },
+  'yozawa_stage':                    { src: './img/yozawa_stage.jpg', w: 1200, h: 900 },
 };
 
 // ── 野口（株式会社EID） スレッド ─────────────────────────
@@ -667,6 +679,7 @@ const DAYS_NOGUCHI = [
     { from: 'them', time: '13:20', text: 'お世話になっております。\n山中様より、ユニットバスの色をホワイトからベージュ系に変更したいとのご要望をいただきました。\n変更は可能でしょうか。' },
     { from: 'me', time: '13:50', text: '発注の締めが明日なので、まだ間に合います。\nベージュ系の品番を確認して、今日中にお送りします。' },
     { from: 'me', time: '17:30', text: 'ベージュ系は2色ございます。\n山中様に選んでいただけますでしょうか。' },
+    { from: 'me', time: '17:31', type: 'photo', photo: 'noguchi_yamanaka_color', alt: 'ユニットバスのベージュ系2色（カタログ）' },
     { from: 'them', time: '18:10', text: 'ありがとうございます。\n明日の午前中にお返事いたします。' },
   ]},
   { date: '10月2日（金）', messages: [
@@ -701,10 +714,13 @@ const DAYS_NOGUCHI = [
     { from: 'me', time: '12:01', text: 'ありがとうございます。確かに受領しました。\nご請求書は10日付でお送りします。' },
     { from: 'them', time: '12:15', text: '承知しました。よろしくお願いいたします。' },
     { from: 'me', time: '17:00', text: '山中邸、旧浴室の解体が終わりました。土台に傷みはありませんでした。\n粂川邸は高圧洗浄まで完了しています。' },
+    { from: 'me', time: '17:01', type: 'photo', photo: 'noguchi_yamanaka_kaitai', alt: '解体後の山中邸 浴室' },
+    { from: 'me', time: '17:02', type: 'photo', photo: 'noguchi_kumekawa_senjo', alt: '高圧洗浄後の粂川邸 外壁' },
     { from: 'them', time: '17:30', text: '順調で何よりです。\n引き続きよろしくお願いいたします。' },
   ]},
   { date: '10月9日（金）', messages: [
     { from: 'me', time: '16:20', text: '山中邸のユニットバス、組み立てが終わりました。\nエコキュートは明日据え付けます。' },
+    { from: 'me', time: '16:21', type: 'photo', photo: 'noguchi_yamanaka_unitbath', alt: '組み立て後の山中邸 ユニットバス' },
     { from: 'them', time: '16:50', text: 'きれいに仕上がっていますね。\nこちらのお写真、山中様にもお見せしてよろしいでしょうか。' },
     { from: 'me', time: '17:00', text: 'もちろんです。' },
   ]},
@@ -715,6 +731,7 @@ const DAYS_NOGUCHI = [
   ]},
   { date: '10月12日（月）', messages: [
     { from: 'me', time: '17:15', text: '粂川邸、中塗りまで完了しました。\n明日から仕上げ塗りに入ります。' },
+    { from: 'me', time: '17:16', type: 'photo', photo: 'noguchi_kumekawa_nakanuri', alt: '中塗り後の粂川邸 外壁' },
     { from: 'them', time: '17:40', text: '承知しました。\n粂川様が、色見本より少し明るめで安心したとおっしゃっていました。' },
   ]},
   { date: '10月13日（火）', messages: [
@@ -817,6 +834,7 @@ const DAYS_GOTO = [
   ]},
   { date: '9月4日（金）', messages: [
     { from: 'me', time: '16:30', text: '大竹さん、ナチュラルオークのフローリングに決まりました。' },
+    { from: 'me', time: '16:31', type: 'photo', photo: 'goto_ootake_sample', alt: '大竹邸の床材サンプル3種' },
     { from: 'them', time: '17:05', text: '了解です。これで進めてください。' },
   ]},
   { date: '9月7日（月）', messages: [
@@ -840,6 +858,7 @@ const DAYS_GOTO = [
     { from: 'me', time: '10:31', type: 'file', file: 'fukutomi_iijima_invoice' },
     { from: 'them', time: '11:15', text: '確認しました。10/20で処理します。' },
     { from: 'me', time: '15:10', text: '大竹邸、和室の解体が終わりました。\n床下の根太が一部傷んでいたので、交換しておきます。お見積りの範囲内で収めます。' },
+    { from: 'me', time: '15:11', type: 'photo', photo: 'goto_ootake_yukashita', alt: '和室解体後の大竹邸 床下' },
     { from: 'them', time: '15:40', text: 'ありがとうございます。そう言ってもらえると助かります。' },
   ]},
   { date: '9月14日（月）', messages: [
@@ -852,6 +871,7 @@ const DAYS_GOTO = [
     { from: 'me', time: '14:05', text: '9/18の午前で大丈夫です。10時に現地でよろしいでしょうか。' },
     { from: 'them', time: '14:20', text: '10時でお願いします。住所は後ほど送ります。' },
     { from: 'me', time: '16:00', text: '川島邸のエコキュート、本日据え付けが完了しました。\n試運転も問題ありません。' },
+    { from: 'me', time: '16:01', type: 'photo', photo: 'goto_kawashima_ecocute', alt: '据え付け後の川島邸 エコキュート' },
     { from: 'them', time: '16:25', text: '早い！ありがとうございます。' },
   ]},
   { date: '9月18日（金）', messages: [
@@ -870,6 +890,7 @@ const DAYS_GOTO = [
   ]},
   { date: '9月24日（木）', messages: [
     { from: 'me', time: '17:20', text: '宮崎邸の駐車場土間、昨日打設して今日は養生中です。\n明日フェンスを付けて完了の予定です。' },
+    { from: 'me', time: '17:21', type: 'photo', photo: 'goto_miyazaki_doma', alt: '打設後・養生中の宮崎邸 駐車場土間' },
     { from: 'them', time: '17:45', text: '了解です。雨が降らなくてよかったですね。' },
   ]},
   { date: '9月25日（金）', messages: [
@@ -909,6 +930,7 @@ const DAYS_GOTO = [
   ]},
   { date: '10月9日（金）', messages: [
     { from: 'me', time: '16:40', text: '小島化学さんの外壁補修、終わりました。\n工場の担当の方にも見ていただいています。' },
+    { from: 'me', time: '16:41', type: 'photo', photo: 'goto_kojima_gaiheki', alt: '補修後の小島化学 工場外壁' },
     { from: 'them', time: '17:10', text: 'ありがとうございます。\n先方からも、作業が丁寧だったと連絡がありました。' },
   ]},
   { date: '10月14日（水）', messages: [
@@ -1036,6 +1058,7 @@ const DAYS_YOZAWA = [
   ]},
   { date: '10月5日（月）', messages: [
     { from: 'them', time: '10:10', text: '図面です。' },
+    { from: 'them', time: '10:11', type: 'photo', photo: 'yozawa_zumen', alt: '会場レイアウト・ステージ図面' },
     { from: 'me', time: '10:40', text: '受け取りました。\nステージは高さ60cmで組みます。' },
     { from: 'them', time: '10:45', text: 'それで。' },
     { from: 'me', time: '17:12', text: '会場設営、本日すべて完了しました。\n清掃と廃材の搬出も終わっています。' },
@@ -1060,6 +1083,7 @@ const DAYS_YOZAWA = [
     { from: 'me', time: '7:55', text: 'おはようございます。到着しました。8時から搬入を始めます。\nステージは本日中に組み上げます。' },
     { from: 'them', time: '8:10', text: '了解です。' },
     { from: 'me', time: '17:40', text: 'ステージと照明まで組み終わりました。' },
+    { from: 'me', time: '17:41', type: 'photo', photo: 'yozawa_stage', alt: '組み上がった特設ステージと照明' },
     { from: 'them', time: '18:05', text: 'いいですね。' },
   ]},
   { date: '10月10日（土）', messages: [
