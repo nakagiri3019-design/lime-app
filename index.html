@@ -334,16 +334,16 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
     </div>
 
-    <!-- 榎本（会話なし：data-ts が無いので一覧の一番下。会話を入れたら data-ts・f-time・f-last を入れる → 新しい順の位置に移る） -->
-    <div class="friend-row openable" id="enomoto-row">
+    <!-- 榎本 -->
+    <div class="friend-row openable" id="enomoto-row" data-ts="2026-08-31T16:03">
       <div class="f-avatar-wrap">
         <div class="f-avatar" style="background:#8E9AAF;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
         </div>
       </div>
       <div class="f-info">
-        <div class="f-name-row"><span class="f-name">榎本</span><span class="f-time"></span></div>
-        <div class="f-last"></div>
+        <div class="f-name-row"><span class="f-name">榎本</span><span class="f-time">8/31</span></div>
+        <div class="f-last">確認しました。100万円、着金しています。わざわざありがとうございます。</div>
       </div>
     </div>
 
@@ -3700,7 +3700,45 @@ Interakt様に説明する時は、
   <div class="messages-area" id="messages-area-enomoto">
     <div class="float-date-wrap"><div class="floating-date" id="floating-date-enomoto"></div></div>
 
-    <!-- ここに日付区切り（date-divider）とメッセージ（msg-row）を追加する -->
+    <div class="date-divider"><span class="date-pill">8月31日(月)</span></div>
+
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="background:#8E9AAF;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">お疲れさまです。<br>先月お借りしていた100万円、今日送金します。<br>どちらに振り込めばいいですか？</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">09:08</span></div>
+      </div>
+    </div>
+
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">09:31</span></div>
+        <div class="bubble bbl-me">お疲れさまです。<br>ありがとうございます。<br>アークラボの住信SBIの口座にお願いします。以前お伝えした口座と同じです。</div>
+      </div>
+    </div>
+
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="background:#8E9AAF;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">了解です。手続きしますね。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">09:43</span></div>
+      </div>
+    </div>
+
+    <div class="msg-row row-them">
+      <div class="avatar-slot"><div class="msg-av" style="background:#8E9AAF;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg></div></div>
+      <div class="msg-content content-them">
+        <div class="bubble bbl-them">送金しました。ご確認ください。<br>助かりました、ありがとうございました。</div>
+        <div class="msg-meta meta-them"><span class="time-lbl">14:16</span></div>
+      </div>
+    </div>
+
+    <div class="msg-row row-me">
+      <div class="msg-content content-me">
+        <div class="msg-meta meta-me"><span class="read-lbl">既読</span><span class="time-lbl">16:03</span></div>
+        <div class="bubble bbl-me">確認しました。100万円、着金しています。<br>わざわざありがとうございます。</div>
+      </div>
+    </div>
 
   </div>
 
