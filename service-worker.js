@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'lime-cache-v35';
+﻿const CACHE_NAME = 'lime-cache-v36';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',

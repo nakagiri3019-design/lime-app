@@ -334,6 +334,32 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
     </div>
 
+    <!-- 榎本（会話なし：一覧には出さない。会話を入れたら style="display:none" を消し、data-ts・f-time・f-last を入れる） -->
+    <div class="friend-row openable" id="enomoto-row" style="display:none">
+      <div class="f-avatar-wrap">
+        <div class="f-avatar" style="background:#8E9AAF;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+        </div>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">榎本</span><span class="f-time"></span></div>
+        <div class="f-last"></div>
+      </div>
+    </div>
+
+    <!-- 陶山（会話なし：一覧には出さない。会話を入れたら style="display:none" を消し、data-ts・f-time・f-last を入れる） -->
+    <div class="friend-row openable" id="suyama-row" style="display:none">
+      <div class="f-avatar-wrap">
+        <div class="f-avatar" style="background:#A3907A;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
+        </div>
+      </div>
+      <div class="f-info">
+        <div class="f-name-row"><span class="f-name">陶山</span><span class="f-time"></span></div>
+        <div class="f-last"></div>
+      </div>
+    </div>
+
   </div>
 
   <div class="bottom-tabs">
@@ -3648,6 +3674,102 @@ Interakt様に説明する時は、
     <span class="ai-chip">ムードを分析</span>
   </div>
 </div>
+<!-- CHAT VIEW: 榎本 -->
+<div id="chat-view-enomoto" style="display:none;flex-direction:column;height:100%;">
+  <div class="chat-header">
+    <button class="back-btn" id="back-btn-enomoto">
+      <svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1L1 9l8 8"/></svg>
+    </button>
+    <span class="chat-name">榎本</span>
+    <div class="chat-icons">
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="messages-area" id="messages-area-enomoto">
+    <div class="float-date-wrap"><div class="floating-date" id="floating-date-enomoto"></div></div>
+
+    <!-- ここに日付区切り（date-divider）とメッセージ（msg-row）を追加する -->
+
+  </div>
+
+  <div class="input-bar">
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <div class="input-wrap">
+      <input class="msg-input" type="text" placeholder="メッセージを入力">
+      <div class="input-right">
+        <button class="i-sm-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></button>
+        <button class="i-sm-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button>
+      </div>
+    </div>
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+  </div>
+  <div class="ai-bar">
+    <div class="ai-dot"></div>
+    <span class="ai-chip">返信を提案</span>
+    <span class="ai-chip">話題を提案</span>
+    <span class="ai-chip">ムードを分析</span>
+  </div>
+</div>
+<!-- CHAT VIEW: 陶山 -->
+<div id="chat-view-suyama" style="display:none;flex-direction:column;height:100%;">
+  <div class="chat-header">
+    <button class="back-btn" id="back-btn-suyama">
+      <svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1L1 9l8 8"/></svg>
+    </button>
+    <span class="chat-name">陶山</span>
+    <div class="chat-icons">
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.9 11.1 19.8 19.8 0 01.86 2.46A2 2 0 012.84.29h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.12 6.12l1.66-1.66a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </button>
+      <button class="c-icon-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="messages-area" id="messages-area-suyama">
+    <div class="float-date-wrap"><div class="floating-date" id="floating-date-suyama"></div></div>
+
+    <!-- ここに日付区切り（date-divider）とメッセージ（msg-row）を追加する -->
+
+  </div>
+
+  <div class="input-bar">
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <div class="input-wrap">
+      <input class="msg-input" type="text" placeholder="メッセージを入力">
+      <div class="input-right">
+        <button class="i-sm-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/></svg></button>
+        <button class="i-sm-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a3 3 0 00-3 3v7a3 3 0 006 0V5a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button>
+      </div>
+    </div>
+    <button class="i-icon-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button>
+  </div>
+  <div class="ai-bar">
+    <div class="ai-dot"></div>
+    <span class="ai-chip">返信を提案</span>
+    <span class="ai-chip">話題を提案</span>
+    <span class="ai-chip">ムードを分析</span>
+  </div>
+</div>
 
 </div>
 <script>
@@ -3698,6 +3820,25 @@ document.getElementById('back-btn-ito').addEventListener('click', () => {
   chatViewIto.style.display = 'none';
   listView.style.display = 'flex';
   setThemeColor('#FFFFFF');
+});
+
+// 榎本・陶山 チャット（会話はまだなし。一覧の行は非表示）
+[['enomoto', 'chat-view-enomoto', 'messages-area-enomoto', 'floating-date-enomoto', 'back-btn-enomoto'],
+ ['suyama', 'chat-view-suyama', 'messages-area-suyama', 'floating-date-suyama', 'back-btn-suyama']].forEach(function (c) {
+  const view = document.getElementById(c[1]);
+  const area = document.getElementById(c[2]);
+  document.getElementById(c[0] + '-row').addEventListener('click', () => {
+    listView.style.display = 'none';
+    view.style.display = 'flex';
+    setThemeColor('#3D6B8C');
+    area.scrollTop = area.scrollHeight;
+  });
+  document.getElementById(c[4]).addEventListener('click', () => {
+    view.style.display = 'none';
+    listView.style.display = 'flex';
+    setThemeColor('#FFFFFF');
+  });
+  setupFloatingDate(area, document.getElementById(c[3]));
 });
 
 // ── 写真・ファイル添付（oda/ の実装を移植） ─────────────────
