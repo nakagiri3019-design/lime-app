@@ -334,8 +334,8 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
     </div>
 
-    <!-- 榎本（会話なし：一覧には出さない。会話を入れたら style="display:none" を消し、data-ts・f-time・f-last を入れる） -->
-    <div class="friend-row openable" id="enomoto-row" style="display:none">
+    <!-- 榎本（会話なし：data-ts が無いので一覧の一番下。会話を入れたら data-ts・f-time・f-last を入れる → 新しい順の位置に移る） -->
+    <div class="friend-row openable" id="enomoto-row">
       <div class="f-avatar-wrap">
         <div class="f-avatar" style="background:#8E9AAF;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
@@ -347,8 +347,8 @@ body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f0f0f0;di
       </div>
     </div>
 
-    <!-- 陶山（会話なし：一覧には出さない。会話を入れたら style="display:none" を消し、data-ts・f-time・f-last を入れる） -->
-    <div class="friend-row openable" id="suyama-row" style="display:none">
+    <!-- 陶山（会話なし：data-ts が無いので一覧の一番下。会話を入れたら data-ts・f-time・f-last を入れる → 新しい順の位置に移る） -->
+    <div class="friend-row openable" id="suyama-row">
       <div class="f-avatar-wrap">
         <div class="f-avatar" style="background:#A3907A;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>
@@ -3822,7 +3822,7 @@ document.getElementById('back-btn-ito').addEventListener('click', () => {
   setThemeColor('#FFFFFF');
 });
 
-// 榎本・陶山 チャット（会話はまだなし。一覧の行は非表示）
+// 榎本・陶山 チャット（会話はまだなし。一覧では一番下）
 [['enomoto', 'chat-view-enomoto', 'messages-area-enomoto', 'floating-date-enomoto', 'back-btn-enomoto'],
  ['suyama', 'chat-view-suyama', 'messages-area-suyama', 'floating-date-suyama', 'back-btn-suyama']].forEach(function (c) {
   const view = document.getElementById(c[1]);
@@ -3975,6 +3975,8 @@ setupFloatingDate(messagesAreaIto, document.getElementById('floating-date-ito'))
   });
   rows.sort(function(a,b){ return new Date(b.dataset.ts)-new Date(a.dataset.ts); });
   rows.forEach(function(r){ fl.appendChild(r); });
+  // 会話がまだない（data-ts の無い）友だちは、新しい順の行のあと＝一番下に並べる（HTML に書いた順）
+  Array.from(fl.querySelectorAll('.friend-row:not([data-ts])')).forEach(function(r){ fl.appendChild(r); });
 })();
 </script>
 </body>
