@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'lime-cache-v43';
+﻿const CACHE_NAME = 'lime-cache-v44';
 const PRECACHE_URLS = [
   './index.html',
   './manifest.json',
@@ -8,6 +8,8 @@ const PRECACHE_URLS = [
   './icons/icon-maskable-192.png',
   './icons/icon-maskable-512.png',
   './avatars/ito_yu.png',
+  './avatars/enomoto.png',
+  './avatars/suyama.png',
 ];
 
 self.addEventListener('install', (event) => {
